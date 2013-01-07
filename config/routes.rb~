@@ -1,5 +1,5 @@
 Scheduling::Application.routes.draw do
-	resources :schedules
+
   resources :projects do
 	collection do
 			get :autocomplete

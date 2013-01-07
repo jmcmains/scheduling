@@ -1,0 +1,72 @@
+<h1>Time Saver</h1>
+<table>
+<tr>
+<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+  <td style="text-align:left;vertical-align:center"><%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0" %></td>
+  <td style="text-align:center;vertical-align:center">
+  <button class="btn btn-success" name="go" type="submit">
+  	<i class="icon-play icon-white"></i>
+	</button>
+<% end %>
+</tr>
+
+<% Project.all.sort_by(&:name).each do |project| %>
+	<tr>
+		<td style="text-align:left"><%= project.name %></td>
+		<td style="text-align:center;vertical-align:center">
+		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+			<%= hidden_field_tag :name, project.name  %>
+			<% if project.active? %>
+				<button class="btn btn-danger" name="stop" type="submit">
+					<i class="icon-pause icon-white"></i>
+				</button>
+			<% else %>
+				<button class="btn btn-success" name="go" type="submit">
+					<i class="icon-play icon-white"></i>
+				</button>
+			<% end %>	
+		<% end %>
+		</td>
+	</tr>
+<% end %>
+</table>
+
+<div id='calendar' style="width: 600px"></div>
+
+<%= debug(params) if Rails.env.development? %>
+
+
+<script>
+$(function() {
+	 $(".autocomplete").autocomplete({
+			source: $(".autocomplete").data('autocomplete-source')
+	});
+	$('#calendar').fullCalendar({
+        height: 600,
+        theme: true,
+        defaultView: 'agendaWeek',
+        header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+				editable: true,
+				events: [
+				<% Schedule.all.each do |event| %>
+				{
+					title: '<%= event.project.name %>',
+					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>, <%= event.start_at.sec %>),
+					<% if event.end_at %>
+						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>, <%= event.end_at.sec %>),
+					<% else %>
+						end: new Date(<%= DateTime.now.year %>, <%= DateTime.now.month-1 %>, <%= DateTime.now.day %>, <%= DateTime.now.hour %>, <%= DateTime.now.min %>, <%= DateTime.now.sec %>),
+					<% end %>
+					allDay: false
+				}<%= "," if event != Schedule.last %>
+				<% end %>
+				]
+				
+    })
+});
+</script>
+
