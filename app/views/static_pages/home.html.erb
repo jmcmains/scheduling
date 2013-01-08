@@ -41,8 +41,8 @@
 <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>
 
 <% total_time = 0 %>
-<% begday = Date.today.to_datetime %>
-<% endday = (Date.today + 1.day).to_datetime %>
+<% begday = 5.hours.ago.beginning_of_day %>
+<% endday = 5.hours.ago.end_of_day %>
 <% Project.all.each do |project| %>
 <% project.schedules.each do |s| %>
 	<% start = s.start_at %>

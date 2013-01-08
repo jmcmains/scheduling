@@ -14,7 +14,7 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
 	<tr>
-		<td style="text-align:left"><%= project.name %></td>
+		<td style="text-align:left"><%= link_to project.name, project_path(project) %></td>
 		<td style="text-align:center;vertical-align:center">
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= hidden_field_tag :name, project.name  %>
