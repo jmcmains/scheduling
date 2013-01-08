@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
 	def new
 		@project = Project.find_or_create_by_name(params[:name])
-		@project.save
+		@project.save!
     if params[:go]
 		  current_project=Schedule.find_by_end_at(nil)
 		  @project.update_attributes(featured: true)
@@ -18,7 +18,7 @@ class SchedulesController < ApplicationController
 				current_project.update_attributes(end_at:5.hours.ago)
 			end
 		end
-		@project.save
+		@project.save!
 		redirect_to root_path
 	end
 	def index
