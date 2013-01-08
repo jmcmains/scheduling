@@ -38,8 +38,9 @@
 	<% end %>
 <% end %>
 </table>
+<p>
 <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>
-
+</p>
 <% total_time = 0 %>
 <% begday = 5.hours.ago.beginning_of_day %>
 <% endday = 5.hours.ago.end_of_day %>
@@ -59,5 +60,5 @@
 	<% total_time = total_time + (finish - start) %>
 <% end %>
 <% end %>
-<br><%= (total_time/3600).round(1) %> hours worked today
+<p><%= (total_time/3600).round(1) %> hours worked today</p>
 
