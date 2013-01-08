@@ -1,4 +1,4 @@
-<%= link_to "Main", root_path %>
+<%= link_to "Return to Main", root_path %>
 <table class="table-striped" style="text-align:center;vertical-align:center">
 <tr>
 	<td>Project</td>
@@ -16,9 +16,9 @@
 			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
 		<% end %>
 		<td style="text-align:center;vertical-align:center">
-		<input class="btn btn-danger" data-confirm="You sure?" title="Delete Test Project 2" type="submit" value="-" style="margin:0"></td>
+		<%= link_to "-", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}", class: "btn btn-danger" %></td>
 	</tr>
 <% end %>
 </table>
 
-<%= link_to "Main", root_path %>
+<%= link_to "Return to Main", root_path %>
