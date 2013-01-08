@@ -8,10 +8,24 @@ class ProjectsController < ApplicationController
   def index
     @title = "All Projects"
     @projects = Project.all
+    if params[:start_date]
+  		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
+  		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
+  	else
+  		@start_date = Date.today.beginning_of_week
+  		@end_date = Date.today.end_of_week
+  	end
   end
   
   def show
   	@project = Project.find(params[:id])
+  	if params[:start_date]
+  		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
+  		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
+  	else
+  		@start_date = Date.today.beginning_of_week
+  		@end_date = Date.today.end_of_week
+  	end
   end
   
   def edit

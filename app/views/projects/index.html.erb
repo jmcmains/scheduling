@@ -1,6 +1,18 @@
 <h1>All Projects</h1>
-<ul class="projects">
-  <%= render @projects %>
-</ul>
+Time Span:
+<%= form_tag(projects_path, method: :get) do %>
+	Start:<br> <%= select_date @start_date, {:prefix => 'start_date'}, {:class => "input-small"} %><br>
+	Finish:<br> <%= select_date @end_date, {:prefix => 'end_date'}, {:class => "input-small"} %><br>
+<%= submit_tag %>
+<% end %>
+
+<table class="table-striped">
+<tr>
+<td style="text-align:center">Project</td>
+<td style="text-align:center">Hours Spent</td>
+<td style="text-align:center">Modify</td>
+</tr>
+  <%= render @projects, :start_date => @start_date, :end_date => @end_date %>
+</table>
 
 <%= link_to 'New Project', new_project_path %>

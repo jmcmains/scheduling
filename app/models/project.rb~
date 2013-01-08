@@ -30,6 +30,10 @@ class Project < ActiveRecord::Base
   def time_spent
   	sql = ActiveRecord::Base.connection()
   	d=sql.execute("SELECT sum(strftime('%s', schedules.end_at)- strftime('%s', schedules.start_at)) FROM schedules WHERE schedules.project_id = #{id}")
-  	d[0]
+  	d[0][0]
+  end
+  
+  def happens_during?(start_date,end_date)
+  	(start_date < start_at && start_at < end_date) || (start_date < end_at && end_at < end_date)
   end
 end

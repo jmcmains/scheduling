@@ -1,7 +1,11 @@
 Scheduling::Application.routes.draw do
-	resources :schedules
+	resources :schedules do
+		collection do
+			get :calendar
+		end
+	end
   resources :projects do
-	collection do
+		collection do
 			get :autocomplete
 		end
 	end

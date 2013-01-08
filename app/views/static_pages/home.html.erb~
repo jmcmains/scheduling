@@ -1,4 +1,5 @@
 <h1>Time Saver</h1>
+<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>
 <table>
 <tr>
 <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
@@ -11,6 +12,7 @@
 </tr>
 
 <% Project.all.sort_by(&:name).each do |project| %>
+	<% if project.featured %>
 	<tr>
 		<td style="text-align:left"><%= project.name %></td>
 		<td style="text-align:center;vertical-align:center">
@@ -27,42 +29,35 @@
 			<% end %>	
 		<% end %>
 		</td>
+		<td>
+			<button class="btn btn-danger" name="del" type="submit">
+					<i class="icon-remove icon-white"></i>
+				</button>
+				</td>
 	</tr>
+	<% end %>
 <% end %>
 </table>
+<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>
 
-<div id='calendar' style="width: 600px"></div>
-
-<%= debug(params) if Rails.env.development? %>
-
-
-<script>
-$(function() {
-	 $(".autocomplete").autocomplete({
-			source: $(".autocomplete").data('autocomplete-source')
-	});
-	$('#calendar').fullCalendar({
-        height: 600,
-        theme: true,
-        defaultView: 'agendaWeek',
-        header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay'
-				},
-				editable: true,
-				events: [
-				<% Schedule.all.each do |event| %>
-				{
-					title: '<%= event.project.name %>',
-					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>, <%= event.start_at.sec %>),
-					end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>, <%= event.end_at.sec %>),
-					allDay: false
-				}<%= "," if event != Schedule.last %>
-				<% end %>
-				]
-				
-    })
-});
-</script>
+<% total_time = 0 %>
+<% begday = Date.today.to_datetime %>
+<% endday = (Date.today + 1.day).to_datetime %>
+<% Project.all.each do |project| %>
+<% project.schedules.each do |s| %>
+	<% start = s.start_at %>
+	<% finish = s.end_at.blank? ? 5.hours.ago : s.end_at %>
+	<% if  begday < finish && finish < endday && begday < start && start < endday %>
+	<% elsif begday < finish && finish < endday %>
+		<% start = begday %>
+	<% elsif begday < start && start < endday %>
+		<% finish = endday %>
+	<% else %>
+		<% start = begday %>
+		<% finish = begday %>
+	<% end %>
+	<% total_time = total_time + (finish - start) %>
+<% end %>
+<% end %>
+<br><%= (total_time/3600).round(1) %> hours worked today
 

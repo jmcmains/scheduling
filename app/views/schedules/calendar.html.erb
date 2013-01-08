@@ -1,0 +1,34 @@
+<div id='calendar' style="width: 600px"></div>
+<script>
+$(function() {
+	 $(".autocomplete").autocomplete({
+			source: $(".autocomplete").data('autocomplete-source')
+	});
+	$('#calendar').fullCalendar({
+        height: 600,
+        theme: true,
+        defaultView: 'agendaWeek',
+        header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+				editable: true,
+				events: [
+				<% Schedule.all.each do |event| %>
+				{
+					title: '<%= event.project.name %>',
+					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>, <%= event.start_at.sec %>),
+					<% if event.end_at %>
+						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>, <%= event.end_at.sec %>),
+					<% else %>
+						end: new Date(<%= DateTime.now.year %>, <%= DateTime.now.month-1 %>, <%= DateTime.now.day %>, <%= DateTime.now.hour %>, <%= DateTime.now.min %>, <%= DateTime.now.sec %>),
+					<% end %>
+					allDay: false
+				}<%= "," if event != Schedule.last %>
+				<% end %>
+				]
+				
+    })
+});
+</script>

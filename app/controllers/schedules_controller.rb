@@ -1,20 +1,38 @@
 class SchedulesController < ApplicationController
 	def new
 		@project = Project.find_or_create_by_name(params[:name])
-    @project.save
+		@project.save
     if params[:go]
 		  current_project=Schedule.find_by_end_at(nil)
+		  @project.featured=true
 		  if current_project
 		  	current_project.update_attributes(end_at:5.hours.ago)
 		  end
 		  Schedule.create!(project_id:@project.id,start_at:5.hours.ago)
+		elsif params[:del]
+			@project.featured=false
 		else
 			current_project=Schedule.find_by_end_at(nil)
+			@project.featured=true
 			if current_project
 				current_project.update_attributes(end_at:5.hours.ago)
 			end
 		end
+		@project.save
 		redirect_to root_path
 	end
-
+	def index
+		@schedules = Schedule.all
+	end
+	def update
+		@schedule = Schedule.find(params[:id])
+		@schedule.update_attributes(params[:schedule])
+		redirect_to schedules_path
+	end
+	def destroy
+    Schedule.find(params[:id]).destroy
+    redirect_to schedules_path 
+  end
+  def calendar
+  end
 end

@@ -1,0 +1,24 @@
+<%= link_to "Main", root_path %>
+<table class="table-striped" style="text-align:center;vertical-align:center">
+<tr>
+	<td>Project</td>
+	<td>Start Time</td>
+	<td>End Time</td>
+	<td>Update</td>
+	<td>Delete</td>
+</tr>
+<% @schedules.each do |event| %>
+	<tr>
+		<td style="text-align:left;vertical-align:center"><%= event.project.name %></td>
+		<%= form_for(event) do |f| %>
+			<td style="text-align:center;vertical-align:center"><%= f.text_field :start_at, {style: "margin:0"} %></td>
+			<td style="text-align:center;vertical-align:center"><%= f.text_field :end_at, {style: "margin:0"}  %></td>
+			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
+		<% end %>
+		<td style="text-align:center;vertical-align:center">
+		<input class="btn btn-danger" data-confirm="You sure?" title="Delete Test Project 2" type="submit" value="-" style="margin:0"></td>
+	</tr>
+<% end %>
+</table>
+
+<%= link_to "Main", root_path %>

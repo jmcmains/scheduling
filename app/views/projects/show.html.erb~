@@ -1,5 +1,5 @@
 <h1><%= @project.name %></h1>
-<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
+<%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %><br>
 Time Span:
 <%= form_tag(projects_path, method: :get) do %>
 	Start:<br> <%= select_date @start_date, {:prefix => 'start_date'}, {:class => "input-small"} %><br>
