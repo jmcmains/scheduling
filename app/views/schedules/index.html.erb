@@ -10,7 +10,7 @@
 <% @schedules.each do |event| %>
 	<tr>
 		<td style="text-align:left;vertical-align:center"><%= event.project.name %></td>
-		<%= form_for(event) do |f| %>
+		<%= form_for event do |f| %>
 			<td style="text-align:center;vertical-align:center"><%= f.text_field :start_at, {style: "margin:0"} %></td>
 			<td style="text-align:center;vertical-align:center"><%= f.text_field :end_at, {style: "margin:0"}  %></td>
 			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>

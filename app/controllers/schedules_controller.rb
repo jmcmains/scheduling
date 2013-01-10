@@ -22,12 +22,15 @@ class SchedulesController < ApplicationController
 		redirect_to root_path
 	end
 	def index
-		@schedules = Schedule.all
+		@schedules = Schedule.all.sort_by(&:id).reverse
 	end
 	def update
 		@schedule = Schedule.find(params[:id])
 		@schedule.update_attributes(params[:schedule])
-		redirect_to schedules_path
+		respond_to do |format|
+      format.html {redirect_to schedules_path}
+      format.js
+    end
 	end
 	def destroy
     Schedule.find(params[:id]).destroy

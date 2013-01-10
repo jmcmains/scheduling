@@ -1,6 +1,6 @@
 <h1>Time Saver</h1>
 <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>
-<table class="table-condensed">
+<table>
 <tr>
 <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
   <td style="text-align:left;vertical-align:center"><%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0" %></td>
@@ -27,14 +27,15 @@
 					<i class="icon-play icon-white"></i>
 				</button>
 			<% end %>	
-		<% end %>
+		
 		</td>
 		<td>
 			<button class="btn btn-danger" name="del" type="submit">
 					<i class="icon-remove icon-white"></i>
-				</button>
-				</td>
+			</button>
+			</td>
 	</tr>
+	<% end %>
 	<% end %>
 <% end %>
 </table>

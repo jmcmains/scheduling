@@ -1,9 +1,13 @@
 <h1>Edit Project</h1>
 
-<%= form_for(@project) do |f| %>
+<%= form_for(@project, class: "form-inline") do |f| %>
 <div class="field">
-	<%= f.label :name %><br />
+	<%= f.label :name %>
 	<%= f.text_field :name %>
+</div>
+<div class="field">
+	<%= f.check_box :featured %>
+	<%= f.label :featured %>
 </div>
 <div class="actions">
 	<%= f.submit "Save" %>

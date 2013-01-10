@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-	attr_accessible :name, :featured
+  
   has_many :schedules, dependent: :destroy
   accepts_nested_attributes_for :schedules
   

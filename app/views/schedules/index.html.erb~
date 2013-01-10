@@ -10,13 +10,14 @@
 <% @schedules.each do |event| %>
 	<tr>
 		<td style="text-align:left;vertical-align:center"><%= event.project.name %></td>
-		<%= form_for(event) do |f| %>
+		<%= form_for event do |f| %>
 			<td style="text-align:center;vertical-align:center"><%= f.text_field :start_at, {style: "margin:0"} %></td>
 			<td style="text-align:center;vertical-align:center"><%= f.text_field :end_at, {style: "margin:0"}  %></td>
 			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
 		<% end %>
 		<td style="text-align:center;vertical-align:center">
-		<%= link_to "-", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}", class: "btn btn-danger" %></td>
+		<%= link_to "-", event, :method => :delete, :confirm => "You sure?",:title => "Delete #{event.project.name}", class: "btn btn-danger" %></td>
+		<td><div id="update_flash_<%=event.id %>"></div>
 	</tr>
 <% end %>
 </table>

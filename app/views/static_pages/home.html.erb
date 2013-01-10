@@ -27,14 +27,15 @@
 					<i class="icon-play icon-white"></i>
 				</button>
 			<% end %>	
-		<% end %>
+		
 		</td>
 		<td>
 			<button class="btn btn-danger" name="del" type="submit">
 					<i class="icon-remove icon-white"></i>
-				</button>
-				</td>
+			</button>
+			</td>
 	</tr>
+	<% end %>
 	<% end %>
 <% end %>
 </table>
@@ -61,4 +62,10 @@
 <% end %>
 <% end %>
 <p><%= (total_time/3600).round(1) %> hours worked today</p>
-
+<script>
+$(function() {
+	 $( ".autocomplete" ).autocomplete({
+			source: $( "#name" ).data('autocomplete-source')
+	});
+});
+</script>
