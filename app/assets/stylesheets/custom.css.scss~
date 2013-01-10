@@ -1,7 +1,7 @@
 @import "bootstrap";
 
 .container {
-	width: 30%;
+	width: 100%;
   min-width: none;
   margin: 0 auto;
   padding: 0;

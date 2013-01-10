@@ -40,7 +40,7 @@
 <% end %>
 </table>
 <p>
-<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %>| <%= link_to "View Time Spent", projects_path %>
+<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %>
 </p>
 <% total_time = 0 %>
 <% begday = 5.hours.ago.beginning_of_day %>
@@ -68,4 +68,10 @@ $(function() {
 			source: $( "#name" ).data('autocomplete-source')
 	});
 });
+// Popup window code
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=580,width=350,right=10,bottom=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+}
 </script>
+<a href="JavaScript:newPopup('<%= root_path %>');">Open a popup window</a>
