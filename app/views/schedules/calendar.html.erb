@@ -15,7 +15,7 @@ $(function() {
 				},
 				editable: true,
 				events: [
-				<% Schedule.all.each do |event| %>
+				<% Schedule.all.sort_by(&:id).each do |event| %>
 				{
 					title: '<%= event.project.name %>',
 					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>, <%= event.start_at.sec %>),
