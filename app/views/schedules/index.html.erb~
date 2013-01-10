@@ -11,8 +11,14 @@
 	<tr>
 		<td style="text-align:left;vertical-align:center"><%= event.project.name %></td>
 		<%= form_for event do |f| %>
-			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-min",style: "margin:0"} %></td>
-			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :end_at, {:ampm => true}, {class: "input-min",style: "margin:0"} %></td>
+			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %></td>
+			<td style="text-align:center;vertical-align:center">
+			<% if event.end_at.blank? %>
+				<%= f.text_field :end_at, {class: "input-mini",style: "margin:0"} %>
+			<% else %>
+				<%= f.datetime_select :end_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %>
+			<% end %>
+			</td>
 			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
 		<% end %>
 		<td style="text-align:center;vertical-align:center">
