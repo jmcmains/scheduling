@@ -1,4 +1,8 @@
-<%= link_to "Return to Main", root_path %>
+<h1>Edit Schedule</h1>
+<p><%= link_to "Main", root_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %></p>
+<div class="pagination">
+     <%= will_paginate @schedules, :container => false %>
+</div>
 <table class="table-bordered" style="text-align:center;vertical-align:center">
 <tr>
 	<td>Project</td>
@@ -14,7 +18,7 @@
 			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %></td>
 			<td style="text-align:center;vertical-align:center">
 			<% if event.end_at.blank? %>
-				<%= f.text_field :end_at, {class: "input-mini",style: "margin:0"} %>
+				<%= f.text_field :end_at, {style: "margin:0"} %>
 			<% else %>
 				<%= f.datetime_select :end_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %>
 			<% end %>
@@ -26,5 +30,7 @@
 	</tr>
 <% end %>
 </table>
-
+<div class="pagination">
+     <%= will_paginate @offerings, :container => false %>
+</div>
 <%= link_to "Return to Main", root_path %>

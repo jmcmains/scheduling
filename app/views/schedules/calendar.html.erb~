@@ -1,12 +1,13 @@
+<h1>Calendar</h1>
+<p><%= link_to "Home", root_path %> | <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Time Spent", projects_path %></p>
 <div id='calendar' style="width: 600px"></div>
+<%= link_to "Home", root_path %> | <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Time Spent", projects_path %>
 <script>
 $(function() {
-	 $(".autocomplete").autocomplete({
-			source: $(".autocomplete").data('autocomplete-source')
-	});
 	$('#calendar').fullCalendar({
         height: 600,
-        theme: true,
+        theme: false,
+        firstHour: 8,
         defaultView: 'agendaWeek',
         header: {
 					left: 'prev,next today',
@@ -28,7 +29,6 @@ $(function() {
 				}<%= "," if event != Schedule.last %>
 				<% end %>
 				]
-				
     })
 });
 </script>

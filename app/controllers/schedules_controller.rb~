@@ -27,10 +27,9 @@ class SchedulesController < ApplicationController
 	def update
 		@schedule = Schedule.find(params[:id])
 		@schedule.update_attributes(params[:schedule])
-		redirect_to schedules_path
 		respond_to do |format|
-      format.html
-      format.xml
+      format.html {redirect_to schedules_path}
+      format.js
     end
 	end
 	def destroy

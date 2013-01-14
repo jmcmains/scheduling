@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-
+gem 'will_paginate'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do

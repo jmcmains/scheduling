@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+  require 'will_paginate/array'
 	def new
 		@project = Project.find_or_create_by_name(params[:name])
 		@project.save!
@@ -22,7 +23,7 @@ class SchedulesController < ApplicationController
 		redirect_to root_path
 	end
 	def index
-		@schedules = Schedule.all.sort_by(&:id).reverse
+		@schedules = Schedule.all.sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 10)
 	end
 	def update
 		@schedule = Schedule.find(params[:id])
