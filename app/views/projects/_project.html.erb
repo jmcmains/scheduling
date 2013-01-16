@@ -18,3 +18,4 @@
 	<td style="text-align:center"><%= (total_time/60/60).round(1) %></td>
 	<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
 </tr>
+<% total_project_time = total_project_time+total_time %>

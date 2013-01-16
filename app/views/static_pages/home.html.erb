@@ -43,26 +43,9 @@
 <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %> <br>
 <a href="JavaScript:newPopup('<%= root_path %>');">Open a popup window</a>
 </p>
-<% total_time = 0 %>
-<% begday = 5.hours.ago.beginning_of_day %>
-<% endday = 5.hours.ago.end_of_day %>
-<% Project.all.each do |project| %>
-<% project.schedules.each do |s| %>
-	<% start = s.start_at %>
-	<% finish = s.end_at.blank? ? 5.hours.ago : s.end_at %>
-	<% if  begday < finish && finish < endday && begday < start && start < endday %>
-	<% elsif begday < finish && finish < endday %>
-		<% start = begday %>
-	<% elsif begday < start && start < endday %>
-		<% finish = endday %>
-	<% else %>
-		<% start = begday %>
-		<% finish = begday %>
-	<% end %>
-	<% total_time = total_time + (finish - start) %>
-<% end %>
-<% end %>
-<p><%= (total_time/3600).round(1) %> hours worked today</p>
+<div id="myDiv">
+<%= render "total_time" %>
+<div>
 <script>
 $(function() {
 	 $( ".autocomplete" ).autocomplete({
@@ -74,4 +57,11 @@ function newPopup(url) {
 	popupWindow = window.open(
 		url,'popUpWindow','height=580,width=350,right=10,bottom=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
 }
+ $(document).ready(function() {
+        // get data every 5 mins and refresh myDiv
+        var pingAfter = 5000*60;  
+        var refreshId = setInterval(function() {
+            $("#myDiv").html('<%= escape_javascript render "total_time" %>');
+        }, pingAfter);
+    });
 </script>
