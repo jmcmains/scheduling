@@ -13,12 +13,12 @@
 </tr>
 <% @schedules.each do |event| %>
 	<tr>
-		<td style="text-align:left;vertical-align:center"><%= event.project.name %></td>
 		<%= form_for event do |f| %>
+			<td style="text-align:left;vertical-align:center"><%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", id: event.id, :style => "display:inline;margin:0" %></td>
 			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %></td>
 			<td style="text-align:center;vertical-align:center">
 			<% if event.end_at.blank? %>
-				<%= f.text_field :end_at, {style: "margin:0"} %>
+				<%= f.text_field :end_at, {style: "margin:0", class: "input-small"} %>
 			<% else %>
 				<%= f.datetime_select :end_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %>
 			<% end %>
@@ -34,3 +34,10 @@
      <%= will_paginate @offerings, :container => false %>
 </div>
 <%= link_to "Return to Main", root_path %>
+<script>
+$(function() {
+	 $( ".autocomplete" ).autocomplete({
+			source: $( "#<%= @schedules.first.id %>" ).data('autocomplete-source')
+	});
+});
+</script>

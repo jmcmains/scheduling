@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   end
   
   def project_name
-  	try(:name)
+  	project.try(:name)
   end
   
   def project_name=(name)
@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
 			finish = s.end_at.blank? ? 5.hours.ago : s.end_at
 			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
 			elsif (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day))
-				start = start_date.to_datetime %>
+				start = start_date.to_datetime
 			elsif (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
 				finish = end_date.to_datetime+1.day
 			else
