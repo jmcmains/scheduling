@@ -3,31 +3,19 @@
 <div class="pagination">
      <%= will_paginate @schedules, :container => false %>
 </div>
-<table class="table-bordered" style="text-align:center;vertical-align:center">
+<table class="table-striped" style="text-align:center;vertical-align:center;">
 <tr>
 	<td>Project</td>
 	<td>Start Time</td>
 	<td>End Time</td>
 	<td>Update</td>
 	<td>Delete</td>
+	<td></td>
 </tr>
 <% @schedules.each do |event| %>
-	<tr>
-		<%= form_for event do |f| %>
-			<td style="text-align:left;vertical-align:center"><%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: event.id, :style => "display:inline;margin:0" %></td>
-			<td style="text-align:center;vertical-align:center"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %></td>
-			<td style="text-align:center;vertical-align:center">
-			<% if event.end_at.blank? %>
-				<%= f.text_field :end_at, {style: "margin:0", class: "input-small"} %>
-			<% else %>
-				<%= f.datetime_select :end_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %>
-			<% end %>
-			</td>
-			<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
-		<% end %>
-		<td style="text-align:center;vertical-align:center">
-		<%= link_to "-", event, :method => :delete, :confirm => "You sure?",:title => "Delete #{event.project.name}", class: "btn btn-danger" %></td>
-	</tr>
+<tr id="row_<%= event.id %>">
+	<%= render "event", event: event %>
+</tr>			
 <% end %>
 </table>
 <div class="pagination">

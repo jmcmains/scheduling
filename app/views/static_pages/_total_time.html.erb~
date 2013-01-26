@@ -17,4 +17,4 @@
 	<% total_time = total_time + (finish - start) %>
 <% end %>
 <% end %>
-<p><%= (total_time/3600).round(1) %> hours worked today</p>
+<p><%= total_time.round(1) %> hours worked today</p>

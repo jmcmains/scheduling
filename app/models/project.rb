@@ -19,6 +19,29 @@ class Project < ActiveRecord::Base
   	try(:name)
   end
   
+  def self.total_time
+  	total_time = 0
+		begday = 5.hours.ago.beginning_of_day
+		endday = 5.hours.ago.end_of_day
+		all.each do |project|
+			project.schedules.each do |s|
+				start = s.start_at
+				finish = s.end_at.blank? ? 5.hours.ago : s.end_at
+				if  begday < finish && finish < endday && begday < start && start < endday
+				elsif begday < finish && finish < endday
+					start = begday
+				elsif begday < start && start < endday
+					finish = endday
+				else
+					start = begday
+					finish = begday
+				end
+				total_time = total_time + (finish - start)
+			end
+		end
+		return total_time
+  end
+  
   def project_name=(name)
   	Project.find_or_create_by_name(name) if name.present?
   end

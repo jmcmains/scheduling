@@ -7,6 +7,7 @@ Time Span:
 <%= submit_tag %>
 <% end %>
 <% total_project_time=0 %>
+<% total_est_time=0 %>
 <table class="table-striped">
 <tr>
 <td style="text-align:center">Project</td>
@@ -15,13 +16,18 @@ Time Span:
 </tr>
 <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date) }.reverse.each do |project| %>
 	<% total_time=project.time_spent(@start_date,@end_date) %>
-	<% total_project_time = total_project_time+total_time %>
-<tr>
-	<td style="text-align:left"><%= link_to project.name, project_path(project) %> </td>
-	<td style="text-align:center"><%= ((2*total_time/60/60).ceil)/2.0 %></td>
-	<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
-</tr>
+	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+	<% total_project_time = total_project_time + total_time %>
+	<% total_est_time = total_est_time + est_time %>
+	<% if est_time > 0 %>
+		<tr>
+			<td style="text-align:left"><%= link_to project.name, project_path(project) %> </td>
+			<td style="text-align:center"><%= est_time %></td>
+			<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+		</tr>
+	<% end %>
 <% end %>
 </table>
+Total Estimated Hours Worked this period: <%= total_est_time %> <br>
 Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
 <%= link_to 'New Project', new_project_path %>
