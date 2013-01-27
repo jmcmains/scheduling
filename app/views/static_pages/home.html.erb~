@@ -43,18 +43,9 @@
 <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %> <br>
 <a href="JavaScript:newPopup('<%= root_path %>');">Open a popup window</a>
 </p>
-<span id="hours"><%= (Project.total_time/3600).round(1) %></span> hours worked today
+<span id="hours"><%= (Project.total_time/3600).round(2) %></span> hours worked today
 <script>
 $(function() {
-    var foo = $('#hours');
-  
-    function updateTime() {
-        var now = new Date();
-        foo.val(now.toString());        
-    }
-  
-    updateTime();
-    setInterval(updateTime, 1000); // 5 * 1000 miliseconds
 	 $( ".autocomplete" ).autocomplete({
 			source: $( "#name" ).data('autocomplete-source')
 	});
@@ -65,3 +56,8 @@ function newPopup(url) {
 		url,'popUpWindow','height=580,width=350,right=10,bottom=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
 }
 </script>
+<script>
+  var i = parseFloat('<%= Project.total_time %>');
+  var timer = setInterval(function() { $('#hours').text( Math.round(i++/36)/100 ) }, 1000)
+</script>
+
