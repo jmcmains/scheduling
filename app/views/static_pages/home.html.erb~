@@ -19,7 +19,7 @@
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= hidden_field_tag :name, project.name  %>
 			<% if project.active? %>
-				<button class="btn btn-danger" name="stop" type="submit">
+				<button class="btn btn-danger" id="running" name="stop" type="submit">
 					<i class="icon-pause icon-white"></i>
 				</button>
 			<% else %>
@@ -57,7 +57,9 @@ function newPopup(url) {
 }
 </script>
 <script>
-  var i = parseFloat('<%= Project.total_time %>');
-  var timer = setInterval(function() { $('#hours').text( Math.round(i++/36)/100 ) }, 1000)
+	if ($("#running").length > 0) {
+  	var i = parseFloat('<%= Project.total_time %>');
+  	var timer = setInterval(function() { $('#hours').text( i++ ) }, 1000)
+  }
 </script>
 
