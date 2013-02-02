@@ -12,8 +12,8 @@ class ProjectsController < ApplicationController
   		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
   		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
   	else
-  		@start_date = Date.today.beginning_of_week
-  		@end_date = Date.today.end_of_week
+  		@start_date = Date.today.beginning_of_week-1
+  		@end_date = Date.today.end_of_week-1
   	end
   end
   
@@ -23,8 +23,8 @@ class ProjectsController < ApplicationController
   		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
   		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
   	else
-  		@start_date = Date.today.beginning_of_week
-  		@end_date = Date.today.end_of_week
+  		@start_date = Date.today.beginning_of_week-1
+  		@end_date = Date.today.end_of_week-1
   	end
   end
   
