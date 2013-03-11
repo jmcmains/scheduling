@@ -21,8 +21,8 @@ class Project < ActiveRecord::Base
   
   def self.total_time
   	total_time = 0
-		begday = DateTime.today.beginning_of_day
-		endday = DateTime.today.end_of_day
+		begday = DateTime.now.beginning_of_day
+		endday = DateTime.now.end_of_day
 		all.each do |project|
 			project.schedules.each do |s|
 				start = s.start_at
