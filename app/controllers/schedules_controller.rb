@@ -7,16 +7,16 @@ class SchedulesController < ApplicationController
 		  current_project=Schedule.find_by_end_at(nil)
 		  @project.update_attributes(featured: true)
 		  if current_project
-		  	current_project.update_attributes(end_at:DateTime.now.in_time_zone("Eastern Time (US & Canada)"))
+		  	current_project.update_attributes(end_at:DateTime.now)
 		  end
-		  Schedule.create!(project_id:@project.id,start_at:DateTime.now.in_time_zone("Eastern Time (US & Canada)"))
+		  Schedule.create!(project_id:@project.id,start_at:DateTime.now)
 		elsif params[:del]
 			@project.update_attributes(featured: false)
 		else
 			current_project=Schedule.find_by_end_at(nil)
 			@project.update_attributes(featured: true)
 			if current_project
-				current_project.update_attributes(end_at:DateTime.now.in_time_zone("Eastern Time (US & Canada)"))
+				current_project.update_attributes(end_at:DateTime.now)
 			end
 		end
 		@project.save!

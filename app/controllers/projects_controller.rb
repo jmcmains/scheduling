@@ -60,9 +60,9 @@ class ProjectsController < ApplicationController
     @project.save
     current_project=Schedule.find_by_end_at(nil)
     if current_project
-    	current_project.update_attributes(end_at:DateTime.now.in_time_zone("Eastern Time (US & Canada)"))
+    	current_project.update_attributes(end_at:DateTime.now)
     end
-    Schedule.create!(project_id:@project.id,start_at:DateTime.now.in_time_zone("Eastern Time (US & Canada)"))
+    Schedule.create!(project_id:@project.id,start_at:DateTime.now)
     redirect_to projects_path
   end
   
