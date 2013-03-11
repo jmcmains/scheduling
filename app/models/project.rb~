@@ -39,7 +39,7 @@ class Project < ActiveRecord::Base
 				total_time = total_time + (finish - start)
 			end
 		end
-		return (total_time/3600)
+		return total_time
   end
   
   def project_name=(name)
