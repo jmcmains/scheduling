@@ -21,12 +21,12 @@ class Project < ActiveRecord::Base
   
   def self.total_time
   	total_time = 0
-		begday = DateTime.now.beginning_of_day
-		endday = DateTime.now.end_of_day
+		begday = 0.minutes.ago.beginning_of_day
+		endday = 0.minutes.ago.end_of_day
 		all.each do |project|
 			project.schedules.each do |s|
 				start = s.start_at
-				finish = s.end_at.blank? ? DateTime.now : s.end_at
+				finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 				if  begday < finish && finish < endday && begday < start && start < endday
 				elsif begday < finish && finish < endday
 					start = begday
@@ -54,7 +54,7 @@ class Project < ActiveRecord::Base
   	total_time = 0
 		schedules.each do |s|
 			start = s.start_at
-			finish = s.end_at.blank? ? DateTime.now : s.end_at
+			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
 			elsif (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day))
 				start = start_date.to_datetime
