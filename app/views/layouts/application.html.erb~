@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
 </head>
 <body>
-<header class="navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top" style="max-height:41px">
   <div class="navbar-inner">
       <%= link_to "Time Saver", root_path, id: "logo" %>
       <nav>
