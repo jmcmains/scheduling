@@ -4,7 +4,7 @@
 	<button class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
-	<div class=" input-append>
+	<div class="input-append">
 <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px;" %>
   <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time/3600).round(2) %></span>
   </div>
