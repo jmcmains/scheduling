@@ -6,7 +6,7 @@
 	</button>
 <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px 19px;font-size:25px;" %>
 <% end %>
-<span style="font-size:25px"><span id="hours"><%= Project.total_time %></span> hours</span>
+<span id="hours"><%= Project.total_time %></span> hours
   </div>
 </header>
 
