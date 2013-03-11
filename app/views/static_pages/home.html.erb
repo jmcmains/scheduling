@@ -1,60 +1,49 @@
-<h1>Time Saver</h1>
-<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %>
-<table>
-<tr>
+<div style="position:absolute;left:0;right:0;top:40px;height:46px;padding-top:2px;">
 <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-  <td style="text-align:left;vertical-align:center"><%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0" %></td>
-  <td style="text-align:center;vertical-align:center">
-  <button class="btn btn-success" name="go" type="submit">
+  <button style="margin-left:1px" class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
+<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px 19px;font-size:25px;" %>
 <% end %>
-</tr>
-
+<span style="font-size:25px"><span id="hours"><%= Project.total_time %></span> hours</span>
+</div>
+<div style="position:absolute;left:0;right:0;top:88px;bottom:0px;overflow:auto">
+<table>
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
 	<tr>
-		<td style="text-align:left"><%= link_to project.name, project_path(project) %></td>
+		
 		<td style="text-align:center;vertical-align:center">
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= hidden_field_tag :name, project.name  %>
 			<% if project.active? %>
-				<button class="btn btn-danger" id="running" name="stop" type="submit">
+				<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
 					<i class="icon-pause icon-white"></i>
 				</button>
 			<% else %>
-				<button class="btn btn-success" name="go" type="submit">
+				<button class="btn btn-success btn-large" name="go" type="submit">
 					<i class="icon-play icon-white"></i>
 				</button>
 			<% end %>	
-		
 		</td>
 		<td>
-			<button class="btn btn-danger" name="del" type="submit">
+			<button class="btn btn-danger btn-large" name="del" type="submit">
 					<i class="icon-remove icon-white"></i>
 			</button>
-			</td>
+		</td>
+		<td style="text-align:left"><%= link_to project.name, project_path(project) %></td>
 	</tr>
 	<% end %>
 	<% end %>
 <% end %>
 </table>
-<p>
-<%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %> <br>
-<a href="JavaScript:newPopup('<%= root_path %>');">Open a popup window</a>
-</p>
-<span id="hours"><%= (Project.total_time/3600).round(2) %></span> hours worked today
+</div>
 <script>
 $(function() {
 	 $( ".autocomplete" ).autocomplete({
 			source: $( "#name" ).data('autocomplete-source')
 	});
 });
-// Popup window code
-function newPopup(url) {
-	popupWindow = window.open(
-		url,'popUpWindow','height=580,width=350,right=10,bottom=10,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
-}
 </script>
 <script>
 	if ($("#running").length > 0) {

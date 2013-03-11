@@ -1,9 +1,8 @@
 <h1>Edit Schedule</h1>
-<p><%= link_to "Main", root_path %> | <%= link_to "View Calendar", calendar_schedules_path %> | <%= link_to "View Time Spent", projects_path %></p>
 <div class="pagination">
      <%= will_paginate @schedules, :container => false %>
 </div>
-<table class="table-striped" style="text-align:center;vertical-align:center;cell-padding:5px">
+<table class="table-striped" style="text-align:center;vertical-align:center;">
 <tr>
 	<td>Project</td>
 	<td>Start Time</td>

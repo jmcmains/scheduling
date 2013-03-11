@@ -28,7 +28,21 @@ $(function() {
 					allDay: false
 				}<%= "," if event != Schedule.last %>
 				<% end %>
-				]
+				],
+				eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+
+        alert(
+            "The end date of " + event.title + "has been moved " +
+            dayDelta + " days and " +
+            minuteDelta + " minutes."
+        );
+
+        if (!confirm("is this okay?")) {
+            revertFunc();
+        }
+
+    }
     })
+    
 });
 </script>

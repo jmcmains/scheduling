@@ -1,6 +1,4 @@
-<h1>All Projects</h1>
-<p><%= link_to "home", root_path %> | <%= link_to "Edit Schedule", schedules_path %> | <%= link_to "View Calendar", calendar_schedules_path %> </p>
-Time Span:
+<div style="position:relative">Time Span:
 <%= form_tag(projects_path, method: :get) do %>
 	Start:<br> <%= select_date @start_date, {:prefix => 'start_date'}, {:class => "input-small"} %><br>
 	Finish:<br> <%= select_date @end_date, {:prefix => 'end_date'}, {:class => "input-small"} %><br>
@@ -31,3 +29,4 @@ Time Span:
 Total Estimated Hours Worked this period: <%= total_est_time %> <br>
 Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
 <%= link_to 'New Project', new_project_path %>
+</div>
