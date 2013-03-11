@@ -1,13 +1,16 @@
-<div style="position:absolute;left:0;right:0;top:40px;height:46px;padding-top:2px;">
-<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-  <button style="margin-left:1px" class="btn btn-success btn-large" name="go" type="submit">
+<header class="navbar-fixed-top" style="top:40px;">
+  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px">
+      <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+  <button style="margin-top:-1px" class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
 <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px 19px;font-size:25px;" %>
 <% end %>
 <span style="font-size:25px"><span id="hours"><%= Project.total_time %></span> hours</span>
-</div>
-<div style="position:absolute;left:0;right:0;top:88px;bottom:0px;overflow:auto">
+  </div>
+</header>
+
+<div style="position:relative;left:0;right:0;top:39px;bottom:0px;overflow:auto">
 <table>
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
