@@ -1,12 +1,14 @@
 <header class="navbar-fixed-top" style="top:40px;">
-  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px">
+  <div class="navbar-inner" style="background-color:#aef;background-image:none;-webkit-box-shadow:none;border:none;padding:1px">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-  <button style="margin-top:-1px" class="btn btn-success btn-large" name="go" type="submit">
+	<button class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
-<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px 19px;font-size:25px;" %>
+	<div class="input-append">
+<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete", :style => "display:inline;margin:0;padding:11px;" %>
+  <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time/3600).round(2) %></span>
+  </div>
 <% end %>
-<span id="hours"><%= Project.total_time %></span> hours
   </div>
 </header>
 
