@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
   	end
   end
   
-  def project_name
+  def project_name	
   	try(:name)
   end
   
