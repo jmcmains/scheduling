@@ -27,7 +27,8 @@ class SchedulesController < ApplicationController
 	end
 	def update
 		@schedule = Schedule.find(params[:id])
-		@schedule.update_attributes(:start_at => params[:schedule][:start_at], :end_at => params[:schedule][:end_at], :project_id => Project.find_or_create_by_name(params[:schedule][:project_name]).id)
+		@schedule.update_attributes(params[:schedule])
+		@schedule.update_attributes(:project_id => Project.find_or_create_by_name(params[:schedule][:project_name]).id)
 		respond_to do |format|
       format.html {redirect_to schedules_path}
       format.js
