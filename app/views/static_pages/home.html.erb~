@@ -13,35 +13,28 @@
 </header>
 
 <div style="position:relative;left:0;right:0;top:39px;bottom:0px;overflow:auto">
-<table>
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
-	<tr>
-		
-		<td style="text-align:center;vertical-align:center">
-		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-			<%= hidden_field_tag :name, project.name  %>
-			<% if project.active? %>
-				<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
-					<i class="icon-pause icon-white"></i>
+			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn btn-default">
+			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+			<div style="vertical-align:center;line-height:20px;margin-bottom:5px;float:left;height:40px;width:85px;overflow:hidden;text-overflow:ellipsis;" class="btn btn-inverse"><%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff" %></div>
+				<%= hidden_field_tag :name, project.name  %>
+				<% if project.active? %>
+					<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
+						<i class="icon-pause icon-white"></i>
+					</button>
+				<% else %>
+					<button class="btn btn-success btn-large" name="go" type="submit">
+						<i class="icon-play icon-white"></i>
+					</button>
+				<% end %>	
+				<button class="btn btn-danger btn-large" name="del" type="submit">
+						<i class="icon-remove icon-white"></i>
 				</button>
-			<% else %>
-				<button class="btn btn-success btn-large" name="go" type="submit">
-					<i class="icon-play icon-white"></i>
-				</button>
-			<% end %>	
-		</td>
-		<td>
-			<button class="btn btn-danger btn-large" name="del" type="submit">
-					<i class="icon-remove icon-white"></i>
-			</button>
-		</td>
-		<td style="text-align:left"><%= link_to project.name, project_path(project) %></td>
-	</tr>
 	<% end %>
-	<% end %>
+	</div>
 <% end %>
-</table>
+<% end %>
 </div>
 <script>
 $(function() {
