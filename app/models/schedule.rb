@@ -14,4 +14,20 @@ class Schedule < ActiveRecord::Base
   def project_name=(name)
   	Project.find_or_create_by_name(name) if name.present?
   end
+  
+  def formatted_start_at
+		start_at.strftime('%m/%d/%Y %I:%M %p %Z')
+	end
+	
+	def formatted_start_at=(time_str)
+		self.start_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p %Z')
+	end
+	
+	def formatted_end_at
+		end_at.strftime('%m/%d/%Y %I:%M %p %Z')
+	end
+	
+	def formatted_end_at=(time_str)
+		self.end_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p %Z')
+	end
 end
