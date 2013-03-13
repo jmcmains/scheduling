@@ -2,7 +2,7 @@
 <div class="pagination">
      <%= will_paginate @schedules, :container => false %>
 </div>
-<table>
+<table style="width:100%">
 <% @schedules.each do |event| %>
 	<%= render "event", event: event %>
 <% end %>

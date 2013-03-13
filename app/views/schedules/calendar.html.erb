@@ -17,11 +17,11 @@ $(function() {
 				<% Schedule.all.sort_by(&:id).each do |event| %>
 				{
 					title: '<%= event.project.name %>',
-					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>, <%= event.start_at.sec %>),
+					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
 					<% if event.end_at %>
-						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>, <%= event.end_at.sec %>),
+						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
 					<% else %>
-						end: new Date(<%= DateTime.now.year %>, <%= DateTime.now.month-1 %>, <%= DateTime.now.day %>, <%= DateTime.now.hour %>, <%= DateTime.now.ago.min %>, <%= DateTime.now.ago.sec %>),
+						end: new Date(<%= 0.hours.ago.year %>, <%= 0.hours.ago.month-1 %>, <%= 0.hours.ago.day %>, <%= 0.hours.ago.hour %>, <%= 0.hours.ago.min %>),
 					<% end %>
 					allDay: false
 				}<%= "," if event != Schedule.last %>

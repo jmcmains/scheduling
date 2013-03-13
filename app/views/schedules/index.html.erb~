@@ -6,6 +6,7 @@
 <% @schedules.each do |event| %>
 	<%= render "event", event: event %>
 <% end %>
+
 <div class="pagination">
      <%= will_paginate @offerings, :container => false %>
 </div>
