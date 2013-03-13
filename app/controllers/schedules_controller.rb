@@ -30,7 +30,7 @@ class SchedulesController < ApplicationController
 	end
 	def update
 		@schedule = Schedule.find(params[:id])
-		@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:schedule][:project_name]).id, start_at: DateTime.strptime(params[:schedule][:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (params[:schedule][:end_at] ? nil : DateTime.strptime(params[:schedule][:end_at], '%m/%d/%Y %I:%M %p %Z')))
+		@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:schedule][:project_name]).id, start_at: DateTime.strptime(params[:schedule][:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (params[:schedule][:end_at] ? DateTime.strptime(params[:schedule][:end_at], '%m/%d/%Y %I:%M %p %Z' : nil)))
 		respond_to do |format|
       format.html {redirect_to schedules_path}
       format.js

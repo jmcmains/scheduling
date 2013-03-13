@@ -71,10 +71,10 @@ $(function () {
 									<% total_time=project.time_spent(@start_date,@end_date) %>
 									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
 									<% if est_time > 0 %>
-										['<%= project.name %>', <%= est_time %>],
+										['<%= project.name %>', <%= est_time.round(2) %>],
 									<% end %>
 								<% end %>
-                ['Others',   0]
+                ['',   0]
                 ]
             }]
         });
