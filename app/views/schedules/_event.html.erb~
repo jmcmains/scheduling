@@ -1,18 +1,12 @@
-	<%= form_for event, remote: true do |f| %>
-		<td style="text-align:left;vertical-align:center"><%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: event.id, :style => "display:inline;margin:0" %></td>
-
-		<td style="text-align:center;vertical-align:center;padding-right:10px"><%= f.datetime_select :start_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %></td>
-
-		<td style="text-align:center;vertical-align:center">
-			<% if event.end_at.blank? %>
-				<%= f.text_field :end_at, {style: "margin:0", class: "input-small"} %>
-			<% else %>
-				<%= f.datetime_select :end_at, {:ampm => true}, {class: "input-mini",style: "margin:0"} %>
-			<% end %>
-		</td>
-
-		<td style="text-align:center;vertical-align:center"><%= f.submit "Update", class: "btn btn-success" %></td>
-	<% end %>
-	<td style="text-align:center;vertical-align:center">
-		<%= link_to "-", event, :method => :delete, :confirm => "You sure?",:title => "Delete #{event.project.name}", class: "btn btn-danger" %></td>
-	<td class="success"><span id="update_<%= event.id %>"></span></td>
+<tr id="row_<%= event.id %>">
+<%= form_for event, remote: true do |f| %>
+		<%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;margin-right:5px;" %>
+		
+		<%= f.text_field :start_at, value: (f.object.start_at.strftime('%m/%d/%Y %I:%M %p') if f.object.start_at), class: "input-medium", style: "margin:0" %> to
+		<%= f.text_field :end_at, value: (f.object.end_at.strftime('%m/%d/%Y %I:%M %p') if f.object.end_at), class: "input-medium btn-mini", style: "margin:0;margin-right:2px;" %>
+		
+		<button class="btn btn-success" name="go" type="submit" style="padding-right:5px"><i class="icon-refresh icon-white"></i></button>
+<% end %>
+<a href="<%= schedule_path(event) %>" class="btn btn-danger" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete #{event.project.name}" data-remote="true"><i class="icon-remove icon-white"></i></a>
+<span id="update_<%= event.id %>" class="text-success"></span><p style="margin:0;height:5px"></p>
+</tr>

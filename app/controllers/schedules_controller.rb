@@ -20,7 +20,10 @@ class SchedulesController < ApplicationController
 			end
 		end
 		@project.save!
-		redirect_to root_path
+		respond_to do |format|
+      format.html {redirect_to root_path}
+      format.js
+    end
 	end
 	def index
 		@schedules = Schedule.all.sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 10)
@@ -35,8 +38,12 @@ class SchedulesController < ApplicationController
     end
 	end
 	def destroy
-    Schedule.find(params[:id]).destroy
-    redirect_to schedules_path 
+    @schedule=Schedule.find(params[:id])
+    @schedule.destroy
+    respond_to do |format|
+      format.html {redirect_to schedules_path}
+      format.js
+    end
   end
   def calendar
   end

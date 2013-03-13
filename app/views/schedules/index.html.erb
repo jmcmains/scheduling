@@ -2,19 +2,9 @@
 <div class="pagination">
      <%= will_paginate @schedules, :container => false %>
 </div>
-<table class="table-striped" style="text-align:center;vertical-align:center;">
-<tr>
-	<td>Project</td>
-	<td>Start Time</td>
-	<td>End Time</td>
-	<td>Update</td>
-	<td>Delete</td>
-	<td></td>
-</tr>
+<table>
 <% @schedules.each do |event| %>
-<tr id="row_<%= event.id %>">
 	<%= render "event", event: event %>
-</tr>			
 <% end %>
 </table>
 <div class="pagination">

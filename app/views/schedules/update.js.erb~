@@ -1,1 +1,2 @@
-$("#update_<%= @schedule.id %>").text("Updated! <%= DateTime.now %>").fadeOut("slow")
+$("#update_<%= @schedule.id %>").text("Updated!").fadeOut("slow")
+$("#row_<%= @schedule.id %>").addClass("success").fadeOut("slow")

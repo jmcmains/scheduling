@@ -29,3 +29,56 @@ Time Span:
 Total Estimated Hours Worked this period: <%= total_est_time %> <br>
 Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
 <%= link_to 'New Project', new_project_path %>
+
+<div id="chart"></div>
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Time Spent'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Time Spent',
+                data: [
+                <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date) }.reverse.each do |project| %>
+									<% total_time=project.time_spent(@start_date,@end_date) %>
+									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+									<% if est_time > 0 %>
+										['<%= project.name %>', <%= est_time %>],
+									<% end %>
+								<% end %>
+                ['Others',   0]
+                ]
+            }]
+        });
+    });
+    
+});
+</script>
