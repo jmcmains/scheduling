@@ -58,14 +58,14 @@ $(function () {
                         color: '#000000',
                         connectorColor: '#000000',
                         formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                            return '<b>'+ this.point.name +'</b>: '+ this.y +' ';
                         }
                     }
                 }
             },
             series: [{
                 type: 'pie',
-                name: 'Browser share',
+                name: 'Time Spent',
                 data: [
                 <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date) }.reverse.each do |project| %>
 									<% total_time=project.time_spent(@start_date,@end_date) %>
