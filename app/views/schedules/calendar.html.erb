@@ -21,7 +21,7 @@ $(function() {
 					<% if event.end_at %>
 						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>, <%= event.end_at.sec %>),
 					<% else %>
-						end: new Date(<%= 5.hours.ago.year %>, <%= 5.hours.ago.month-1 %>, <%= 5.hours.ago.day %>, <%= 5.hours.ago.hour %>, <%= 5.hours.ago.min %>, <%= 5.hours.ago.sec %>),
+						end: new Date(<%= DateTime.now.year %>, <%= DateTime.now.month-1 %>, <%= DateTime.now.day %>, <%= DateTime.now.hour %>, <%= DateTime.now.ago.min %>, <%= DateTime.now.ago.sec %>),
 					<% end %>
 					allDay: false
 				}<%= "," if event != Schedule.last %>
