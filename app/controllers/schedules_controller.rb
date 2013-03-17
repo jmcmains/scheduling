@@ -26,6 +26,7 @@ class SchedulesController < ApplicationController
     end
 	end
 	def index
+		@title = "Edit Schedule"
 		@schedules = Schedule.all.sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 10)
 	end
 	def update
@@ -45,5 +46,10 @@ class SchedulesController < ApplicationController
     end
   end
   def calendar
+  @title= "Calendar"
+  end
+  
+  def edit_calendar
+  
   end
 end

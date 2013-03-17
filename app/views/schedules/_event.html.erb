@@ -1,4 +1,4 @@
-<tr style="padding:0;margin:0">
+<tr>
 <span id="row_<%= event.id %>" style="padding:0;margin:0">
 <%= form_for event, remote: true do |f| %>
 		<%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;" %>

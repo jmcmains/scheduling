@@ -1,5 +1,4 @@
-<h1>Calendar</h1>
-<div id='calendar' style="width: 600px"></div>
+<div id='calendar' style="margin-left:5%;margin-right:5%;width: 90%"></div>
 <script>
 $(function() {
 	$('#calendar').fullCalendar({
@@ -34,7 +33,6 @@ $(function() {
             dayDelta + " days and " +
             minuteDelta + " minutes."
         );
-
         if (!confirm("is this okay?")) {
             revertFunc();
         }
