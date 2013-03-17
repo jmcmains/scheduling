@@ -15,7 +15,11 @@
 <div style="position:relative;left:0;right:0;top:39px;">
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
-			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn btn-default">
+			<% if project.active? %>
+			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn btn-primary">
+			<% else %>
+			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn">
+			<% end %>
 			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff;vertical-align:middle;margin-bottom:5px;float:left;height:40px;width:85px;overflow:hidden;text-overflow:ellipsis;", class: "btn btn-inverse" %>
 				<%= hidden_field_tag :name, project.name  %>
@@ -29,7 +33,7 @@
 					</button>
 				<% end %>	
 				<button class="btn btn-danger btn-large" name="del" type="submit">
-						<i class="icon-remove icon-white"></i>
+						<i class="icon-star icon-white"></i>
 				</button>
 	<% end %>
 	</div>
