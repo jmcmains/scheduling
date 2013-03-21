@@ -11,14 +11,9 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner" style="max-height:41px;overflow:hidden">
       <%= link_to "Time Saver", root_path, id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Edit Schedule", schedules_path %></li>
-          <li><%= link_to "Calendar", calendar_schedules_path %></li>
-          <li><%= link_to "Time Spent", projects_path %></li>
-        </ul>
-      </nav>
+      <div id="nav">
+      	<%= render "layouts/navbar_wide" %>
+      </div>
   </div>
 </header>
 <div class="container">
@@ -26,3 +21,19 @@
 </div>
 </body>
 </html>
+<script>
+$(function() {
+if ($(window).width() < 610) {
+$('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
+} else {
+$('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')
+}
+});
+$(window).resize(function() {
+if ($(window).width() < 610) {
+$('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
+} else {
+$('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')
+}
+});
+</script>

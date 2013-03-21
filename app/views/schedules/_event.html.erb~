@@ -1,13 +1,13 @@
-<tr style="padding:0;margin:0">
+<tr>
 <span id="row_<%= event.id %>" style="padding:0;margin:0">
 <%= form_for event, remote: true do |f| %>
-		<%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;" %>
+		<%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;padding:11px;" %>
 		
-		<%= f.text_field :start_at, value: (f.object.formatted_start_at if f.object.start_at), class: "input-medium", style: "margin:0" %> to
-		<%= f.text_field :end_at, value: (f.object.formatted_end_at if f.object.end_at), class: "input-medium btn-mini", style: "margin:0" %>
+		<%= f.text_field :start_at, value: (f.object.formatted_start_at if f.object.start_at), class: "input-medium", style: "display:inline;margin:0;padding:11px;" %> to
+		<%= f.text_field :end_at, value: (f.object.formatted_end_at if f.object.end_at), class: "input-medium", style: "margin:0;display:inline;padding:11px;" %>
 		
-		<button class="btn btn-success" name="go" type="submit"><i class="icon-refresh icon-white"></i></button>
+		<button class="btn btn-success btn-large" name="go" type="submit"><i class="icon-refresh icon-white"></i></button>
 <% end %>
-<a href="<%= schedule_path(event) %>" class="btn btn-danger" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete #{event.project.name}" data-remote="true"><i class="icon-remove icon-white"></i></a>
+<a href="<%= schedule_path(event) %>" class="btn btn-danger btn-large" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete #{event.project.name}" data-remote="true"><i class="icon-remove icon-white"></i></a>
 <span id="update_<%= event.id %>" class="text-success"></span></span>	
 </tr>
