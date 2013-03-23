@@ -18,7 +18,6 @@
 </header>
 <div class="container">
 <%= yield %>
-<div id="test" style="position:absolute;bottom:0;margin:10px;width:100%">0</div>
 </div>
 </body>
 </html>
