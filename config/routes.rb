@@ -1,7 +1,11 @@
 Scheduling::Application.routes.draw do
 	resources :users
 	
-	match '/signup', to: 'users#new'
+	resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 	
 	resources :schedules do
 		collection do

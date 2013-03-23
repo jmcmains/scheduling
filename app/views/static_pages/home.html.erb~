@@ -5,7 +5,7 @@
   	<i class="icon-play icon-white"></i>
 	</button>
 	<div class="input-append">
-<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-block-level", :style => "display:inline;margin:0;padding:11px;" %>
+<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-large", :style => "display:inline;margin:0;padding:11px;" %>
   <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time/3600).round(2) %></span>
   </div>
 <% end %>
@@ -16,9 +16,9 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.featured %>
 			<% if project.active? %>
-			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn btn-primary">
+			<div style="padding:3px;float:left;text-align:center;width:112px;margin:5px" class="btn btn-primary">
 			<% else %>
-			<div style="float:left;text-align:center;width:112px;margin:5px" class="btn">
+			<div style="padding:3px;float:left;text-align:center;width:112px;margin:5px" class="btn">
 			<% end %>
 			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff;vertical-align:middle;margin-bottom:5px;float:left;height:40px;width:85px;overflow:hidden;text-overflow:ellipsis;", class: "btn btn-inverse" %>

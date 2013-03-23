@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="navbar navbar-fixed-top">
-  <div class="navbar-inner" style="max-height:41px;overflow:hidden">
+  <div class="navbar-inner">
       <%= link_to "Time Saver", root_path, id: "logo" %>
       <div id="nav">
       	<%= render "layouts/navbar_wide" %>
@@ -26,14 +26,14 @@
 </html>
 <script>
 $(function() {
-if ($(window).width() < 610) {
+if ($(window).width() < 620) {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
 } else {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')
 }
 });
 $(window).resize(function() {
-if ($(window).width() < 610) {
+if ($(window).width() < 620) {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
 } else {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')

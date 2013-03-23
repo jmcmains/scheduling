@@ -1,6 +1,8 @@
 Scheduling::Application.routes.draw do
-  get "users/new"
-
+	resources :users
+	
+	match '/signup', to: 'users#new'
+	
 	resources :schedules do
 		collection do
 			get :calendar
