@@ -9,7 +9,7 @@ group :development do
 end
 
 gem 'bootstrap-sass'
-
+gem 'bcrypt-ruby'
 
 # Gems used only for assets and not required
 # in production environments by default.

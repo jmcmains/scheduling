@@ -1,4 +1,6 @@
 Scheduling::Application.routes.draw do
+  get "users/new"
+
 	resources :schedules do
 		collection do
 			get :calendar
