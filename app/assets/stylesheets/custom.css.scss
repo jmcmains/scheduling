@@ -67,8 +67,12 @@ input {
   @extend .error;
 }
 
-.navbar .nav > li > a{
-	padding:10px 5px 10px;
+.nav-wide > li > a{
+	padding:10px 5px 10px !important;
+}
+
+.nav-thin > li > a{
+	padding:10px 10px 10px !important;
 }
 
 

@@ -1,7 +1,7 @@
 <nav>
   <ul class="nav pull-right">
-  	<li><a href="<%= root_path %>"><i class="icon-home"></i></a></li>
     <% if signed_in? %>
+    	<li><a href="<%= root_path %>"><i class="icon-home"></i></a></li>
 		  <li><a href="<%= schedules_path %>"><i class="icon-tasks"></i></a></li>
 		  <li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i></a></li>
 		  <li><a href="<%= current_user %>"><i class="icon-time"></i></a></li>
