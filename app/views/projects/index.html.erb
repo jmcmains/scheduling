@@ -1,8 +1,7 @@
 Time Span:
-<%= form_tag(projects_path, method: :get) do %>
-	Start:<br> <%= select_date @start_date, {:prefix => 'start_date'}, {:class => "input-small"} %><br>
-	Finish:<br> <%= select_date @end_date, {:prefix => 'end_date'}, {:class => "input-small"} %><br>
-<%= submit_tag %>
+<%= form_tag(projects_path, class: "form-inline", method: :get) do %>
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
+<%= submit_tag "submit", class: 'btn btn-primary' %>
 <% end %>
 <% total_project_time=0 %>
 <% total_est_time=0 %>
@@ -12,8 +11,8 @@ Time Span:
 <td style="text-align:center">Hours Spent</td>
 <td style="text-align:center">Modify</td>
 </tr>
-<% @projects.sort_by { |a| a.time_spent(@start_date,@end_date) }.reverse.each do |project| %>
-	<% total_time=project.time_spent(@start_date,@end_date) %>
+<% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,current_user) }.reverse.each do |project| %>
+	<% total_time=project.time_spent(@start_date,@end_date,current_user) %>
 	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
 	<% total_project_time = total_project_time + total_time %>
 	<% total_est_time = total_est_time + est_time %>
@@ -67,8 +66,8 @@ $(function () {
                 type: 'pie',
                 name: 'Time Spent',
                 data: [
-                <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date) }.reverse.each do |project| %>
-									<% total_time=project.time_spent(@start_date,@end_date) %>
+                <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,current_user) }.reverse.each do |project| %>
+									<% total_time=project.time_spent(@start_date,@end_date,current_user) %>
 									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
 									<% if est_time > 0 %>
 										['<%= project.name %>', <%= est_time %>],

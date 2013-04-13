@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   
+  has_many :features, dependent: :destroy
+  accepts_nested_attributes_for :features
   private
   
   	def create_remember_token

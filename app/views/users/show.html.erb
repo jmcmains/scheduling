@@ -1,3 +1,88 @@
 <% provide(:title, @user.name) %>
 <h1><%= @user.name %></h1>
-<%= @user.email %>
+<p><%= @user.email %></p>
+<% if current_user == @user || current_user.admin %>
+Time Span:
+<%= form_tag(projects_path, class: "form-inline", method: :get) do %>
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
+<%= submit_tag "submit", class: 'btn btn-primary' %>
+<% end %>
+<% total_project_time=0 %>
+<% total_est_time=0 %>
+<table class="table-striped">
+<tr>
+<td style="text-align:center">Project</td>
+<td style="text-align:center">Hours Spent</td>
+<td style="text-align:center">Modify</td>
+</tr>
+<% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,current_user) }.reverse.each do |project| %>
+	<% total_time=project.time_spent(@start_date,@end_date,current_user) %>
+	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+	<% total_project_time = total_project_time + total_time %>
+	<% total_est_time = total_est_time + est_time %>
+	<% if est_time > 0 %>
+		<tr>
+			<td style="text-align:left"><%= link_to project.name, project_path(project) %> </td>
+			<td style="text-align:center"><%= est_time %></td>
+			<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+		</tr>
+	<% end %>
+<% end %>
+</table>
+Total Estimated Hours Worked this period: <%= total_est_time %> <br>
+Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
+<%= link_to 'New Project', new_project_path %>
+
+<div id="chart"></div>
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Time Spent'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.y +' ';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Time Spent',
+                data: [
+                <% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,current_user) }.reverse.each do |project| %>
+									<% total_time=project.time_spent(@start_date,@end_date,current_user) %>
+									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+									<% if est_time > 0 %>
+										['<%= project.name %>', <%= est_time %>],
+									<% end %>
+								<% end %>
+                ['',   0]
+                ]
+            }]
+        });
+    });
+    
+});
+</script>
+<% end %>

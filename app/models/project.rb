@@ -1,9 +1,10 @@
 class Project < ActiveRecord::Base
+
   attr_accessible :name, :featured
   has_many :schedules, dependent: :destroy
   accepts_nested_attributes_for :schedules
-  
-  
+  has_many :features, dependent: :destroy
+  accepts_nested_attributes_for :features
   def self.search(search)
   	if search
 			words = search.to_s.strip.split
@@ -19,12 +20,12 @@ class Project < ActiveRecord::Base
   	try(:name)
   end
   
-  def self.total_time
+  def self.total_time(user)
   	total_time = 0
 		begday = 0.minutes.ago.beginning_of_day
 		endday = 0.minutes.ago.end_of_day
 		all.each do |project|
-			project.schedules.each do |s|
+			project.schedules.find_all_by_user_id(user.id).each do |s|
 				start = s.start_at
 				finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 				if  begday < finish && finish < endday && begday < start && start < endday
@@ -46,13 +47,13 @@ class Project < ActiveRecord::Base
   	Project.find_or_create_by_name(name) if name.present?
   end
   
-  def active?
-  	!Schedule.find_by_project_id_and_end_at(id,nil).blank?
+  def active?(user)
+  	!schedules.find_by_end_at_and_user_id(nil,user.id).blank?
   end
   
-  def time_spent(start_date,end_date)
+  def time_spent(start_date,end_date,user)
   	total_time = 0
-		schedules.each do |s|
+		schedules.find_all_by_user_id(user.id).each do |s|
 			start = s.start_at
 			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))

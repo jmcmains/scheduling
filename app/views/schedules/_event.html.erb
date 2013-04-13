@@ -1,13 +1,17 @@
 <tr>
 <span id="row_<%= event.id %>" style="padding:0;margin:0">
-<%= form_for event, remote: true do |f| %>
-		<%= f.text_field :project_name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;padding:11px;" %>
-		
-		<%= f.text_field :start_at, value: (f.object.formatted_start_at if f.object.start_at), class: "input-medium", style: "display:inline;margin:0;padding:11px;" %> -
-		<%= f.text_field :end_at, value: (f.object.formatted_end_at if f.object.end_at), class: "input-medium", style: "margin:0;display:inline;padding:11px;" %>
-		
-		<button class="btn btn-success btn-large" name="go" type="submit"><i class="icon-refresh icon-white"></i></button>
+<%= form_tag rewrite_schedule_path(event), method: :get, name: "form#{event.id}", remote: true do %>
+		<%= text_field_tag :project_name, event.project.name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete input-medium", id: event.id, :style => "display:inline;margin:0;padding:11px;" %>
+		<%= text_field_tag :start_at, (event.formatted_start_at if event.start_at), class: "input-medium", style: "display:inline;margin:0;padding:11px;" %> -
+		<%= text_field_tag :end_at, (event.formatted_end_at if event.end_at), class: "input-medium", style: "margin:0;display:inline;padding:11px;" %>
+		<%= hidden_field_tag :commit %>
+		<button class="btn btn-success btn-large" name="go" type="submit" onClick="document.form<%= event.id %>.commit.value='go'">
+  		<i class="icon-play icon-white"></i>
+		</button>
+		<button class="btn btn-danger btn-large" name="del" type="submit" onClick="document.form<%= event.id %>.commit.value='del'">
+			<i class="icon-remove icon-white"></i>
+		</button>
 <% end %>
-<a href="<%= schedule_path(event) %>" class="btn btn-danger btn-large" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete #{event.project.name}" data-remote="true"><i class="icon-remove icon-white"></i></a>
 <span id="update_<%= event.id %>" class="text-success"></span></span>	
 </tr>
+

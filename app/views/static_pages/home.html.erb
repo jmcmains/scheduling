@@ -1,21 +1,28 @@
-<header class="navbar-fixed-top" style="top:40px;">
-  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px">
+<header class="navbar-fixed-top" style="top:40px;z-index:50;">
+  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:2px;">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-	<button class="btn btn-success btn-large" name="go" type="submit">
+	<div class="input-append input-prepend" style="margin-left:5px">
+		<button class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
-	<div class="input-append">
-<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-large", :style => "display:inline;margin:0;padding:11px;" %>
-  <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time/3600).round(2) %></span>
+<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-large", :style => "display:inline;margin:0;padding:11px;z-index:100" %>
+  <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time(current_user)/3600).round(2) %></span>
+    <% if !Schedule.active_project(current_user).blank? %>
+		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+			<%= hidden_field_tag :name, Schedule.active_project(current_user).name  %>
+			<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
+				<i class="icon-pause icon-white"></i>
+			</button>
+		<% end %>
+	<% end %>
   </div>
 <% end %>
   </div>
 </header>
-
 <div style="position:relative;left:0;right:0;top:39px;">
 <% Project.all.sort_by(&:name).each do |project| %>
-	<% if project.featured %>
-			<% if project.active? %>
+	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured %>
+			<% if project.active?(current_user) %>
 			<div style="padding:5px;float:left;text-align:center;width:112px;margin:5px" class="btn btn-primary">
 			<% else %>
 			<div style="padding:5px;float:left;text-align:center;width:112px;margin:5px" class="btn">
@@ -23,7 +30,7 @@
 			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff;vertical-align:middle;margin-bottom:5px;float:left;height:40px;width:85px;overflow:hidden;text-overflow:ellipsis;", class: "btn btn-inverse" %>
 				<%= hidden_field_tag :name, project.name  %>
-				<% if project.active? %>
+				<% if project.active?(current_user)  %>
 					<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
 						<i class="icon-pause icon-white"></i>
 					</button>
@@ -49,7 +56,7 @@ $(function() {
 </script>
 <script>
 	if ($("#running").length > 0) {
-  	var i = parseFloat('<%= Project.total_time %>');
+  	var i = parseFloat('<%= Project.total_time(current_user) %>');
   	var timer = setInterval(function() { $('#hours').text( Math.round(i++/36)/100 ) }, 1000)
   }
 </script>

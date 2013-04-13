@@ -1,14 +1,14 @@
 <nav>
   <ul class="nav pull-right">
-  	<li><a href="<%= root_path %>"><i class="icon-home"></i> Home</a></li>
     <% if signed_in? %>
+    	<li><a href="<%= root_path %>"><i class="icon-home"></i> Home</a></li>
 		  <li><a href="<%= schedules_path %>"><i class="icon-tasks"></i> Edit Schedule</a></li>
 		  <li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i> Calendar</a></li>
-		  <li><a href="<%= projects_path %>"><i class="icon-time"></i> Time Spent</a></li>
+		  <li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i> Time Spent</a></li>
 			<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-user"></i> Account <b class="caret"></b>
       </a>
-		  <ul class="dropdown-menu">
+		  <ul class="dropdown-menu" style="position:absolute;z-index:11">
           <li><%= link_to "Profile", current_user %></li>
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
           <li class="divider"></li>

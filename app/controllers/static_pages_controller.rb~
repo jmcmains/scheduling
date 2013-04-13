@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-  	@schedule = Schedule.new
+  	@project = Project.new
+  	@schedule = @project.schedules.build
   end
 end

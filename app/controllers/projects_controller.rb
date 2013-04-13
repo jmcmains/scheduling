@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  
+  before_filter :signed_in_user
   def autocomplete
 		@projects = Project.search(params[:term])
 		render json: @projects.map(&:name)
@@ -9,8 +9,8 @@ class ProjectsController < ApplicationController
     @title = "All Projects"
     @projects = Project.all
     if params[:start_date]
-  		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
-  		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
+    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
   	else
   		@start_date = Date.today.beginning_of_week-1
   		@end_date = Date.today.end_of_week-1
@@ -19,9 +19,10 @@ class ProjectsController < ApplicationController
   
   def show
   	@project = Project.find(params[:id])
+  	@title = @project.name
   	if params[:start_date]
-  		@start_date = Date.new(params[:start_date][:year].to_i,params[:start_date][:month].to_i,params[:start_date][:day].to_i)
-  		@end_date = Date.new(params[:end_date][:year].to_i,params[:end_date][:month].to_i,params[:end_date][:day].to_i)
+  		@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
   	else
   		@start_date = Date.today.beginning_of_week-1
   		@end_date = Date.today.end_of_week-1
@@ -62,7 +63,7 @@ class ProjectsController < ApplicationController
     if current_project
     	current_project.update_attributes(end_at:DateTime.now)
     end
-    Schedule.create!(project_id:@project.id,start_at:DateTime.now)
+    Schedule.create!(project_id:@project.id,start_at:DateTime.now,user_id:current_user.id)
     redirect_to projects_path
   end
   

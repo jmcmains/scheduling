@@ -10,7 +10,7 @@ Time Span:
 <% @project.schedules.each do |s| %>
 	<% start = s.start_at %>
 	<% finish = s.end_at.blank? ? 5.hours.ago : s.end_at %>
-	<% if (@start_date.to_datetime < finish && finish < (@end_date.to_datetime+1.day)) && (@start_date.to_datetime < start && start < (end_date.to_datetime+1.day)) %>
+	<% if (@start_date.to_datetime < finish && finish < (@end_date.to_datetime+1.day)) && (@start_date.to_datetime < start && start < (@end_date.to_datetime+1.day)) %>
 	<% elsif (@start_date.to_datetime < finish && finish < (@end_date.to_datetime+1.day)) %>
 		<% start = @start_date.to_datetime %>
 	<% elsif (@start_date.to_datetime < start && start < (@end_date.to_datetime+1.day)) %>
