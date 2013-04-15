@@ -39,7 +39,7 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.find(params[:id])
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p') : nil))
+			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p EDT'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p EDT') : nil))
 			@schedule.save!
 		elsif @command == "del"
 		  @schedule.destroy
