@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
-		@project = Project.find_or_create_by_name(params[:name])
+		@project = Project.find_or_create_by_name(params[:name].titlecase)
 		@project.save!
     if params[:go]
 		  current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
@@ -39,7 +39,7 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.find(params[:id])
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p %Z') : nil))
+			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p') : nil))
 			@schedule.save!
 		elsif @command == "del"
 		  @schedule.destroy

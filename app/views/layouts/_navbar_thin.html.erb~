@@ -4,12 +4,15 @@
     	<li><a href="<%= root_path %>"><i class="icon-home"></i></a></li>
 		  <li><a href="<%= schedules_path %>"><i class="icon-tasks"></i></a></li>
 		  <li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i></a></li>
-		  <li><a href="<%= current_user %>"><i class="icon-time"></i></a></li>
+		  <li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i></a></li>
 			<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="icon-user"></i><b class="caret"></b>
       </a></li>
 		  <ul class="dropdown-menu">
           <li><%= link_to "Profile", current_user %></li>
+          <% if current_user.admin %>
+          	<li><%= link_to "Projects", projects_path %></li>
+          <% end %>
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
           <li class="divider"></li>
           <li><%= link_to "Sign out", signout_path, method: "delete" %></li>

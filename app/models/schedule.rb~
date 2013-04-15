@@ -14,7 +14,7 @@ class Schedule < ActiveRecord::Base
   end
   
   def duration
-  	(end_at ? end_at : DateTime.now)-start_at
+  	(end_at ? end_at : 0.hours.ago)-start_at
   end
   
   def project_name=(name)

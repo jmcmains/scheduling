@@ -1,5 +1,5 @@
 <% if @command == "go" %>
-$("#update_<%= @schedule.id %>").text("Updated!").fadeIn("slow").fadeOut("slow")
+$("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut("slow")
 <% else %>
 $("#row_<%= @schedule.id %>").fadeOut("slow")
 <% end %>

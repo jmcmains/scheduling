@@ -10,6 +10,9 @@
       </a>
 		  <ul class="dropdown-menu" style="position:absolute;z-index:11">
           <li><%= link_to "Profile", current_user %></li>
+          <% if current_user.admin %>
+          	<li><%= link_to "Projects", projects_path %></li>
+          <% end %>
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
           <li class="divider"></li>
           <li><%= link_to "Sign out", signout_path, method: "delete" %></li>

@@ -32,14 +32,14 @@ class SchedulesController < ApplicationController
 	end
 	def index
 		@title = "Edit Schedule"
-		@schedules = Schedule.find_all_by_user_id(current_user).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 10)
+		@schedules = Schedule.find_all_by_user_id(current_user).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 20)
 	end
 	
 	def rewrite
 		@schedule = Schedule.find(params[:id])
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p %Z') : nil))
+			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p') : nil))
 			@schedule.save!
 		elsif @command == "del"
 		  @schedule.destroy
