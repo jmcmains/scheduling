@@ -1,14 +1,9 @@
-<h1>Edit Project</h1>
-
 <%= form_for(@project, class: "form-inline") do |f| %>
-<div class="field">
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-</div>
-<div class="field">
-	<%= f.check_box :featured %><%= f.label :featured %>
-</div>
-<div class="actions">
-	<%= f.submit "Save" %>
-</div>
+	<p><span>Name:</span>
+	<%= f.text_field :name, class: "input-small" %></p>
+	<%= f.fields_for(:features, :html => { :class => "form-inline"}) do |builder| %>
+		<p><%= builder.hidden_field :user_id, value: current_user.id %>
+		<%= builder.check_box :featured %> Featured?</p>
+	<% end %>
+	<%= f.submit "Save", class: "btn btn-primary"%>
 <% end %>

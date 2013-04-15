@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
-		@project = Project.find_or_create_by_name(params[:name])
+		@project = Project.find_or_create_by_name(params[:name].titlecase)
 		@project.save!
     if params[:go]
 		  current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)

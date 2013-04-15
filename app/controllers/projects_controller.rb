@@ -32,6 +32,9 @@ class ProjectsController < ApplicationController
   def edit
   	@project = Project.find(params[:id])
   	@title = "Edit Project"
+  	if @project.features.count < 1
+  		@project.features.build(featured:false)
+  	end
   end
   
   def update

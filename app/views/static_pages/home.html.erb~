@@ -1,4 +1,4 @@
-<header class="navbar-fixed-top" style="top:40px;">
+<header class="navbar-fixed-top" style="top:40px;z-index:50;">
   <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:2px;">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 	<div class="input-append input-prepend" style="margin-left:5px">
@@ -10,7 +10,7 @@
     <% if !Schedule.active_project(current_user).blank? %>
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 			<%= hidden_field_tag :name, Schedule.active_project(current_user).name  %>
-			<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
+			<button class="btn btn-danger btn-large" name="stop" type="submit">
 				<i class="icon-pause icon-white"></i>
 			</button>
 		<% end %>

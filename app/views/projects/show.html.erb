@@ -17,5 +17,5 @@
 	<% end %>
 	<% total_time = total_time + (finish - start) %>
 <% end %>
-
-Total Time Spent = <%= (total_time/60/60).round %> hours
+<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
+<p>Total Time Spent = <%= (total_time/60/60).round %> hours</p>

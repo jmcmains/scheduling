@@ -1,10 +1,6 @@
-<h1><%= @project.name %></h1>
-<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
-Time Span:
-<%= form_tag(projects_path, method: :get) do %>
-	Start:<br> <%= select_date @start_date, {:prefix => 'start_date'}, {:class => "input-small"} %><br>
-	Finish:<br> <%= select_date @end_date, {:prefix => 'end_date'}, {:class => "input-small"} %><br>
-<%= submit_tag %>
+<%= form_tag(projects_path, class: "form-inline", method: :get) do %>
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
+<%= submit_tag "submit", class: 'btn btn-primary' %>
 <% end %>
 <% total_time = 0 %>
 <% @project.schedules.each do |s| %>
@@ -21,5 +17,5 @@ Time Span:
 	<% end %>
 	<% total_time = total_time + (finish - start) %>
 <% end %>
-
+<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %>
 Total Time Spent = <%= (total_time/60/60).round %> hours
