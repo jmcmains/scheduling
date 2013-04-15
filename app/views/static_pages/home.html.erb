@@ -5,7 +5,7 @@
 		<button class="btn btn-success btn-large" name="go" type="submit">
   	<i class="icon-play icon-white"></i>
 	</button>
-<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-large", :style => "display:inline;margin:0;padding:11px;z-index:100" %>
+<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
   <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time(current_user)/3600).round(2) %></span>
 <% end %>
 <% if !Schedule.active_project(current_user).blank? %>
