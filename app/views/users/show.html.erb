@@ -3,7 +3,7 @@
 <p><%= @user.email %></p>
 <% if current_user == @user || current_user.admin %>
 Time Span:
-<%= form_tag(projects_path, class: "form-inline", method: :get) do %>
+<%= form_tag(user_path(@user), class: "form-inline", method: :get) do %>
 	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
 <%= submit_tag "submit", class: 'btn btn-primary' %>
 <% end %>
