@@ -1,12 +1,11 @@
-<h1>Edit Schedule</h1>
 <div class="pagination">
      <%= will_paginate @schedules, :container => false %>
 </div>
-<table style="width:100%">
+
 <% @schedules.each do |event| %>
 	<%= render "event", event: event %>
 <% end %>
-</table>
+
 <div class="pagination">
      <%= will_paginate @offerings, :container => false %>
 </div>
