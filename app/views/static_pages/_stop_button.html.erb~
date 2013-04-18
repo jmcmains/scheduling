@@ -1,0 +1,8 @@
+<% if !Schedule.active_project(current_user).blank? %>
+		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get), remote: true, do %>
+			<%= hidden_field_tag :name, Schedule.active_project(current_user).name  %>
+			<button class="btn btn-danger btn-large" id="running" name="stop" type="submit">
+				<i class="icon-pause icon-white"></i>
+			</button>
+		<% end %>
+<% end %>

@@ -1,8 +1,13 @@
 <% if @command == "del" %>
-$("#project<%= @project.id %>").fadeOut("slow")
+	$("#project<%= @project.id %>").fadeOut("slow")
 <% elsif @command == "go" %>
-$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
-$(".btn-primary").removeClass("btn-primary")
-$("#project<%= @project.id %>").addClass("btn-primary")
-$(".btn-primary #btn<%= @project.id %>").html("<%= escape_javascript render "static_pages/home_buttons", project: @project %>")
+	<% if @current_project %>
+		$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
+		$(".btn-primary").removeClass("btn-primary")
+	<% end %>
+	$("#project<%= @project.id %>").addClass("btn-primary")
+	$(".btn-primary #btn<%= @project.id %>").html("<%= escape_javascript render "static_pages/home_buttons", project: @project %>")
+<% elsif @command == "stop" %>
+	$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
+	$(".btn-primary").removeClass("btn-primary")
 <% end %>

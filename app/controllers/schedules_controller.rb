@@ -17,9 +17,11 @@ class SchedulesController < ApplicationController
 		elsif params[:del]
 			@command="del"
 		else
+			@command="stop"
 			current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
 			if current_project
 				current_project.update_attributes(end_at:DateTime.now)
+				@current_project=current_project.project
 			end
 		end
 		@project.save!
@@ -65,7 +67,7 @@ class SchedulesController < ApplicationController
 	  else
 	  	@current_schedule=nil
 	  end
-	  @schedule = Schedule.new(project_id:nil,start_at:DateTime.now,user_id:current_user.id)
+	  @schedule = Schedule.new(start_at:DateTime.now,user_id:current_user.id)
 	  @schedule.save!
 	  respond_to do |format|
 	    format.html {redirect_to schedules_path}
