@@ -5,12 +5,17 @@ class SchedulesController < ApplicationController
 		@project = Project.find_or_create_by_name(params[:name])
 		@project.save!
     if params[:go]
-		  current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
+    	@command="go"
+		 	current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
 		  if current_project
 		  	current_project.update_attributes(end_at:DateTime.now)
+		  	@current_project=current_project.project
+		  else
+		  @current_project=nil
 		  end
 		  Schedule.create!(project_id:@project.id,start_at:DateTime.now,user_id:current_user.id)
 		elsif params[:del]
+			@command="del"
 		else
 			current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
 			if current_project
@@ -20,6 +25,7 @@ class SchedulesController < ApplicationController
 		@project.save!
 		featured=@project.features.find_or_create_by_user_id(current_user.id)
 		if params[:del]
+			@command=params[:del];
 			featured.update_attributes(featured:false)
 		else
 			featured.update_attributes(featured:true)
@@ -30,6 +36,7 @@ class SchedulesController < ApplicationController
       format.js
     end
 	end
+	
 	def index
 		@title = "Edit Schedule"
 		@schedules = Schedule.find_all_by_user_id(current_user).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 20)
@@ -50,6 +57,21 @@ class SchedulesController < ApplicationController
 	  end
 	end
 	
+	def addnew
+		current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
+	  if current_project
+	  	current_project.update_attributes(end_at:DateTime.now)
+	  	@current_schedule=current_project
+	  else
+	  	@current_schedule=nil
+	  end
+	  @schedule = Schedule.new(project_id:nil,start_at:DateTime.now,user_id:current_user.id)
+	  @schedule.save!
+	  respond_to do |format|
+	    format.html {redirect_to schedules_path}
+	    format.js
+	  end
+	end
 	
 	def destroy
     @schedule=Schedule.find(params[:id])

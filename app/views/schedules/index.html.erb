@@ -2,10 +2,13 @@
      <%= will_paginate @schedules, :container => false %>
 </div>
 
-<% @schedules.each do |event| %>
-	<%= render "event", event: event %>
-<% end %>
-
+<div class="addnew">
+<div><%= link_to "Add New Event", addnew_schedules_path, remote: true %><br>
+<i class="icon-plus-sign icon-4x"></i></div>
+</div>
+<div id="schedules">
+<%= render @schedules %>
+</div>
 <script>
 $(function() {
 	 $( ".autocomplete" ).autocomplete({

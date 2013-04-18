@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import 'font-awesome';
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
@@ -87,4 +88,25 @@ input {
       border-bottom: 1px solid $grayLighter;
     }
   }
+}
+
+.addnew {
+	width: 132px;
+	height:173px;
+	border:10px dashed #ddd;
+	padding:10px;
+	margin:5px;
+	border-radius:10px;
+	float:left;
+	color: #ddd;
+	display:table;
+	text-align:center;
+	div {
+		display:table-cell;
+		vertical-align:middle;
+	}
+	&:hover {
+	border:10px dashed #aaa;
+	color: #aaa;
+	}
 }

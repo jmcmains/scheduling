@@ -9,6 +9,7 @@ Scheduling::Application.routes.draw do
 	resources :schedules do
 		collection do
 			get :calendar
+			get :addnew
 		end
 		member do
 			get :rewrite

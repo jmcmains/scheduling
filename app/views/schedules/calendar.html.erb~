@@ -15,16 +15,18 @@ $(function() {
 				editable: true,
 				events: [
 				<% Schedule.find_all_by_user_id(current_user).sort_by(&:id).each do |event| %>
-				{
-					title: '<%= event.project.name %>',
-					start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
-					<% if event.end_at %>
-					end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
-					<% else %>
-					end: new Date(<%= 0.hours.ago.year %>, <%= 0.hours.ago.month-1 %>, <%= 0.hours.ago.day %>, <%= 0.hours.ago.hour %>, <%= 0.hours.ago.min %>),
-					<% end %>
-					allDay: false
-				}<%= "," if event != Schedule.last %>
+				<% if event.duration > 60 %>
+					{
+						title: '<%= event.project.name %>',
+						start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
+						<% if event.end_at %>
+						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
+						<% else %>
+						end: new Date(<%= 0.hours.ago.year %>, <%= 0.hours.ago.month-1 %>, <%= 0.hours.ago.day %>, <%= 0.hours.ago.hour %>, <%= 0.hours.ago.min %>),
+						<% end %>
+						allDay: false
+					}<%= "," if event != Schedule.last %>
+				<% end %>
 				<% end %>
 				],
 				eventResize: function(event,dayDelta,minuteDelta,revertFunc) {

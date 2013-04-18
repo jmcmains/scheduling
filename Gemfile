@@ -9,6 +9,8 @@ group :development do
 end
 
 gem 'bootstrap-sass'
+gem 'font-awesome-sass-rails'
+
 gem 'bcrypt-ruby'
 
 # Gems used only for assets and not required
