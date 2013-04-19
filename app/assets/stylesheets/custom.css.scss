@@ -92,11 +92,10 @@ input {
 
 .addnew {
 	width: 132px;
-	height:173px;
+	height:178px;
 	border:10px dashed #ddd;
 	padding:10px;
 	margin:5px;
-	border-radius:10px;
 	float:left;
 	color: #ddd;
 	display:table;
@@ -106,7 +105,40 @@ input {
 		vertical-align:middle;
 	}
 	&:hover {
-	border:10px dashed #aaa;
-	color: #aaa;
+		border-color: #aaa;
+		color: #aaa;
 	}
+}
+
+.title {
+	color:#fff;
+	vertical-align:middle;
+	margin-bottom:5px;
+	float:left;
+	height:40px;
+	width:95px;
+	overflow:hidden;
+	margin:5px;
+	text-overflow:ellipsis;
+}
+
+.home-left {
+margin:5px;
+float:left;
+margin-top:0;
+}
+
+.home-right {
+margin:5px;
+float:right;
+margin-top:0;
+}
+
+.schedule {
+	background-color:#eee;
+	border:1px solid #ccc;
+	padding:0;
+	float:left;
+	margin:10px;	
+	margin-right:0;
 }

@@ -9,7 +9,7 @@
   <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time(current_user)/3600).round(2) %></span>
 <% end %>
 <span id="stopbutton">
-<%= render "stop_button", project: project %>
+<%= render "stop_button" %>
 </span>
 	  </div>
   </div>
@@ -20,10 +20,10 @@
 			<% if project.active?(current_user) %>
 			<div style="padding:5px;float:left;text-align:center;width:120px;margin:5px" class="btn btn-large btn-primary" id="project<%= project.id %>">
 			<% else %>
-			<div style="padding:5px;float:left;text-align:center;width:120px;margin:5px" class="btn btn-large" id="project<%= project.id %>">
+			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>
 			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
-			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff;vertical-align:middle;margin-bottom:5px;float:left;height:40px;width:95px;overflow:hidden;text-overflow:ellipsis;", class: "btn btn-inverse" %><br>
+			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
 				<%= hidden_field_tag :name, project.name  %>
 				<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
 	<% end %>

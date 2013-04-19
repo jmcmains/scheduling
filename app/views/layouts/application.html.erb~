@@ -9,9 +9,9 @@
 </head>
 <body>
 <header class="navbar navbar-fixed-top">
-  <div class="navbar-inner" style="z-index:1">
+  <div class="navbar-inner" style="z-index:100">
       <%= link_to "Time Saver", root_path, id: "logo" %>
-      <div id="nav">
+      <div id="nav nav-list">
       	<%= render "layouts/navbar_wide" %>
       </div>
   </div>

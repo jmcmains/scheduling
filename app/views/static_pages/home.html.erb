@@ -18,12 +18,12 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured %>
 			<% if project.active?(current_user) %>
-			<div style="padding:5px;float:left;text-align:center;width:120px;margin:5px" class="btn btn-large btn-primary" id="project<%= project.id %>">
+			<div class="img-rounded schedule btn-primary" id="project<%= project.id %>">
 			<% else %>
-			<div style="padding:5px;float:left;text-align:center;width:120px;margin:5px" class="btn btn-large" id="project<%= project.id %>">
+			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>
 			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
-			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"color:#fff;vertical-align:middle;margin-bottom:5px;float:left;height:40px;width:95px;overflow:hidden;text-overflow:ellipsis;", class: "btn btn-inverse" %><br>
+			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
 				<%= hidden_field_tag :name, project.name  %>
 				<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
 	<% end %>
