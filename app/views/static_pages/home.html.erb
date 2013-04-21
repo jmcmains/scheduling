@@ -37,8 +37,6 @@ $(function() {
 			source: $( "#name" ).data('autocomplete-source')
 	});
 });
-</script>
-<script>
 	if ($("#running").length > 0) {
   	var i = parseFloat('<%= Project.total_time(current_user) %>');
   	var timer = setInterval(function() { $('#hours').text( Math.round(i++/36)/100 ) }, 1000)

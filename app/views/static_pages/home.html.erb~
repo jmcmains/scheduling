@@ -18,7 +18,7 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured %>
 			<% if project.active?(current_user) %>
-			<div style="padding:5px;float:left;text-align:center;width:120px;margin:5px" class="btn btn-large btn-primary" id="project<%= project.id %>">
+			<div class="img-rounded schedule btn-primary" id="project<%= project.id %>">
 			<% else %>
 			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>

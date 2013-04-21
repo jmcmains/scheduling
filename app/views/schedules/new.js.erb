@@ -8,8 +8,11 @@
 	$("#project<%= @project.id %>").addClass("btn-primary")
 	$(".btn-primary #btn<%= @project.id %>").html("<%= escape_javascript render "static_pages/home_buttons", project: @project %>")
 	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+	var i = parseFloat('<%= Project.total_time(current_user) %>');
+	var timer = setInterval(function() { $('#hours').text( Math.round(i++/36)/100 ) }, 1000)
 <% elsif @command == "stop" %>
 	$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
 	$(".btn-primary").removeClass("btn-primary")
 	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+  clearInterval(timer)
 <% end %>
