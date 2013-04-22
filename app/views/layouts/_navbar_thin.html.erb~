@@ -1,24 +1,27 @@
-<nav>
-  <ul class="nav pull-right nav-thin">
-    <% if signed_in? %>
-    	<li><a href="<%= root_path %>"><i class="icon-home"></i></a></li>
-		  <li><a href="<%= schedules_path %>"><i class="icon-tasks"></i></a></li>
-		  <li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i></a></li>
-		  <li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i></a></li>
-			<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-user"></i><b class="caret"></b>
-      </a></li>
-		  <ul class="dropdown-menu">
-          <li><%= link_to "Profile", current_user %></li>
-          <% if current_user.admin %>
-          	<li><%= link_to "Projects", projects_path %></li>
-          <% end %>
-          <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-          <li class="divider"></li>
-          <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-      </ul>
-    <% else %>
-    	<li><a href="<%= signin_path %>"><i class="icon-user"></i></a></li>
-    <% end %>
-  </ul>
-</nav>
+    <a href="<%= root_path %>" id="logo"><%= image_tag "old_clock.png", style: "height:25px;vertical-align:bottom;float:left;margin-right:5px;" %></a>
+    <div>
+    	<nav>
+				<ul class="nav pull-right nav-thin">
+					<% if signed_in? %>
+						<li><a href="<%= root_path %>"><i class="icon-home"></i></a></li>
+						<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i></a></li>
+						<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i></a></li>
+						<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i></a></li>
+						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-user"></i><b class="caret"></b>
+						</a></li>
+						<ul class="dropdown-menu">
+							  <li><%= link_to "Profile", current_user %></li>
+							  <% if current_user.admin %>
+							  	<li><%= link_to "Projects", projects_path %></li>
+							  <% end %>
+							  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+							  <li class="divider"></li>
+							  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+						</ul>
+					<% else %>
+						<li><a href="<%= signin_path %>"><i class="icon-user"></i></a></li>
+					<% end %>
+				</ul>
+			</nav>
+		</div>
