@@ -1,13 +1,17 @@
 <header class="navbar-fixed-top" style="top:40px;z-index:50;">
   <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:5px;">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-	<div class="input-append input-prepend" style="margin-left:5px">
-		<button class="btn btn-success btn-large" name="go" type="submit">
-  	<i class="icon-play icon-white"></i>
-	</button>
-<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
-  <span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time(current_user)/3600).round(2) %></span>
-<% end %>
+				
+				<div class="input-append input-prepend" style="margin-left:5px">
+					<button class="btn btn-success btn-large" name="go" type="submit">
+						<i class="icon-play icon-white"></i>
+					</button>
+					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
+  				<span class="add-on" id="hours" style="padding:11px;"><%= (Project.total_time(current_user)/3600).round(2) %></span>
+  				<button class="btn btn-success btn-large" name="go" type="submit" style="display:none">
+						<i class="icon-play icon-white"></i>
+					</button>
+			<% end %>
 <span id="stopbutton">
 <%= render "stop_button" %>
 </span>

@@ -1,21 +1,8 @@
-<%= form_tag(projects_path, class: "form-inline", method: :get) do %>
+<%= form_tag(project_path(@project), class: "form-inline", method: :get) do %>
 	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
 <%= submit_tag "submit", class: 'btn btn-primary' %>
 <% end %>
-<% total_time = 0 %>
-<% @project.schedules.each do |s| %>
-	<% start = s.start_at %>
-	<% finish = s.end_at.blank? ? 5.hours.ago : s.end_at %>
-	<% if (@start_date.to_datetime < finish && finish < (@end_date.to_datetime+1.day)) && (@start_date.to_datetime < start && start < (@end_date.to_datetime+1.day)) %>
-	<% elsif (@start_date.to_datetime < finish && finish < (@end_date.to_datetime+1.day)) %>
-		<% start = @start_date.to_datetime %>
-	<% elsif (@start_date.to_datetime < start && start < (@end_date.to_datetime+1.day)) %>
-		<% finish = @end_date.to_datetime+1.day %>
-	<% else %>
-		<% start = @start_date %>
-		<% finish = @start_date %>
-	<% end %>
-	<% total_time = total_time + (finish - start) %>
-<% end %>
 <p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
-<p>Total Time Spent = <%= (total_time/60/60).round %> hours</p>
+<p>Total Time Spent during period = <%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %> hours</p>
+
+
