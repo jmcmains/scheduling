@@ -41,12 +41,24 @@ Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <
 	<% size = ((total_time/total_project_time)*(maxbox-minbox))+minbox %>
 	<% if est_time > 0 %>
 		<div class="item" style="margin:10px;float:left;width:<%=size %>px;height:<%=size %>px;border:1px solid black">
-			<%= link_to project.name, project_path(project) %> 
-			Est Time:<%= est_time %> 
+			<%= link_to project.name, project_path(project) %> <br>
+			Est Time:<%= est_time %> <br>
 			<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %>
 		</div>
 	<% end %>
 <% end %>
+
+<script>
+
+$(document).ready(function() {
+				$('#count').masonry({
+						// options
+						itemSelector : '.item',
+						columnWidth : 100,
+						isFitWidth: true
+					});
+					});
+					</script>
 
 </div>
 <% end %>

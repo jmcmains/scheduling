@@ -31,6 +31,8 @@ Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <
 <%= link_to 'New Project', new_project_path %>
 </div>
 <%= render 'pie_chart', projects:@projects, start_date: @start_date, end_date: @end_date %>
+<% 
+=begin %>
 <div style="width:100%;float:left;">j</div>
 <div id="cont" style="width:800px">
 <% @projects.each do |project| %>
@@ -48,5 +50,19 @@ Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <
 	<% end %>
 <% end %>
 
+<script>
+
+$(document).ready(function() {
+				$('#count').masonry({
+						// options
+						itemSelector : '.item',
+						columnWidth : 100,
+						isFitWidth: true
+					});
+					});
+					</script>
+
 </div>
+<%
+=end %>
 <% end %>
