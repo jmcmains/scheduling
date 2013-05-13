@@ -57,6 +57,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    masonry-rails (0.2.0)
+      rails
     mime-types (1.22)
     multi_json (1.7.2)
     pg (0.15.1)
@@ -117,6 +119,7 @@ DEPENDENCIES
   coffee-rails
   font-awesome-sass-rails
   jquery-rails
+  masonry-rails
   pg
   rails
   sass-rails

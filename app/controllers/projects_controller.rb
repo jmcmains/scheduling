@@ -12,8 +12,8 @@ class ProjectsController < ApplicationController
     	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
   	else
-  		@start_date = Date.today.beginning_of_week-1
-  		@end_date = Date.today.end_of_week-1
+  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
+  		@end_date = Date.today.end_of_week(start_day = :sunday)
   	end
   end
   
@@ -24,8 +24,8 @@ class ProjectsController < ApplicationController
   		@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
   	else
-  		@start_date = Date.today.beginning_of_week-1
-  		@end_date = Date.today.end_of_week-1
+  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
+  		@end_date = Date.today.end_of_week(start_day = :sunday)
   	end
   end
   

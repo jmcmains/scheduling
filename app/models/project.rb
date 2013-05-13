@@ -69,4 +69,23 @@ class Project < ActiveRecord::Base
 		return total_time
   end
   
+  def self.time_spent(start_date,end_date,user)
+  	total_time = 0
+		Schedule.find_all_by_user_id(user.id).each do |s|
+			start = s.start_at
+			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
+			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
+			elsif (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day))
+				start = start_date.to_datetime
+			elsif (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
+				finish = end_date.to_datetime+1.day
+			else
+				start = start_date
+				finish = start_date
+			end
+			total_time = total_time + (finish - start)
+		end
+		return total_time
+  end
+  
 end

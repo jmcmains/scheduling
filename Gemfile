@@ -10,7 +10,7 @@ end
 
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
-
+gem 'masonry-rails'
 gem 'bcrypt-ruby'
 
 # Gems used only for assets and not required
