@@ -32,29 +32,21 @@ Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <
 </div>
 <%= render 'pie_chart', projects:@projects, start_date: @start_date, end_date: @end_date %>
 <div style="width:100%;float:left;">j</div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="/path/to/jquery.masonry.min.js"></script>
-<div id="container">
-<% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,@user) }.reverse.each do |project| %>
+<div id="cont" style="width:800px">
+<% @projects.each do |project| %>
 	<% total_time=project.time_spent(@start_date,@end_date,@user) %>
 	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
-	<% size = ((total_time/total_project_time)*500**2)**0.5 %>
+	<% minbox=100 %>
+	<% maxbox=300 %>
+	<% size = ((total_time/total_project_time)*(maxbox-minbox))+minbox %>
 	<% if est_time > 0 %>
-		<div class="item" style="width:<%=size %>px;height:<%=size %>px;border:1px solid black">
+		<div class="item" style="margin:10px;float:left;width:<%=size %>px;height:<%=size %>px;border:1px solid black">
 			<%= link_to project.name, project_path(project) %> 
 			Est Time:<%= est_time %> 
 			<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %>
 		</div>
 	<% end %>
 <% end %>
-<script>
-$(function(){
-  $('#container').masonry({
-    // options
-    itemSelector : '.item',
-    columnWidth : 100
-  });
-});
-</script>
+
 </div>
 <% end %>
