@@ -6,6 +6,10 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
+  <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png" />
   <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
 </head>
 <body>
@@ -24,14 +28,14 @@
 </html>
 <script>
 $(function() {
-if ($(window).width() < 700) {
+if ($(window).width() < 680) {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
 } else {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')
 }
 });
 $(window).resize(function() {
-if ($(window).width() < 700) {
+if ($(window).width() < 680) {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_thin" %>')
 } else {
 $('#nav').html('<%= escape_javascript render "layouts/navbar_wide" %>')
