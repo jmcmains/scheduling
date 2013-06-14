@@ -12,6 +12,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'masonry-rails'
 gem 'bcrypt-ruby'
+gem 'google_drive'
 
 # Gems used only for assets and not required
 # in production environments by default.

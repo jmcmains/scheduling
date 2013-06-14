@@ -14,6 +14,36 @@ class UsersController < ApplicationController
   	end
   end
   
+  def google
+		require "rubygems"
+		require "google_drive"
+  	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+  	@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+  	@user = User.find(params[:id])
+  	session = GoogleDrive.login("jason@rubberbanditz.com", "jkm826191")
+  	ws = session.spreadsheet_by_key("0AkIywWhymTjhdGxRQndYZEx5X1RtMW0zMGNyenViTEE").worksheets[1]
+  	# Creating header
+		project_col=ws.num_cols+1
+		hours_col=ws.num_cols+2
+		ws[1,project_col] = Date.today.beginning_of_week
+		ws[3,project_col] = "Project"
+		ws[3,hours_col] = "Hours Spent"
+		i=4;
+
+		Project.all.sort_by { |a| a.time_spent(@start_date,@end_date,@user) }.reverse.each do |project|
+			time_spent=((2*project.time_spent(@start_date,@end_date,@user)/60/60).ceil)/2.0
+			if time_spent > 0
+				ws[i,project_col] = project.name
+				ws[i,hours_col] = time_spent
+				i=i+1
+			end
+		end
+		ws.save()
+		ws.reload()
+		flash[:success] = "Spreadsheet Updated!"
+  	redirect_to @user
+  end
+  
   def new
   	@user = User.new
   end
