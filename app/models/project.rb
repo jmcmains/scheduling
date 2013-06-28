@@ -15,14 +15,23 @@ class Project < ActiveRecord::Base
   	end
   end
   
+  def in_use?(user)
+  	schedules.find_all_by_user_id(user).sort_by {|a| a.updated_at }.last.updated_at > 2.weeks.ago
+  end
+  
   def project_name	
   	try(:name)
   end
   
-  def self.total_time(user)
+  def self.total_time(span,user)
   	total_time = 0
+  	if span == "day"
 		begday = 0.minutes.ago.beginning_of_day
 		endday = 0.minutes.ago.end_of_day
+		elsif span == "week"
+		begday = 0.minutes.ago.beginning_of_week(start_day = :sunday)
+		endday = 0.minutes.ago.end_of_week(start_day = :sunday)
+		end
 		all.each do |project|
 			project.schedules.find_all_by_user_id(user.id).each do |s|
 				start = s.start_at

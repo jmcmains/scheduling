@@ -27,7 +27,7 @@ class SchedulesController < ApplicationController
 		@project.save!
 		featured=@project.features.find_or_create_by_user_id(current_user.id)
 		if params[:del]
-			@command=params[:del];
+			@command="del"
 			featured.update_attributes(featured:false)
 		else
 			featured.update_attributes(featured:true)

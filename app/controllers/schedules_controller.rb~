@@ -67,7 +67,7 @@ class SchedulesController < ApplicationController
 	  else
 	  	@current_schedule=nil
 	  end
-	  @schedule = Schedule.new(project_id:nil,start_at:DateTime.now,user_id:current_user.id)
+	  @schedule = Schedule.new(start_at:DateTime.now,user_id:current_user.id)
 	  @schedule.save!
 	  respond_to do |format|
 	    format.html {redirect_to schedules_path}

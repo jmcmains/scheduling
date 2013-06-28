@@ -6,7 +6,7 @@
 	<button class="btn btn-success btn-large home-left" name="go" type="submit">
 		<i class="icon-play icon-white"></i>
 	</button>
-<% end %>	
+<% end %>
 <button class="btn btn-warning btn-large  home-left" name="del" type="submit" remote="true">
 	<i class="icon-star icon-white"></i>
 </button>
