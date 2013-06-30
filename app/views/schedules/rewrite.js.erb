@@ -1,0 +1,7 @@
+<% if @command == "go" %>
+$("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut("slow")
+<% else %>
+$("#row_<%= @schedule.id %>").hide({ direction: "right"  }, "slow")
+<% end %>
+
+

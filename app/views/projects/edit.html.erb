@@ -1,0 +1,9 @@
+<%= form_for(@project, class: "form-inline") do |f| %>
+	<span>Name:</span>
+	<%= f.text_field :name, class: "input-small" %>
+	<%= f.fields_for(:features, :html => { :class => "form-inline"}) do |builder| %>
+		<%= builder.hidden_field :user_id, value: current_user.id %>
+		<%= builder.check_box :featured %> Featured?
+	<% end %>
+	<%= f.submit "Save", class: "btn btn-primary"%>
+<% end %>

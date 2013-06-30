@@ -1,0 +1,68 @@
+<% provide(:title, @user.name) %>
+<h1><%= @user.name %></h1>
+<p><%= @user.email %></p>
+<% if current_user == @user || current_user.admin %>
+<div style="width:50%;float:left">
+<%= render 'shared/span_form', user: @user, start_date: @start_date, end_date: @end_date %>
+<% total_project_time=0 %>
+<% total_est_time=0 %>
+<table class="table-striped">
+<tr>
+<td style="text-align:center">Project</td>
+<td style="text-align:center">Hours Spent</td>
+<td style="text-align:center">Modify</td>
+</tr>
+<% @projects.sort_by { |a| a.time_spent(@start_date,@end_date,@user) }.reverse.each do |project| %>
+	<% total_time=project.time_spent(@start_date,@end_date,@user) %>
+	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+	<% total_project_time = total_project_time + total_time %>
+	<% total_est_time = total_est_time + est_time %>
+	<% if est_time > 0 %>
+		<tr>
+			<td style="text-align:left"><%= link_to project.name, project_path(project) %> </td>
+			<td style="text-align:center"><%= est_time %></td>
+			<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+		</tr>
+	<% end %>
+<% end %>
+</table>
+Total Estimated Hours Worked this period: <%= total_est_time %> <br>
+Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
+<%= link_to 'New Project', new_project_path %>
+</div>
+<%= render 'pie_chart', projects:@projects, start_date: @start_date, end_date: @end_date %>
+<% 
+=begin %>
+<div style="width:100%;float:left;">j</div>
+<div id="cont" style="width:800px">
+<% @projects.each do |project| %>
+	<% total_time=project.time_spent(@start_date,@end_date,@user) %>
+	<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+	<% minbox=100 %>
+	<% maxbox=300 %>
+	<% size = ((total_time/total_project_time)*(maxbox-minbox))+minbox %>
+	<% if est_time > 0 %>
+		<div class="item" style="margin:10px;float:left;width:<%=size %>px;height:<%=size %>px;border:1px solid black">
+			<%= link_to project.name, project_path(project) %> <br>
+			Est Time:<%= est_time %> <br>
+			<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %>
+		</div>
+	<% end %>
+<% end %>
+
+<script>
+
+$(document).ready(function() {
+				$('#count').masonry({
+						// options
+						itemSelector : '.item',
+						columnWidth : 100,
+						isFitWidth: true
+					});
+					});
+					</script>
+
+</div>
+<%
+=end %>
+<% end %>

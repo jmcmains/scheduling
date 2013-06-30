@@ -1,0 +1,22 @@
+<% if @command == "del" %>
+	$("#project<%= @project.id %>").fadeOut("slow")
+<% elsif @command == "go" %>
+	<% if @current_project %>
+		$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
+		$(".btn-primary").removeClass("btn-primary")
+	<% else %>
+		var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
+  	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
+  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(i_day++/36)/100 ) }, 1000)
+  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(i_week++/36)/100 ) }, 1000)
+	<% end %>
+	$("#project<%= @project.id %>").addClass("btn-primary")
+	$(".btn-primary #btn<%= @project.id %>").html("<%= escape_javascript render "static_pages/home_buttons", project: @project %>")
+	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+<% elsif @command == "stop" %>
+	$(".btn-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
+	$(".btn-primary").removeClass("btn-primary")
+	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+  clearInterval(timer1)
+  clearInterval(timer2)
+<% end %>

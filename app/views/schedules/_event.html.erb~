@@ -1,0 +1,16 @@
+<div id="row_<%= event.id %>" class="img-rounded" style="background-color:#eee;padding:0;float:left;margin:5px;border-radius:3px">
+<%= form_tag rewrite_schedule_path(event), method: :get, name: "form#{event.id}", remote: true do %>
+		<%= text_field_tag :project_name, event.project.name, data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: event.id, :style => "display:inline;margin:5px;padding:11px;width:160px" %><br>
+		<%= text_field_tag :start_at, (event.formatted_start_at if event.start_at), style: "display:inline;margin:5px;padding:11px;width:160px" %><br>
+		<%= text_field_tag :end_at, (event.formatted_end_at if event.end_at), style: "margin:5px;display:inline;padding:11px;width:160px" %><br>
+		<%= hidden_field_tag :commit %>
+				<button class="btn btn-danger btn-large" name="del" style="float:right;margin:5px;" type="submit" onClick="document.form<%= event.id %>.commit.value='del'">
+			<i class="icon-remove icon-white"></i>
+		</button>
+		<button class="btn btn-success btn-large" name="go" style="float:right;margin:5px" type="submit" onClick="document.form<%= event.id %>.commit.value='go'">
+  		<i class="icon-retweet icon-white"></i>
+		</button>
+		<span id="update_<%= event.id %>" style="display:none;float:right;margin:5px;padding-top:11px"><i class="icon-thumbs-up icon-green"></i></span>
+<% end %>
+</div>	
+

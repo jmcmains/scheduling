@@ -1,0 +1,13 @@
+<h1>New Project</h1>
+
+<%= form_for(@project, class: "form") do |f| %>
+<div class="field">
+	<%= f.label :name %>	<%= f.text_field :name %>
+</div>
+<div class="field">
+	<%= f.check_box :featured %> <%= f.label :featured %>
+</div>
+<div class="actions">
+	<%= f.submit "Save" %>
+</div>
+<% end %>

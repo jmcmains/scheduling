@@ -1,0 +1,144 @@
+@import "bootstrap";
+@import 'font-awesome';
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+.container {
+	width: 100%;
+  min-width: none;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+
+}
+body {
+  padding-top: 50px;
+}
+
+#logo {
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-size:1.7em;
+	text-transform:uppercase;
+	letter-spacing: -1px;
+	padding-top: 9px;
+	font-weight: bold;
+	line-height: 1;
+	&:hover {
+		text-decoration:none;
+	}
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+	
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
+.nav-wide > li > a{
+	padding:10px 5px 10px !important;
+}
+
+.nav-thin > li > a{
+	padding:10px 10px 10px !important;
+}
+
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+.addnew {
+	width: 132px;
+	height:178px;
+	border:10px dashed #ddd;
+	padding:10px;
+	margin:5px;
+	float:left;
+	color: #ddd;
+	display:table;
+	text-align:center;
+	div {
+		display:table-cell;
+		vertical-align:middle;
+	}
+	&:hover {
+		border-color: #aaa;
+		color: #aaa;
+	}
+}
+
+.title {
+	color:#fff;
+	vertical-align:middle;
+	margin-bottom:5px;
+	float:left;
+	height:40px;
+	width:95px;
+	overflow:hidden;
+	margin:5px;
+	text-overflow:ellipsis;
+}
+
+.home-left {
+margin:5px;
+float:left;
+margin-top:0;
+}
+
+.home-right {
+margin:5px;
+float:right;
+margin-top:0;
+}
+
+.schedule {
+	background-color:#eee;
+	border:1px solid #ccc;
+	padding:0;
+	float:left;
+	margin:10px;	
+	margin-right:0;
+}

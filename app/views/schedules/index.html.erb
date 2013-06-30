@@ -1,0 +1,18 @@
+<div class="pagination">
+     <%= will_paginate @schedules, :container => false %>
+</div>
+<a href="<%= addnew_schedules_path %>" data-remote="true">
+<div class="addnew img-rounded">
+<div>Add New Event<br>
+<i class="icon-plus-sign icon-4x"></i></div>
+</div></a>
+<div id="schedules">
+<%= render @schedules %>
+</div>
+<script>
+$(function() {
+	 $( ".autocomplete" ).autocomplete({
+			source: $( "#<%= @schedules.first.id %>" ).data('autocomplete-source')
+	});
+});
+</script>

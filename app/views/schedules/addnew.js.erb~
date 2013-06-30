@@ -1,0 +1,6 @@
+<% if @current_schedule %>
+	$('#end_at<%= @current_schedule.id %>').val('<%= @current_schedule.formatted_end_at %>')
+<% end %>
+$('#schedules').prepend($('<%= escape_javascript render @schedule %>').show({direction: "bottom"}, 2000))
+$(".autocomplete").autocomplete({ source: $( "#<%= @schedule.id %>" ).data('autocomplete-source') });
+

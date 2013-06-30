@@ -1,0 +1,52 @@
+<header class="navbar-fixed-top" style="top:40px;z-index:50;">
+  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:5px;max-height:25px;overflow:hidden;">
+      <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+				
+				<div class="input-append" style="margin-left:5px">
+					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
+  				<button class="btn btn-success btn-large" name="go" type="submit">
+						<i class="icon-play icon-white"></i>
+					</button>
+			<% end %>
+<span id="stopbutton">
+<%= render "stop_button" %>
+</span>
+	  </div>
+	  <div style="float:right">
+	  Hours:<br>
+	  			Today: <span id="hours_day" style="padding:11px;"><%= (Project.total_time("day",current_user)/3600).round(2) %></span>
+  				This Week:<span id="hours_week" style="padding:11px;"><%= (Project.total_time("week",current_user)/3600).round(2) %></span>
+	  </div>
+  </div>
+</header>
+<div style="position:relative;left:0;right:0;top:39px;">
+<% Project.all.sort_by(&:name).each do |project| %>
+	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
+			<% if project.active?(current_user) %>
+			<div class="img-rounded schedule btn-primary" id="project<%= project.id %>">
+			<% else %>
+			<div class="img-rounded schedule" id="project<%= project.id %>">
+			<% end %>
+			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
+			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
+				<%= hidden_field_tag :name, project.name  %>
+				<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
+	<% end %>
+	</div>
+<% end %>
+<% end %>
+</div>
+<script>
+$(function() {
+	 $( ".autocomplete" ).autocomplete({
+			source: $( "#name" ).data('autocomplete-source')
+	});
+});
+	if ($("#running").length > 0) {
+  	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
+  	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
+  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(i_day++/36)/100 ) }, 1000)
+  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(i_week++/36)/100 ) }, 1000)
+  }
+</script>
+

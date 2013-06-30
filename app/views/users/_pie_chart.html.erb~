@@ -1,0 +1,58 @@
+<div id="chart" style="width:50%;float:left"></div>
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+				$('#count').masonry({
+						// options
+						itemSelector : '.item',
+						columnWidth : 100,
+						isFitWidth: true
+					});
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'chart',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Time Spent'
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.y +' ';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Time Spent',
+                data: [
+                <% projects.sort_by { |a| a.time_spent(start_date,end_date,current_user) }.reverse.each do |project| %>
+									<% total_time=project.time_spent(start_date,end_date,current_user) %>
+									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+									<% if est_time > 0 %>
+										['<%= project.name %>', <%= est_time %>],
+									<% end %>
+								<% end %>
+                ['',   '']
+                ]
+            }]
+        });
+    });
+    
+});
+</script>

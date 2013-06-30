@@ -1,0 +1,29 @@
+<div style="float:left"><a href="<%= root_path %>" id="logo">Time Saver</a></div>
+<div style="float:right">
+	<nav>
+		<ul class="nav pull-right nav-<%= width %>">
+		
+			<% if signed_in? %>
+				<li><a href="<%= root_path %>"><i class="icon-home"></i><%= " Home" if width=="wide" %></a></li>
+				<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i><%= " Edit Schedule" if width=="wide" %></a></li>
+				<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i><%= " Calendar" if width=="wide" %></a></li>
+				<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i><%= " Time Spent" if width=="wide" %></a></li>
+				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<i class="icon-user"></i><%= " Account" if width=="wide" %><b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" style="position:absolute;z-index:11">
+					  <li><%= link_to "Profile", current_user %></li>
+					  <% if current_user.admin %>
+					  	<li><%= link_to "Projects", projects_path %></li>
+					  <% end %>
+					  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+					  <li class="divider"></li>
+					  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+				</ul></li>
+			<% else %>
+				<li><a href="<%= signin_path %>"><i class="icon-user"></i> Sign In</a></li>
+			<% end %>
+		</ul>
+	</nav>
+</div>
+

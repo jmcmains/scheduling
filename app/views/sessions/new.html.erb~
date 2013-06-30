@@ -1,0 +1,37 @@
+<% provide(:title, "Sign in") %>
+<p style="margin:5px">Time saver is a simple app that allows you to track your time spent on various projects</p>
+<div class="row">
+  <div class="span6" style="padding:5px">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
+<p>Or if you're a new user,  Sign up now!</p>
+<div class="row">
+  <div class="span6" style="padding-left:5px;">
+    <%= form_for(User.new) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

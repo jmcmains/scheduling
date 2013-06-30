@@ -1,0 +1,14 @@
+<%= form_tag(project_path(@project), class: "form-inline", method: :get) do %>
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y"), class: "input-small" %>
+<%= submit_tag "submit", class: 'btn btn-primary' %>
+<% end %>
+<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
+<p>Total Time Spent during period = <%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %> hours</p>
+
+<% begs = ((0..9).map { |i| Date.today.beginning_of_week - (7*i) }).reverse %>
+<% ends = ((0..9).map { |i| Date.today.end_of_week - (7*i) }).reverse %>
+<% ts =[] %>
+<%= begs[5] %>
+<%= ends[5] %>
+<%= @project.time_spent(begs[4],ends[4],current_user) %>
+

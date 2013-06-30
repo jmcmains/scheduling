@@ -1,0 +1,6 @@
+if (<%= @command %> == "update") {
+$("#update_<%= @schedule.id %>").text("Updated!").fadeIn("slow").fadeOut("slow")
+} else {
+$("#row_<%= @schedule.id %>").fadeOut("slow")
+}
+
