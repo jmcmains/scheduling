@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
+<<<<<<< HEAD
 ruby '2.0.0'
 gem 'rails', '4.0.0'
+=======
+
+gem 'rails'
+>>>>>>> 37f5f5b469d6f6a2cd4591bd57110a8b92b33786
 gem 'will_paginate'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -28,9 +33,15 @@ end
 
 gem 'jquery-rails'
 
+<<<<<<< HEAD
+#group :production do
+#  gem 'pg'
+#end
+=======
 group :production do
   gem 'pg'
 end
+>>>>>>> 37f5f5b469d6f6a2cd4591bd57110a8b92b33786
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
