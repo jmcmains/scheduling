@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
-<<<<<<< HEAD
+
 ruby '2.0.0'
 gem 'rails', '4.0.0'
-=======
 
 gem 'rails'
->>>>>>> 37f5f5b469d6f6a2cd4591bd57110a8b92b33786
+
 gem 'will_paginate'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 group :development do
 	gem 'sqlite3'
 end
@@ -19,40 +17,15 @@ gem 'masonry-rails'
 gem 'bcrypt-ruby'
 gem 'google_drive'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier'
 end
 
 gem 'jquery-rails'
 
-<<<<<<< HEAD
-#group :production do
-#  gem 'pg'
-#end
-=======
 group :production do
   gem 'pg'
 end
->>>>>>> 37f5f5b469d6f6a2cd4591bd57110a8b92b33786
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
