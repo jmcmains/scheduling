@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails','3.2.13'
+gem 'rails'
 
 ruby '2.0.0'
 
@@ -14,8 +14,9 @@ end
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'masonry-rails'
-gem 'bcrypt-ruby','3.1.1'
+gem 'bcrypt-ruby','~> 3.0.0'
 gem 'google_drive'
+gem 'activeresource', github: 'rails/activeresource'
 
 group :assets do
   gem 'sass-rails'
@@ -23,8 +24,8 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'jquery-rails'
-
+gem 'jquery-rails','~> 2.3.0'
+gem 'jquery-ui-rails'
 group :production do
   gem 'pg'
 end

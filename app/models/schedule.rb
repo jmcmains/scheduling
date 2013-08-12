@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-  attr_accessible :end_at, :project_id, :start_at, :project_name, :user_id
+
   belongs_to :project
   accepts_nested_attributes_for :project
   belongs_to :user

@@ -22,19 +22,19 @@ class Schedule < ActiveRecord::Base
   end
   
   def formatted_start_at
-		start_at.strftime('%m/%d/%Y %I:%M %p')
+		start_at.strftime('%m/%d/%Y %I:%M %p %Z')
 	end
 	
 	def formatted_start_at=(time_str)
-		self.start_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p')
+		self.start_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p %Z')
 	end
 	
 	def formatted_end_at
-		end_at.strftime('%m/%d/%Y %I:%M %p')
+		end_at.strftime('%m/%d/%Y %I:%M %p %Z')
 	end
 	
 	def formatted_end_at=(time_str)
-		self.end_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p')
+		self.end_at = DateTime.strptime(time_str, '%m/%d/%Y %I:%M %p %Z')
 	end
 	
 	def self.active_project(user)
