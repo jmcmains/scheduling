@@ -3,7 +3,7 @@
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 				
 				<div class="input-append" style="margin-left:5px">
-					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:100px" %>
+					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
   				<button class="btn btn-success btn-large" name="go" type="submit">
 						<i class="icon-play icon-white"></i>
 					</button>
