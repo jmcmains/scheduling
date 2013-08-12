@@ -1,12 +1,10 @@
 source 'https://rubygems.org'
 
-<<<<<<< HEAD
-gem 'rails','3.2.13'
-=======
-ruby '2.0.0'
-gem 'rails', '4.0.0'
 
->>>>>>> cf18593a80720b4a09906bef361189dfc2f15fe7
+gem 'rails','3.2.13'
+
+ruby '2.0.0'
+
 gem 'will_paginate'
 
 group :development do
@@ -30,7 +28,4 @@ gem 'jquery-rails'
 group :production do
   gem 'pg'
 end
-<<<<<<< HEAD
-=======
 
->>>>>>> cf18593a80720b4a09906bef361189dfc2f15fe7

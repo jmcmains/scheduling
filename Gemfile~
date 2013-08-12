@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 
-<<<<<<< HEAD
+
 gem 'rails','3.2.13'
-=======
+
 ruby '2.0.0'
 gem 'rails', '4.0.0'
 
-gem 'rails'
 
->>>>>>> cf18593a80720b4a09906bef361189dfc2f15fe7
 gem 'will_paginate'
 
 group :development do
