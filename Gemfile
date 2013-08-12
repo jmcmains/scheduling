@@ -14,7 +14,7 @@ end
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'masonry-rails'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby','3.1.1'
 gem 'google_drive'
 
 group :assets do
