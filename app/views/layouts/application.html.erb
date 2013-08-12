@@ -2,8 +2,8 @@
 <html>
 <head>
   <title><%= @title ? @title : "Scheduling" %></title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <link rel="apple-touch-icon" href="<%= image_path 'iTunesArtwork@2x.png' %>" />

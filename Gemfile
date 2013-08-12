@@ -17,6 +17,7 @@ gem 'masonry-rails'
 gem 'bcrypt-ruby','3.0.1'
 gem 'google_drive'
 gem 'activeresource', github: 'rails/activeresource'
+gem 'turbolinks', '1.1.1'
 
 group :assets do
   gem 'sass-rails'
