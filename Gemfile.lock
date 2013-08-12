@@ -144,7 +144,7 @@ DEPENDENCIES
   jquery-rails
   masonry-rails
   pg
-  rails
+  rails (= 3.2.13)
   sass-rails
   sqlite3
   uglifier

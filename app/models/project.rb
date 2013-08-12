@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   end
   
   def in_use?(user)
-  	schedules.find_all_by_user_id(user).sort_by {|a| a.updated_at }.last.updated_at > 2.weeks.ago
+  	schedules.find_all_by_user_id(user).sort_by {|a| a.updated_at }.last.updated_at > 100.weeks.ago
   end
   
   def project_name	
@@ -58,6 +58,7 @@ class Project < ActiveRecord::Base
   def active?(user)
   	!schedules.find_by_end_at_and_user_id(nil,user.id).blank?
   end
+  
   
   def time_spent(start_date,end_date,user)
   	total_time = 0

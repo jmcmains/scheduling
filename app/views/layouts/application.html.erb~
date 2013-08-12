@@ -11,7 +11,7 @@
 </head>
 <body>
 <header class="navbar navbar-fixed-top">
-  <div class="navbar-inner" style="z-index:100;vertical-align:bottom;" id="nav">
+  <div class="navbar-inner" style="z-index:1;vertical-align:bottom;max-height:25px;" id="nav">
 		<%= render "layouts/navbar", width: "wide" %>
 	</div>
 </header>
@@ -24,18 +24,14 @@
 </body>
 </html>
 <script>
-$(function() {
-if ($(window).width() < 680) {
-$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin" %>')
-} else {
-$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide" %>')
-}
-});
-$(window).resize(function() {
-if ($(window).width() < 680) {
-$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin" %>')
-} else {
-$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide" %>')
-}
-});
+$(function() {navresize();});
+$(window).resize(function() {navresize();});
+
+function navresize(){
+  if ($(window).width() < 680) {
+		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin" %>')
+	} else {
+		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide" %>')
+	}
+  }
 </script>
