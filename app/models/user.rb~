@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
   
   has_many :features, dependent: :destroy
   accepts_nested_attributes_for :features
+  
+  def working?
+  	!Schedule.find_by_end_at_and_user_id(nil,id).blank?
+  end
+  
   private
   
   	def create_remember_token

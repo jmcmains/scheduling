@@ -20,13 +20,31 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 <%= yield %>
+<div id="hours_popup" style="width:150px;z-index:50;" class="hidden">
+	  <h3>Hours</h3>
+	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Project.total_time("day",current_user)/3600).round(2) %></span><br>
+  				This Week:<span id="hours_week" style="padding:11px;"><%= (Project.total_time("week",current_user)/3600).round(2) %></span>
+  				</div>
+</div>
 </div>
 </body>
 </html>
 <script>
 $(function() {navresize();});
 $(window).resize(function() {navresize();});
-
+$( "div#hours_popup" ).click(function() {
+ if ($("div#hours_popup").hasClass("hidden")) {
+		$( "div#hours" ).slideToggle("slow");
+		$("div#hours_popup").css("bottom","0px");
+		$("div#hours_popup").removeClass("hidden")
+		$("div#hours_popup").addClass("shown")
+	} else {
+		$( "div#hours" ).slideToggle("slow");
+		$("div#hours_popup").css("bottom","0px");
+		$("div#hours_popup").addClass("hidden")
+		$("div#hours_popup").removeClass("shown")
+	}
+	});
 function navresize(){
   if ($(window).width() < 680) {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin" %>')

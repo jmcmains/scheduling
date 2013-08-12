@@ -59,9 +59,6 @@ class Project < ActiveRecord::Base
   	!schedules.find_by_end_at_and_user_id(nil,user.id).blank?
   end
   
-  def self.working?(user)
-  	!Schedule.find_by_end_at_and_user_id(nil,user.id).blank?
-  end
   
   def time_spent(start_date,end_date,user)
   	total_time = 0

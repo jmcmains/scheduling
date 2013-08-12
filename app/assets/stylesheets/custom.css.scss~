@@ -166,7 +166,7 @@ margin-top:0;
 	width:150px;
 	background-image:linear-gradient(to top, white, rgb(242, 242, 242));
 	&:hover {
-			cursor:hand;
+			cursor:pointer;
 		}
 	h3 {
 		padding:0;
@@ -174,7 +174,7 @@ margin-top:0;
 		line-height:100%;
 		text-align:center;
 		&:hover {
-			cursor:hand;
+			cursor:pointer;
 		}
 	}
 }
