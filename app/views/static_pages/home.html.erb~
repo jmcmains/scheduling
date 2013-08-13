@@ -1,7 +1,6 @@
 <header class="navbar-fixed-top" style="top:40px;z-index:50;">
   <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:5px;max-height:46px;overflow:hidden;">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-				
 				<div class="input-append" style="margin-left:5px">
 					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
   				<button class="btn btn-success btn-large" name="go" type="submit">
@@ -12,14 +11,13 @@
 <%= render "stop_button" %>
 </span>
 	  </div>
-	  
   </div>
 </header>
 <div id="projects">
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
 			<% if project.active?(current_user) %>
-			<div class="img-rounded schedule btn-primary" id="project<%= project.id %>">
+			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% else %>
 			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>
@@ -50,7 +48,7 @@ function contresize(){
   var win_width = $(window).width();
 	var box_width = $('.schedule').outerWidth()+10;
 	var box_count = (Math.floor(win_width/box_width));
-	var total_width = box_count * box_width;
+	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width)
   }
   

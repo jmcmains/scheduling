@@ -1,10 +1,9 @@
-<div style="float:left"><a href="<%= root_path %>" id="logo">Time Saver</a></div>
 <div style="float:right">
 	<nav>
 		<ul class="nav pull-right nav-<%= width %>">
 		
 			<% if signed_in? %>
-				<li><a href="<%= root_path %>"><i class="icon-home"></i><%= " Home" if width=="wide" %></a></li>
+				<li><a href="<%= root_path %>"><i class="icon-home"></i> <%= " Home" if width=="wide" %></a></li>
 				<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i><%= " Edit Schedule" if width=="wide" %></a></li>
 				<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i><%= " Calendar" if width=="wide" %></a></li>
 				<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i><%= " Time Spent" if width=="wide" %></a></li>
@@ -27,3 +26,4 @@
 	</nav>
 </div>
 
+<div style="float:left"><a href="<%= root_path %>" id="logo"><%= "Time Saver" if show_logo %></a></div>

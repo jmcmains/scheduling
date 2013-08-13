@@ -17,7 +17,7 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
 			<% if project.active?(current_user) %>
-			<div class="img-rounded schedule btn-primary" id="project<%= project.id %>">
+			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
 			<% else %>
 			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>
@@ -48,7 +48,7 @@ function contresize(){
   var win_width = $(window).width();
 	var box_width = $('.schedule').outerWidth()+10;
 	var box_count = (Math.floor(win_width/box_width));
-	var total_width = box_count * box_width;
+	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width)
   }
   

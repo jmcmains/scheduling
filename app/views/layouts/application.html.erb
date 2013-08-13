@@ -12,7 +12,7 @@
 <body>
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner" style="z-index:1;vertical-align:bottom;max-height:25px;" id="nav">
-		<%= render "layouts/navbar", width: "wide" %>
+		<%= render "layouts/navbar", width: "wide", show_logo: true %>
 	</div>
 </header>
 <div class="container">
@@ -20,18 +20,23 @@
   <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 <%= yield %>
+<% if signed_in? %>
 <div id="hours_popup" style="width:150px;z-index:50;" class="hidden">
 	  <h3>Hours</h3>
 	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Project.total_time("day",current_user)/3600).round(2) %></span><br>
   				This Week:<span id="hours_week" style="padding:11px;"><%= (Project.total_time("week",current_user)/3600).round(2) %></span>
   				</div>
 </div>
-</div>
-</body>
-</html>
 <script>
-$(function() {navresize();});
-$(window).resize(function() {navresize();});
+$(function() {
+if ('<%= current_user.working? %>' == 'true') {
+  	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
+  	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
+  	var start = new Date;
+  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 ) }, 1000	)
+  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 ) }, 1000	)
+}
+});
 $( "div#hours_popup" ).click(function() {
  if ($("div#hours_popup").hasClass("hidden")) {
 		$( "div#hours" ).slideToggle("slow");
@@ -44,12 +49,26 @@ $( "div#hours_popup" ).click(function() {
 		$("div#hours_popup").addClass("hidden")
 		$("div#hours_popup").removeClass("shown")
 	}
-	});
+});
+</script>
+<% end %>
+</div>
+</body>
+</html>
+<script>
+$(function() {
+navresize();
+});
+$(window).resize(function() {
+navresize();
+});
 function navresize(){
-  if ($(window).width() < 680) {
-		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin" %>')
+  if ($(window).width() < 680 && $(window).width() > 360) {
+		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin", show_logo: true %>')
+	} else if ($(window).width() < 360) {
+		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin", show_logo: false %>')
 	} else {
-		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide" %>')
+		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide", show_logo: true %>')
 	}
   }
 </script>
