@@ -12,7 +12,7 @@
 <body>
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner" style="z-index:1;vertical-align:bottom;max-height:25px;" id="nav">
-		<%= render "layouts/navbar", width: "wide", show_logo: true %>
+		<%= render "layouts/navbar", width: "thin", show_logo: false %>
 	</div>
 </header>
 <div class="container">

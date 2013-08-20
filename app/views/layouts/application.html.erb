@@ -57,7 +57,7 @@ navresize();
 function navresize(){
   if ($(window).width() < 680 && $(window).width() > 360) {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin", show_logo: true %>')
-	} else if ($(window).width() < 360) {
+	} else if ($(window).width() <= 360) {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "thin", show_logo: false %>')
 	} else {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide", show_logo: true %>')
