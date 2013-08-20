@@ -9,6 +9,6 @@ if ('<%= current_user.working? %>' == 'true') {
 	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
 	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
 	var start = new Date;
-var timer1 = setInterval(function() { $('#hours_day').text(new Date - start) }, 1000	)
-  var timer2 = setInterval(function() { $('#hours_week').text(new Date - start) }, 1000	)
+  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 ) }, 1000	)
+  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 ) }, 1000	)
 }

@@ -33,8 +33,10 @@ if ('<%= current_user.working? %>' == 'true') {
   	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
   	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
   	var start = new Date;
-  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 ) }, 1000	);
-  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 ) }, 1000	);
+  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 ) }, 1000	)
+  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 ) }, 1000	)
+}
+navresize();
 });
 $( "div#hours_popup" ).click(function() {
  if ($("div#hours_popup").hasClass("hidden")) {
@@ -49,15 +51,6 @@ $( "div#hours_popup" ).click(function() {
 		$("div#hours_popup").removeClass("shown")
 	}
 });
-</script>
-<% end %>
-</div>
-</body>
-</html>
-<script>
-$(function() {
-navresize();
-});
 $(window).resize(function() {
 navresize();
 });
@@ -69,5 +62,11 @@ function navresize(){
 	} else {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide", show_logo: true %>')
 	}
-  }
+}
 </script>
+</script>
+<% end %>
+</div>
+</body>
+</html>
+

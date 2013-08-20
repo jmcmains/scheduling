@@ -12,7 +12,7 @@
 <body>
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner" style="z-index:1;vertical-align:bottom;max-height:25px;" id="nav">
-		<%= render "layouts/navbar", width: "wide", show_logo: true %>
+		<%= render "layouts/navbar", width: "thin", show_logo: false %>
 	</div>
 </header>
 <div class="container">
@@ -36,6 +36,7 @@ if ('<%= current_user.working? %>' == 'true') {
   	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 ) }, 1000	)
   	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 ) }, 1000	)
 }
+navresize();
 });
 $( "div#hours_popup" ).click(function() {
  if ($("div#hours_popup").hasClass("hidden")) {
@@ -50,15 +51,6 @@ $( "div#hours_popup" ).click(function() {
 		$("div#hours_popup").removeClass("shown")
 	}
 });
-</script>
-<% end %>
-</div>
-</body>
-</html>
-<script>
-$(function() {
-navresize();
-});
 $(window).resize(function() {
 navresize();
 });
@@ -70,5 +62,11 @@ function navresize(){
 	} else {
 		$('#nav').html('<%= escape_javascript render "layouts/navbar", width: "wide", show_logo: true %>')
 	}
-  }
+}
 </script>
+</script>
+<% end %>
+</div>
+</body>
+</html>
+

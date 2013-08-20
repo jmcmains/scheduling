@@ -89,24 +89,34 @@ input {
     }
   }
 }
+.schedule_time {
+	background-color:#eee;
+	padding:0;
+	float:left;
+	margin:5px;
+	border-radius:3px;
+}
 
 .addnew {
-	width: 132px;
-	height:178px;
-	border:10px dashed #ddd;
-	padding:10px;
+	width: 170px;
+	height:212px;
 	margin:5px;
 	float:left;
-	color: #ddd;
+	position:absolute;
+	z-index:5;
+	background-color:#fff;
+	color: #555;
 	display:table;
 	text-align:center;
+	border-radius:3px;
+padding:1px;
+	opacity: 0.5;
 	div {
 		display:table-cell;
 		vertical-align:middle;
 	}
 	&:hover {
-		border-color: #aaa;
-		color: #aaa;
+		color: #000;
 	}
 }
 
@@ -154,7 +164,7 @@ margin-top:0;
 	margin-right:auto;
 	margin-top:39px;
   padding: 0;
-	background:#aaa;
+
 }
 
 #hours_popup {

@@ -1,18 +1,34 @@
-<div class="pagination">
-     <%= will_paginate @schedules, :container => false %>
-</div>
+<div id="projects" style="margin-top:0px;">
+<%= will_paginate @schedules, renderer: BootstrapPagination::Rails, style: "text-align:center;padding:0;margin:0 auto auto 0;" %>
 <a href="<%= addnew_schedules_path %>" data-remote="true">
 <div class="addnew img-rounded">
-<div>Add New Event<br>
-<i class="icon-plus-sign icon-4x"></i></div>
+<div><i class="icon-plus-sign icon-4x"></i><br>
+Do something else...<br>
+</div>
 </div></a>
+<div style="position:relative">
+<%= render Schedule.new %>
+</div>
 <div id="schedules">
 <%= render @schedules %>
 </div>
+</div>
 <script>
-$(function() {
+$(function() {	
 	 $( ".autocomplete" ).autocomplete({
 			source: $( "#<%= @schedules.first.id %>" ).data('autocomplete-source')
 	});
+$(".addnew").css("width", $("#row_").width());
+$(".addnew").css("height", $("#row_").height());
+contresize();
 });
+$(window).resize(function() {contresize();});
+function contresize(){
+  var win_width = $(window).width();
+	var box_width = $('.schedule_time').outerWidth()+10;
+	var box_count = (Math.floor(win_width/box_width));
+	var total_width = box_count * box_width+1;
+	$('#projects').css('width',total_width);
+
+	}
 </script>
