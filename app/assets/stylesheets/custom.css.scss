@@ -143,6 +143,24 @@ margin:5px;
 float:right;
 margin-top:0;
 }
+.go-bar {
+	background-color:#fff;
+	background-image:none;
+	-webkit-box-shadow:none;
+	border:none;
+	padding:1px;
+	padding-top:5px;
+	max-height:56px;
+	overflow:hidden;
+}
+
+#search-bar {
+	display:inline;
+	margin:0;
+	z-index:100;
+	width: calc(90% - 108px);
+	max-width:600px;
+}
 
 .schedule {
 	background-color:#eee;
@@ -154,7 +172,6 @@ margin-top:0;
 
 .schedule-primary {
 	background-color:rgb(0, 108, 204);
-	border:1px solid #ccc;
 }
 #projects {
 	position:relative;

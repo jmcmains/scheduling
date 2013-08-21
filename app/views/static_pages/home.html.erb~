@@ -1,9 +1,9 @@
-<header class="navbar-fixed-top" style="top:40px;z-index:50;">
-  <div class="navbar-inner" style="background-color:#fff;background-image:none;-webkit-box-shadow:none;border:none;padding:1px;padding-top:5px;max-height:46px;overflow:hidden;">
+<header class="navbar-fixed-top" style="width:100%;top:40px;z-index:50;text-align:center">
+  <div class="navbar-inner go-bar" style="width:100%;text-align:center">
       <%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-				<div class="input-append" style="margin-left:5px">
-					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", :style => "display:inline;margin:0;padding:11px;z-index:100;width:160px" %>
-  				<button class="btn btn-success btn-large" name="go" type="submit">
+				<div class="input-append">
+					<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium", id: "search-bar" %>
+  				<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
 						<i class="icon-play icon-white"></i>
 					</button>
 			<% end %>
@@ -17,7 +17,7 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
 			<% if project.active?(current_user) %>
-			<div class="img-rounded schedule" id="project<%= project.id %>">
+			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
 			<% else %>
 			<div class="img-rounded schedule" id="project<%= project.id %>">
 			<% end %>
@@ -35,7 +35,11 @@ $(window).resize(function() {contresize();});
 $( ".autocomplete" ).autocomplete({source: $( "#name" ).data('autocomplete-source')});
 $(function() {
 	contresize();
-	$('#name').outerHeight( $('#stopbutton').outerHeight());
+	var oh=$('#main-play').outerHeight();
+	var sb=$('#search-bar').height();
+	var padding=(oh-sb)/2-1;
+	$('#search-bar').css('padding-top',(padding + 'px'));
+	$('#search-bar').css('padding-bottom',(padding + 'px'));
 	if ('<%= current_user.working? %>' == 'true') {
   	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
   	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
