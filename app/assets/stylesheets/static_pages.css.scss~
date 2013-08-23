@@ -6,6 +6,7 @@
 ul.ui-autocomplete {
 	position: absolute;
 	list-style: none;
+	z-index:50;
 	margin: 0;
 	padding: 0;
 	border: solid 1px #999;
@@ -30,5 +31,5 @@ ul.ui-autocomplete {
 }
 
 .ui-helper-hidden-accessible {
-	display:hidden;
+	display:none;
 }
