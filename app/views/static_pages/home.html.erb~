@@ -1,5 +1,5 @@
-<header class="navbar-fixed-top navbar-inner" style="text-align:center">
-	<div class="go-bar input-append" style="margin-left:auto;margin-right:auto;padding:5px"><%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+<header class="navbar-fixed-top navbar-inner go-bar input-append" style="text-align:center">
+	<div style="margin-left:auto;margin-right:auto;padding:5px"><%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
 		<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium" %>
 		<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
 			<i class="icon-play icon-white"></i>
@@ -36,18 +36,13 @@ $(function() {
 	var padding=(oh-sb)/2-1;
 	$('#name').css('padding-top',(padding + 'px'));
 	$('#name').css('padding-bottom',(padding + 'px'));
-	if ('<%= current_user.working? %>' == 'true') {
-  	var i_day = parseFloat('<%= Project.total_time("day",current_user) %>');
-  	var i_week = parseFloat('<%= Project.total_time("week",current_user) %>');
-  	var timer1 = setInterval(function() { $('#hours_day').text( Math.round(i_day++/36)/100 ) }, 1000)
-  	var timer2 = setInterval(function() { $('#hours_week').text( Math.round(i_week++/36)/100 ) }, 1000)
-}
 });
 
 function contresize(){
   var win_width = $(window).width();
 	var box_width = $('.schedule').outerWidth()+10;
-	var box_count = (Math.floor(win_width/box_width));
+	var box_count = Math.min(Math.floor(win_width/box_width)),parseFloat('<%= Feature.find_all_by_featured_and_user_id(true,current_user).count %>'));
+
 	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width)
 	$('#name').css('width',(Math.min((win_width*.9 - 108),600)+'px'));
