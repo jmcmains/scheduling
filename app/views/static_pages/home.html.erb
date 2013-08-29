@@ -1,6 +1,6 @@
 <header class="navbar-fixed-top navbar-inner go-bar input-append" style="text-align:center">
 	<div style="margin-left:auto;margin-right:auto;padding:5px"><%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-		<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium" %>
+		<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium" %>
 		<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
 			<i class="icon-play icon-white"></i>
 		</button>
@@ -9,6 +9,7 @@
 		<%= render "stop_button" %>
 	</span></div>
 </header>
+
 <div id="projects">
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>

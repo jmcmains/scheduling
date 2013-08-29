@@ -3,7 +3,7 @@ $("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut("slow")
 <% else %>
 $("#row_<%= @schedule.id %>").hide({ direction: "right"  }, "slow")
 <% end %>
-for (var i = 1; i < 99999; i++) {
+for (var i = 1; i < 100; i++) {
 	window.clearInterval(i);
 }
 if ('<%= current_user.working? %>' == 'true') {
