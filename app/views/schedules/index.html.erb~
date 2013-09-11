@@ -1,5 +1,4 @@
 <div id="projects" style="margin-top:0px;">
-<div class="test"></div>
 <%= will_paginate @schedules, renderer: BootstrapPagination::Rails, style: "text-align:center;padding:0;margin:0 auto auto 0;" %>
 <a href="<%= addnew_schedules_path %>" data-remote="true">
 <div class="addnew img-rounded">
@@ -26,11 +25,10 @@ contresize();
 $(window).resize(function() {contresize();});
 function contresize(){
   var win_width = $(window).width();
-  var pg_width =$(".pagination").width();
 	var box_width = $('.schedule_time').outerWidth()+10;
 	var box_count = (Math.floor(win_width/box_width));
 	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width);
-	$('.test').html(pg_width);
+
 	}
 </script>

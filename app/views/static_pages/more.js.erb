@@ -1,0 +1,7 @@
+$('#sched a:last').remove();
+$('#inner_sched').append('<%= escape_javascript render @schedules %>')
+$('#inner_sched').append('<%= link_to "Load More", "more/#{@page}", remote: true, id: "more" %>')
+$('#inner_sched').width($('#inner_sched').width() + 2002);
+if ("<%= @schedules.blank? %>" == "true" ) {
+	$('#scroll a:last').remove();
+}

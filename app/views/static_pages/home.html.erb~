@@ -1,37 +1,59 @@
 <header class="navbar-fixed-top navbar-inner go-bar input-append" style="text-align:center">
-	<div style="margin-left:auto;margin-right:auto;padding:5px"><%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-		<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium" %>
-		<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
-			<i class="icon-play icon-white"></i>
-		</button>
-	<% end %>
-	<span id="stopbutton">
-		<%= render "stop_button" %>
-	</span></div>
+	<div style="margin-left:auto;margin-right:auto;padding:5px">
+		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
+			<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium autocomplete" %>
+			<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
+				<i class="icon-play icon-white"></i>
+			</button>
+		<% end %>
+		<span id="stopbutton">
+			<%= render "stop_button" %>
+		</span>
+	</div>
 </header>
-<style>
-.schedule_time {
-	float:none;
-}
-</style>
+
 <div id="projects">
 <% Project.all.sort_by(&:name).each do |project| %>
 	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
-			<% if project.active?(current_user) %>
+		<% if project.active?(current_user) %>
 			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
-			<% else %>
+		<% else %>
 			<div class="img-rounded schedule" id="project<%= project.id %>">
-			<% end %>
-			<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
-			<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
-				<%= hidden_field_tag :name, project.name  %>
-				<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
+		<% end %>
+		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
+		<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
+		<%= hidden_field_tag :name, project.name  %>
+		<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
+		<% end %>
+		</div>
 	<% end %>
-	</div>
-<% end %>
 <% end %>
 </div>
+	<div id="sched">
+	<div id="inner_sched">
+			<a href="<%= addnew_static_pages_path %>" data-remote="true">
+		<div class="addnew">
+			<div><i class="icon-plus-sign icon-4x"></i><br>
+				Do something else...<br>
+			</div>
+		</div>
+		</a>
+		<%= render Schedule.new %>
+		<div id="schedules">
+		<%= render @schedules %>
+		<%= link_to "Load More", "more/#{@page}", remote: true, id: "more" %>
+		</div>
+		</div>
+	</div>
+
 <script>
+$('#sched').scroll(function () { 
+	var sL = $('#sched').scrollLeft();
+	var w = $('#sched')[0].scrollWidth-$('#sched').innerWidth();
+	if (sL >= w) {
+		$('a#more').click();
+	}
+});
 $(window).resize(function() {contresize();});
 $( ".autocomplete" ).autocomplete({source: $( ".autocomplete" ).data('autocomplete-source')});
 $(function() {

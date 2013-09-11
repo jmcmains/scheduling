@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
 		endday = 0.minutes.ago.end_of_week(start_day = :sunday)
 		end
 		all.each do |project|
-			project.schedules.find_all_by_user_id(user.id).each do |s|
+			project.schedules.where('user_id = ?',user.id).each do |s|
 				start = s.start_at
 				finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 				if  begday < finish && finish < endday && begday < start && start < endday

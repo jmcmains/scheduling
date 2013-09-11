@@ -95,22 +95,34 @@ input {
 	float:left;
 	margin:5px;
 	border-radius:3px;
+	display:inline;
 }
 
+#sched {
+	height:232px;
+	width:100%;
+	overflow-x:scroll;
+	overflow-y:hidden;
+	white-space:nowrap;
+	float:left;
+}
+
+#inner_sched {
+	width:2002px;
+}
 .addnew {
 	width: 170px;
 	height:212px;
-	margin:5px;
-	float:left;
-	position:absolute;
 	z-index:5;
 	background-color:#fff;
 	color: #555;
+	margin:5px;
 	display:table;
 	text-align:center;
-	border-radius:3px;
-padding:1px;
+	padding:1px;
 	opacity: 0.5;
+	float:left;
+	margin-right:-100%;
 	div {
 		display:table-cell;
 		vertical-align:middle;
@@ -143,6 +155,7 @@ margin:5px;
 float:right;
 margin-top:0;
 }
+
 .go-bar {
 	background-color:#fff;
 	background-image:none;
@@ -179,6 +192,7 @@ margin-top:0;
 .schedule-primary {
 	background-color:rgb(0, 108, 204);
 }
+
 #projects {
 	position:relative;
 	width: 100%;
