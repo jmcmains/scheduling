@@ -30,7 +30,7 @@ class Schedule < ActiveRecord::Base
 		begday = 0.minutes.ago.beginning_of_week(start_day = :sunday)
 		endday = 0.minutes.ago.end_of_week(start_day = :sunday)
 		end
-		all.where('user_id = ? AND ',user.id).each do |s|
+		Schedule.all.where("user_id = ? AND ((start_at > ? AND start_at < ?) OR (end_at > ? AND end_at < ?))",1,begday,endday,begday,endday).each do |s|
 			start = s.start_at
 			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 			if  begday < finish && finish < endday && begday < start && start < endday

@@ -18,7 +18,7 @@ class Schedule < ActiveRecord::Base
   end
   
   def project_name=(name)
-  	Project.find_or_create_by_name(name) if name.present?
+  	self.project = Project.find_or_create_by_name(name) if name.present?
   end
   
   def self.total_time(span,user)
