@@ -1,7 +1,7 @@
 <header class="navbar-fixed-top navbar-inner go-bar input-append" style="text-align:center">
 	<div style="margin-left:auto;margin-right:auto;padding:5px">
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-			<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium autocomplete" %>
+			<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium" %>
 			<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
 				<i class="icon-play icon-white"></i>
 			</button>
@@ -29,33 +29,11 @@
 	<% end %>
 <% end %>
 </div>
-	<div id="sched">
-	<div id="inner_sched">
-			<a href="<%= addnew_static_pages_path %>" data-remote="true">
-		<div class="addnew">
-			<div><i class="icon-plus-sign icon-4x"></i><br>
-				Do something else...<br>
-			</div>
-		</div>
-		</a>
-		<%= render Schedule.new %>
-		<div id="schedules">
-		<%= render @schedules %>
-		<%= link_to "Load More", "more/#{@page}", remote: true, id: "more" %>
-		</div>
-		</div>
-	</div>
 
 <script>
-$('#sched').scroll(function () { 
-	var sL = $('#sched').scrollLeft();
-	var w = $('#sched')[0].scrollWidth-$('#sched').innerWidth();
-	if (sL >= w) {
-		$('a#more').click();
-	}
-});
 $(window).resize(function() {contresize();});
 $( ".autocomplete" ).autocomplete({source: $( ".autocomplete" ).data('autocomplete-source')});
+
 $(function() {
 	contresize();
 	var oh=$('#main-play').outerHeight();
@@ -74,7 +52,5 @@ function contresize(){
 	$('#name').css('width',(Math.min((win_width*.9 - 108),600)+'px'));
 	$('.go-bar').css('width',(Math.min((win_width*.9 +20),728)+'px'));
   }
-  
-
 </script>
 

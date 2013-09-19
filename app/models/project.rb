@@ -22,34 +22,6 @@ class Project < ActiveRecord::Base
   	try(:name)
   end
   
-  def self.total_time(span,user)
-  	total_time = 0
-  	if span == "day"
-		begday = 0.minutes.ago.beginning_of_day
-		endday = 0.minutes.ago.end_of_day
-		elsif span == "week"
-		begday = 0.minutes.ago.beginning_of_week(start_day = :sunday)
-		endday = 0.minutes.ago.end_of_week(start_day = :sunday)
-		end
-		all.each do |project|
-			project.schedules.where('user_id = ?',user.id).each do |s|
-				start = s.start_at
-				finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
-				if  begday < finish && finish < endday && begday < start && start < endday
-				elsif begday < finish && finish < endday
-					start = begday
-				elsif begday < start && start < endday
-					finish = endday
-				else
-					start = begday
-					finish = begday
-				end
-				total_time = total_time + (finish - start)
-			end
-		end
-		return total_time
-  end
-  
   def project_name=(name)
   	Project.find_or_create_by_name(name) if name.present?
   end

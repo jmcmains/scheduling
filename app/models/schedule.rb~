@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-  attr_accessible :end_at, :project_id, :start_at, :project_name, :user_id
+
   belongs_to :project
   accepts_nested_attributes_for :project
   belongs_to :user
@@ -20,6 +20,35 @@ class Schedule < ActiveRecord::Base
   def project_name=(name)
   	Project.find_or_create_by_name(name) if name.present?
   end
+  
+  def self.total_time(span,user)
+  	total_time = 0
+  	if span == "day"
+		begday = 0.minutes.ago.beginning_of_day
+		endday = 0.minutes.ago.end_of_day
+		elsif span == "week"
+		begday = 0.minutes.ago.beginning_of_week(start_day = :sunday)
+		endday = 0.minutes.ago.end_of_week(start_day = :sunday)
+		end
+		all.where('user_id = ? AND ',user.id).each do |s|
+			start = s.start_at
+			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
+			if  begday < finish && finish < endday && begday < start && start < endday
+			elsif begday < finish && finish < endday
+				start = begday
+			elsif begday < start && start < endday
+				finish = endday
+			else
+				start = begday
+				finish = begday
+			end
+			total_time = total_time + (finish - start)
+		end
+		
+		return total_time
+  end
+  
+  
   
   def formatted_start_at
 		start_at.strftime('%m/%d/%Y %I:%M %p %Z')

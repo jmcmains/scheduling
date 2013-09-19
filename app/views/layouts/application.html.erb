@@ -23,14 +23,14 @@
 <% if signed_in? %>
 <div id="hours_popup" style="width:150px;z-index:50;" class="hidden">
 	  <div id="test" style="display:none"></div><h3>Hours</h3>
-	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Project.total_time("day",current_user)/3600).round(2) %></span><br>
-  				This Week:<span id="hours_week" style="padding:11px;"><%= (Project.total_time("week",current_user)/3600).round(2) %></span>
+	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
+  				This Week:<span id="hours_week" style="padding:11px;"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
   				</div>
 </div>
 <script>
 $(function() {
-var i_day = <%= Project.total_time("day",current_user) %>
-var i_week = <%= Project.total_time("week",current_user) %>
+var i_day = <%= Schedule.total_time("day",current_user) %>
+var i_week = <%= Schedule.total_time("week",current_user) %>
 timers(<%= current_user.working? %>,i_day,i_week);
 navresize();
 });
