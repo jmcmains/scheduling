@@ -1,1 +1,8 @@
-<div class="img-rounded schedule" id="project<%= project.id %>"><%= link_to project.name, project_path(project) %> - <%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></div>
+<tr>
+<td>
+<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+<td>
+<%= link_to project.name, project_path(project) %>
+</td>
+<td><%= featured=project.features.where(user_id: current_user.id).first_or_create.featured %>
+</tr>

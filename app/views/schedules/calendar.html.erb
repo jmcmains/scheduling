@@ -13,7 +13,7 @@ $(function() {
 				},
 				editable: true,
 				events: [
-				<% Schedule.find_all_by_user_id(current_user).sort_by(&:id).each do |event| %>
+				<% Schedule.where(user_id: current_user.id).sort_by(&:id).each do |event| %>
 				<% if event.duration > 60 %>
 					{
 						title: '<%= event.project.name %>',

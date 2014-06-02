@@ -1,6 +1,10 @@
 Time Span:
-<%= form_tag(user_path(user), class: "form-inline", method: :get) do %>
-	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "input-small" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "input-small" %>
-<%= submit_tag "Submit", class: 'btn btn-primary' %> <%= link_to 'Last Week',user_path(@user, start_date: (Date.today.beginning_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y"),end_date: (Date.today.end_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y")), class: 'btn btn-primary' %>
-<%= link_to 'Load to Google',google_user_path(id: @user, start_date: (Date.today.beginning_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y"),end_date: (Date.today.end_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y")), class: 'btn btn-primary' %>
+
+<%= form_tag(user_path(user), class: 'form-inline', style: 'display:inline;margin-left:auto;margin-right:auto', method: :get) do %>
+	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "form-control", style: "width:100px" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "form-control", style: "width:100px" %>
+<%= submit_tag "Submit", class: 'btn btn-default' %>
+<p style="text-align:center;margin-top:10px;">
+<%= link_to 'Last Week',user_path(@user, start_date: (Date.today.beginning_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y"),end_date: (Date.today.end_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y")), class: 'btn btn-default' %>
+<%= link_to 'Load to Google',google_user_path(id: @user, start_date: (Date.today.beginning_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y"),end_date: (Date.today.end_of_week(start_day = :sunday)-7).strftime("%m/%d/%Y")), class: 'btn btn-default' %>
 <% end %>
+</p>

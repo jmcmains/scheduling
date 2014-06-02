@@ -1,12 +1,12 @@
 <% if project.active?(current_user)  %>
-	<button class="btn btn-danger btn-large home-left" name="stop" type="submit">
-		<i class="icon-pause icon-white" style="margin-right:-1px"></i>
+	<button class="btn btn-danger btn-lg home-left" name="stop" type="submit" style="margin-right:4px">
+		<i class="icon-pause icon-white"></i>
 	</button>
 <% else %>
-	<button class="btn btn-success btn-large home-left" name="go" type="submit">
+	<button class="btn btn-success btn-lg home-left" name="go" type="submit">
 		<i class="icon-play icon-white"></i>
 	</button>
 <% end %>
-<button class="btn btn-warning btn-large  home-left" name="del" type="submit">
+<button class="btn btn-warning btn-lg  home-left" name="del" type="submit">
 	<i class="icon-star icon-white"></i>
 </button>

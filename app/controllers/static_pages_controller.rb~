@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
   def home
   	@project = Project.new
   	@schedule = @project.schedules.build
-  	@schedules= Schedule.find_all_by_user_id(current_user).sort_by(&:id).reverse.paginate(:page => 1, :per_page => 10)
+  	@schedules= Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => 1, :per_page => 10)
   	@page=2;
   	if signed_in?
   		render 'home'
@@ -14,12 +14,12 @@ class StaticPagesController < ApplicationController
   
   def more
     page=params[:page];
-		@schedules=Schedule.find_all_by_user_id(current_user).sort_by(&:id).reverse.paginate(:page => page, :per_page => 10)
+		@schedules=Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => page, :per_page => 10)
 		@page = page.to_f+1;
 	end
 	
 	def addnew
-		current_project=Schedule.find_by_end_at_and_user_id(nil,current_user.id)
+		current_project=Schedule.where(end_at: nil, user_id: current_user.id)
 	  if current_project
 	  	current_project.update_attributes(end_at:DateTime.now)
 	  	@current_schedule=current_project
@@ -34,19 +34,4 @@ class StaticPagesController < ApplicationController
 	  end
 	end
 	
-	def rewrite
-		@schedule = Schedule.find(params[:id])
-		@command = params[:commit]
-		if @command == "go"
-			@schedule.update_attributes(project_id: Project.find_or_create_by_name(params[:project_name]).id, start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p %Z') : nil))
-			@schedule.save!
-		elsif @command == "del"
-			@id=@schedule.id
-		  @schedule.destroy
-		end
-		respond_to do |format|
-	    format.html {redirect_to schedules_path}
-	    format.js
-	  end
-	end
 end

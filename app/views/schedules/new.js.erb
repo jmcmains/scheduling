@@ -1,18 +1,23 @@
+
 <% if @command == "del" %>
-	$("#project<%= @project.id %>").fadeOut("slow")
+  $("#project<%= @project.id %>").fadeOut("slow")
 <% elsif @command == "go" %>
-	<% if @current_project %>
-		$(".schedule-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
-		$(".schedule-primary").removeClass("schedule-primary")
-	<% end %>
-	$("#project<%= @project.id %>").addClass("schedule-primary")
-	$(".schedule-primary #btn<%= @project.id %>").html("<%= escape_javascript render "static_pages/home_buttons", project: @project %>")
-	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+  <% if @new %>
+    $("#projects").html("<%= escape_javascript render 'static_pages/project' %>")
+  <% else %>
+    <% if @current_project %>
+      $(".schedule-primary span").html("<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>")
+      $(".schedule-primary").removeClass("schedule-primary")
+    <% end %>
+    $("#project<%= @project.id %>").addClass("schedule-primary")
+    $(".schedule-primary #btn<%= @project.id %>").html("<%= escape_javascript render 'static_pages/home_buttons', project: @project %>")
+  <% end %>
+  $("#stopbutton").html("<%= escape_javascript render 'static_pages/stop_button' %>")
 <% elsif @command == "stop" %>
-	$(".schedule-primary span").html("<%= escape_javascript render "static_pages/home_buttons", project: @current_project %>")
-	$(".schedule-primary").removeClass("schedule-primary")
-	$("#stopbutton").html("<%= escape_javascript render "static_pages/stop_button" %>")
+  $(".schedule-primary span").html("<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>")
+  $(".schedule-primary").removeClass("schedule-primary")
+  $("#stopbutton").html("<%= escape_javascript render 'static_pages/stop_button' %>")
 <% end %>
-var i_day = <%= Project.total_time("day",current_user) %>
-var i_week = <%= Project.total_time("week",current_user) %>
+var i_day = <%= Schedule.total_time("day",current_user) %>
+var i_week = <%= Schedule.total_time("week",current_user) %>
 timers(<%= current_user.working? %>,i_day,i_week);

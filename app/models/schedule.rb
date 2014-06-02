@@ -18,7 +18,7 @@ class Schedule < ActiveRecord::Base
   end
   
   def project_name=(name)
-  	self.project = Project.find_or_create_by_name(name) if name.present?
+  	self.project = Project.where(name: name).first_or_create if name.present?
   end
   
   def self.total_time(span,user)
@@ -67,8 +67,8 @@ class Schedule < ActiveRecord::Base
 	end
 	
 	def self.active_project(user)
-  	if find_by_end_at_and_user_id(nil,user.id)
-  		find_by_end_at_and_user_id(nil,user.id).project
+  	if where(end_at: nil,user_id: user.id).first
+  		where(end_at: nil,user_id: user.id).first.project
   	end
   end
 end

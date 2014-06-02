@@ -1,13 +1,19 @@
 class ProjectsController < ApplicationController
   before_filter :signed_in_user
-  def autocomplete
-		@projects = Project.search(params[:term])
-		render json: @projects.map(&:name)
-	end
+
+	def autocomplete
+	  term = params[:term].downcase
+    @projects = Project.order(:name).where('LOWER(name) LIKE ?',"%#{term}%")
+    respond_to do |format|
+      format.json { 
+		    render json: @projects.map(&:name)
+      }
+    end
+  end
 	
   def index
     @title = "All Projects"
-    @projects = Project.all
+    @projects = Project.where(user_id: current_user.id)
     if params[:start_date]
     	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
@@ -39,7 +45,9 @@ class ProjectsController < ApplicationController
   
   def update
     @project = Project.find(params[:id])
-    if @project.update_attributes(params[:project])
+    if @project.update_attributes(name: params[:project][:name])
+      featured=@project.features.where(user_id: current_user.id).first_or_create
+			featured.update_attributes(featured:params[:project][:features_attributes][:featured])
       flash[:success] = "Project updated."
     	redirect_to projects_path
     else

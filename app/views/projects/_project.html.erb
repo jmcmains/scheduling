@@ -1,1 +1,8 @@
-<li><%= link_to project.name, project_path(project) %> - <%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></li>
+<tr>
+<td>
+<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+<td>
+<%= link_to project.name, project_path(project) %>
+</td>
+<td><%= project.features.where(user_id: current_user.id).first_or_create.featured %>
+</tr>

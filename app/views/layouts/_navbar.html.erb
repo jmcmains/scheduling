@@ -1,29 +1,60 @@
-<div style="float:right">
-	<nav>
-		<ul class="nav pull-right nav-<%= width %>">
-		
-			<% if signed_in? %>
-				<li><a href="<%= root_path %>"><i class="icon-home"></i> <%= " Home" if width=="wide" %></a></li>
-				<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i><%= " Edit Schedule" if width=="wide" %></a></li>
-				<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i><%= " Calendar" if width=="wide" %></a></li>
-				<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i><%= " Time Spent" if width=="wide" %></a></li>
-				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="icon-user"></i><%= " Account" if width=="wide" %><b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu" style="position:absolute;z-index:11">
-					  <li><%= link_to "Profile", current_user %></li>
-					  <% if current_user.admin %>
-					  	<li><%= link_to "Projects", projects_path %></li>
-					  <% end %>
-					  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-					  <li class="divider"></li>
-					  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-				</ul></li>
-			<% else %>
-				<li><a href="<%= signin_path %>"><i class="icon-user"></i> Sign In</a></li>
-			<% end %>
-		</ul>
-	</nav>
-</div>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="<%= root_path %>" class="navbar-brand">Time Saver</a>
+    </div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+        <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get, remote: true) do %>
+          <div class="form-group">
+			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project" %>
+			    </div>
+			    <button class="btn btn-default" name="go" type="submit" id="main-play">
+				      <span class="glyphicon glyphicon-play"></span>
+			    </button>
+			    <span id="stopbutton">
+	          <%= render "static_pages/stop_button" %>
+          </span>
+			    
+			    
+        <% end %>
 
-<div style="float:left"><a href="<%= root_path %>" id="logo"><%= "Time Saver" if show_logo %></a></div>
+      <ul class="nav navbar-nav navbar-right">
+				<% if signed_in? %>
+					<li><a href="<%= root_path %>"><i class="icon-home"></i> Home</a></li>
+					<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i> Edit Schedule</a></li>
+					<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i> Calendar</a></li>
+					<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i> Time Spent</a></li>
+					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-user"></i> Account <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu" style="position:absolute;z-index:11">
+						  <% if current_user.admin %>
+						  	<li><%= link_to "Projects", projects_path %></li>
+						  <% end %>
+						  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+						  <li class="divider"></li>
+						  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+					</ul></li>
+				<% else %>
+					<li><a href="<%= signin_path %>"><i class="icon-user"></i> Sign In</a></li>
+				<% end %>
+			</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<script>
+$(function() {	
+	 $( ".autocomplete-project" ).autocomplete({
+			source: $( "#name" ).data('autocomplete-source')
+	});
+});
+</script>

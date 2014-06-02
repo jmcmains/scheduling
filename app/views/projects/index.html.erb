@@ -1,3 +1,8 @@
-<ul>
+<table class="table table-condensed table-hover table-responsive">
+<tr>
+<th>Modify</th>
+<th>Project Name</th>
+<th>Visible</th>
+</tr>
 <%= render Project.all.sort_by { |a| a.name.titlecase } %>
-</ul>
+</table>

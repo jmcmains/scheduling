@@ -32,9 +32,11 @@ class UsersController < ApplicationController
 
 		Project.all.sort_by { |a| a.time_spent(@start_date,@end_date,@user) }.reverse.each do |project|
 			time_spent=((2*project.time_spent(@start_date,@end_date,@user)/60/60).ceil)/2.0
-							ws[i,project_col] = project.name
+			if time_spent > 0
+				ws[i,project_col] = project.name
 				ws[i,hours_col] = time_spent
 				i=i+1
+			end
 		end
 		ws.save()
 		ws.reload()
@@ -92,4 +94,9 @@ class UsersController < ApplicationController
   	def admin_user
   		redirect_to(root_path) unless (current_user && current_user.admin)
   	end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password,:password_confirmation)
+    end
+
 end

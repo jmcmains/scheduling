@@ -1,4 +1,4 @@
-<div id="chart" style="width:40%;float:left"></div>
+<div class="user_info" id="chart"></div>
 <script>
 $(function () {
     var chart;

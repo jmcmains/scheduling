@@ -1,56 +1,21 @@
-<header class="navbar-fixed-top navbar-inner go-bar input-append" style="text-align:center">
-	<div style="margin-left:auto;margin-right:auto;padding:5px">
-		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get) do %>
-			<%= text_field_tag :name, "", required: true,data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "autocomplete input-medium autocomplete-project" %>
-			<button class="btn btn-success btn-large" name="go" type="submit" id="main-play">
-				<i class="icon-play icon-white"></i>
-			</button>
-		<% end %>
-		<span id="stopbutton">
-			<%= render "stop_button" %>
-		</span>
-	</div>
-</header>
-
 <div id="projects">
-<% Project.all.sort_by(&:name).each do |project| %>
-	<% if project.features.find_by_user_id(current_user) && project.features.find_by_user_id(current_user).featured && project.in_use?(current_user) %>
-		<% if project.active?(current_user) %>
-			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
-		<% else %>
-			<div class="img-rounded schedule" id="project<%= project.id %>">
-		<% end %>
-		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
-		<%= link_to project.name, project_path(project), title: project.name, rel: "tooltip", style:"", class: "btn btn-inverse title" %><br>
-		<%= hidden_field_tag :name, project.name  %>
-		<span id="btn<%= project.id %>"><%= render "home_buttons", project: project %></span>
-		<% end %>
-		</div>
-	<% end %>
-<% end %>
+	<%= render "static_pages/project"%>
 </div>
 
 <script>
 $(window).resize(function() {contresize();});
-$( ".autocomplete-project" ).autocomplete({source: $( ".autocomplete-project" ).data('autocomplete-source')});
+
 
 $(function() {
 	contresize();
-	var oh=$('#main-play').outerHeight();
-	var sb=$('#name').height();
-	var padding=(oh-sb)/2-1;
-	$('#name').css('padding-top',(padding + 'px'));
-	$('#name').css('padding-bottom',(padding + 'px'));
 });
 
 function contresize(){
   var win_width = $(window).width();
 	var box_width = $('.schedule').outerWidth()+10;
-	var box_count = Math.min(Math.floor(win_width/box_width),parseFloat('<%= Feature.find_all_by_featured_and_user_id(true,current_user).count %>'));
+	var box_count = Math.min(Math.floor(win_width/box_width),parseFloat('<%= Feature.where(featured: true, user_id:current_user.id).count %>'));
 	var total_width = box_count * box_width;
 	$('#projects').css('width',total_width)
-	$('#name').css('width',(Math.min((win_width*.9 - 108),600)+'px'));
-	$('.go-bar').css('width',(Math.min((win_width*.9 +20),728)+'px'));
   }
 </script>
 

@@ -10,12 +10,12 @@ class Project < ActiveRecord::Base
 		    combined_scope.where('LOWER(name) LIKE ?',"%#{word.downcase}%")
 		  end
   	else
-  		return find(:all)
+  		return all
   	end
   end
   
   def in_use?(user)
-  	schedules.find_all_by_user_id(user).sort_by {|a| a.updated_at }.last.updated_at > 100.weeks.ago
+  	schedules.where(user_id: user.id).sort_by(&:updated_at).last.updated_at > 100.weeks.ago
   end
   
   def project_name	
@@ -27,13 +27,13 @@ class Project < ActiveRecord::Base
   end
   
   def active?(user)
-  	!schedules.find_by_end_at_and_user_id(nil,user.id).blank?
+  	!schedules.where(end_at: nil, user_id: user.id).blank?
   end
   
   
   def time_spent(start_date,end_date,user)
   	total_time = 0
-		schedules.find_all_by_user_id(user.id).each do |s|
+		schedules.where(user_id: user.id).each do |s|
 			start = s.start_at
 			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))
@@ -52,7 +52,7 @@ class Project < ActiveRecord::Base
   
   def self.time_spent(start_date,end_date,user)
   	total_time = 0
-		Schedule.find_all_by_user_id(user.id).each do |s|
+		Schedule.where(user_id: user.id).each do |s|
 			start = s.start_at
 			finish = s.end_at.blank? ? 0.minutes.ago : s.end_at
 			if (start_date.to_datetime < finish && finish < (end_date.to_datetime+1.day)) && (start_date.to_datetime < start && start < (end_date.to_datetime+1.day))

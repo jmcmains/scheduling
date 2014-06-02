@@ -1,16 +1,17 @@
-<div id="projects" style="margin-top:0px;">
-<%= will_paginate @schedules, renderer: BootstrapPagination::Rails, style: "text-align:center;padding:0;margin:0 auto auto 0;" %>
+<div id="projects">
+<%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %>
+<div>
 <a href="<%= addnew_schedules_path %>" data-remote="true">
 <div class="addnew img-rounded">
 <div><i class="icon-plus-sign icon-4x"></i><br>
 Do something else...<br>
 </div>
 </div></a>
-<div>
-<%= render Schedule.new %>
-</div>
+
+
 <div id="schedules">
 <%= render @schedules %>
+</div>
 </div>
 </div>
 <script>

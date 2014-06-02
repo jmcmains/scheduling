@@ -7,9 +7,7 @@ ruby '2.0.0'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-group :development do
-	gem 'sqlite3'
-end
+
 
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
@@ -27,7 +25,6 @@ end
 
 gem 'jquery-rails','~> 2.3.0'
 gem 'jquery-ui-rails'
-group :production do
-  gem 'pg'
-end
+
+gem 'pg'
 
