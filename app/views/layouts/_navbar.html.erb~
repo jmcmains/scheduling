@@ -13,7 +13,7 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <!-- Collect the nav links, forms, and other content for toggling -->
        <% if signed_in? %>
-       <% if current_path?(root_path) %>
+       <% if current_page?(root_path) %>
         <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get, remote: true) do %>
           <div class="form-group">
 			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
@@ -43,7 +43,6 @@
 
       <ul class="nav navbar-nav navbar-right">
 				<% if signed_in? %>
-					<li><a href="<%= root_path %>"><i class="icon-home"></i> Home</a></li>
 					<li><a href="<%= schedules_path %>"><i class="icon-tasks"></i> Edit Schedule</a></li>
 					<li><a href="<%= calendar_schedules_path %>"><i class="icon-calendar"></i> Calendar</a></li>
 					<li><a href="<%= user_path(current_user) %>"><i class="icon-time"></i> Time Spent</a></li>
