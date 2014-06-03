@@ -6,6 +6,7 @@ Scheduling::Application.routes.draw do
 	end
 	
 	resources :sessions, only: [:new, :create, :destroy]
+	resources :features, only: [:toggle]
 
   get '/signin',  to: 'sessions#new'
   get '/signout', to: 'sessions#destroy', via: :delete
@@ -14,6 +15,8 @@ Scheduling::Application.routes.draw do
 		collection do
 			get :calendar
 			get :addnew
+		end
+		member do
 			get :rewrite
 		end
 	end

@@ -12,9 +12,11 @@
     </div>
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <!-- Collect the nav links, forms, and other content for toggling -->
+       <% if signed_in? %>
+       <% if current_page?(root_path) %>
         <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get, remote: true) do %>
           <div class="form-group">
-			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project" %>
+			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
 			    </div>
 			    <button class="btn btn-default" name="go" type="submit" id="main-play">
 				      <span class="glyphicon glyphicon-play"></span>
@@ -22,7 +24,20 @@
 			    <span id="stopbutton">
 	          <%= render "static_pages/stop_button" %>
           </span>
-			    
+			   <% end %>
+			   <% else %>
+			   <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get) do %>
+          <div class="form-group">
+			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
+			    </div>
+			    <button class="btn btn-default" name="go" type="submit" id="main-play">
+				      <span class="glyphicon glyphicon-play"></span>
+			    </button>
+			    <span id="stopbutton">
+	          <%= render "static_pages/stop_button" %>
+          </span>
+			   <% end %>
+			   <% end %>
 			    
         <% end %>
 
@@ -41,7 +56,7 @@
 						  <% end %>
 						  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
 						  <li class="divider"></li>
-						  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+						  <li><%= link_to "Sign out", signout_path %></li>
 					</ul></li>
 				<% else %>
 					<li><a href="<%= signin_path %>"><i class="icon-user"></i> Sign In</a></li>

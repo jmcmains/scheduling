@@ -6,6 +6,14 @@ Scheduling::Application.routes.draw do
 	end
 	
 	resources :sessions, only: [:new, :create, :destroy]
+	resources :features do
+	  member do 
+	    get :toggle
+	  end
+	end
+	  
+	
+	 
 
   get '/signin',  to: 'sessions#new'
   get '/signout', to: 'sessions#destroy', via: :delete

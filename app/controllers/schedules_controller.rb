@@ -44,7 +44,7 @@ class SchedulesController < ApplicationController
 		end
 
 		respond_to do |format|
-      format.html {redirect_to root_path}
+      format.html {redirect_to request.referer}
       format.js
     end
 	end

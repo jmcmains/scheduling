@@ -17,8 +17,8 @@
 <% end %>
 <%= yield %>
 <% if signed_in? %>
-<div id="hours_popup" style="width:150px;z-index:50;" class="hidden1">
-	  <div id="test" style="display:none"></div><h3>Hours</h3>
+<div id="hours_popup" style="width:130px;z-index:50;" class="hidden1 btn btn-default">
+	  <h3 style="margin-top:5px;">Hours</h3>
 	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
   				This Week:<span id="hours_week" style="padding:11px;"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
   				</div>

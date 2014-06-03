@@ -1,11 +1,11 @@
 class StaticPagesController < ApplicationController
   require 'will_paginate/array'
   def home
-  	@project = Project.new
-  	@schedule = @project.schedules.build
-  	@schedules= Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => 1, :per_page => 10)
-  	@page=2;
   	if signed_in?
+    	@project = Project.new
+    	@schedule = @project.schedules.build
+    	@schedules= Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => 1, :per_page => 10)
+    	@page=2;
   		render 'home'
   	else
   		redirect_to signin_url

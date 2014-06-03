@@ -14,7 +14,7 @@ $(function() {
 				editable: true,
 				events: [
 				<% Schedule.where(user_id: current_user.id).sort_by(&:id).each do |event| %>
-				<% if event.duration > 60 %>
+				<% if event.duration > 60 && !event.project.blank? %>
 					{
 						title: '<%= event.project.name %>',
 						start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),

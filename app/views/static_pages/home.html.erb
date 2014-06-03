@@ -12,7 +12,7 @@ $(function() {
 
 function contresize(){
   var win_width = $(window).width();
-	var box_width = $('.schedule').outerWidth()+10;
+	var box_width = $('.schedule').outerWidth()+11;
 	var box_count = Math.min(Math.floor(win_width/box_width),parseFloat('<%= Feature.where(featured: true, user_id:current_user.id).count %>'));
 	var total_width = box_count * box_width;
 	$('#projects').css('width',total_width)

@@ -1,8 +1,17 @@
 <tr>
-<td>
-<%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
+<td style="text-align:center;">
+<a href="<%= edit_project_path(project) %>"> <span class="glyphicon glyphicon-edit"></span></a> | 
+<a confirm="You sure?" data-method="delete" href="<%= project_path(project) %>" rel="nofollow" title="Delete <%= project.name %>"><span class="glyphicon glyphicon-remove"></span></a>
+</td>
 <td>
 <%= link_to project.name, project_path(project) %>
 </td>
-<td><%= project.features.where(user_id: current_user.id).first_or_create.featured %>
+<td  style="text-align:center;">
+<a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first) %>">
+<% if project.features.where(user_id: current_user.id).first_or_create.featured %>
+<span class="glyphicon glyphicon-eye-open"></span>
+<% else %>
+<span class="glyphicon glyphicon-eye-close"></span>
+<% end %>
+</a>
 </tr>
