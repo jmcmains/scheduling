@@ -7,7 +7,7 @@
 <%= link_to project.name, project_path(project) %>
 </td>
 <td  style="text-align:center;">
-<a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first) %>">
+<a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
 <% if project.features.where(user_id: current_user.id).first_or_create.featured %>
 <span class="glyphicon glyphicon-eye-open"></span>
 <% else %>
