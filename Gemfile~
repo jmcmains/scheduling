@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails'
 
-ruby '2.0.0'
+ruby '2.1.2'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
