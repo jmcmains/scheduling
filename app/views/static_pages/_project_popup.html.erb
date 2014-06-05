@@ -1,0 +1,39 @@
+<div class="modal fade" id="modal<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><%= project.name %></h4><a href="<%= edit_project_path(project) %>"> <span class="glyphicon glyphicon-edit"></span></a> | <a confirm="You sure?" data-method="delete" href="<%= project_path(project) %>" rel="nofollow" title="Delete <%= project.name %>"><span class="glyphicon glyphicon-remove"></span></a> | <a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
+<% if project.features.where(user_id: current_user.id).first_or_create.featured %>
+<span class="glyphicon glyphicon-eye-open"></span>
+<% else %>
+<span class="glyphicon glyphicon-eye-close"></span>
+<% end %>
+</a>
+      </div>
+      <div class="modal-body" style="text-align:center">
+        Time Span:
+
+<%= form_tag(project_path(project), class: 'form-inline', style: 'display:inline;margin-left:auto;margin-right:auto', method: :get, remote: true) do %>
+	
+	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "form-control datepicker", id: "checkin#{project.id}", style: "width:100px" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "form-control datepicker", id: "checkout#{project.id}", style: "width:100px" %>
+<%= submit_tag "Submit", class: 'btn btn-default' %>
+      <% end %>
+      
+      
+      <p>Total Time Spent during period = <span id="time_<%= project.id %>"><%= (project.time_spent(start_date,end_date,current_user)/60/60).ceil %></span> hours</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+    var checkin = $('#checkin<%= project.id %>').datepicker({ onRender: function(date) {}}).on('changeDate', function(ev) {checkin.hide();}).data('datepicker');
+    var checkout = $('#checkout<%= project.id %>').datepicker({ onRender: function(date) {}}).on('changeDate', function(ev) {checkout.hide();
+    }).data('datepicker');
+});
+</script>

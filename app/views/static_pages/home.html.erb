@@ -1,5 +1,7 @@
 <div id="projects">
-	<%= render "static_pages/project"%>
+<% Project.all.sort_by(&:name).each do |project| %>
+	<%= render "static_pages/project", project: project, start_date: @start_date, end_date: @end_date %>
+<% end %>
 </div>
 
 <script>

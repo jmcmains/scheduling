@@ -4,10 +4,11 @@
 <a confirm="You sure?" data-method="delete" href="<%= project_path(project) %>" rel="nofollow" title="Delete <%= project.name %>"><span class="glyphicon glyphicon-remove"></span></a>
 </td>
 <td>
-<%= link_to project.name, project_path(project) %>
+
+		<a data-toggle="modal" data-target="#modal<%= project.id %>"><%= project.name %></a>
 </td>
 <td  style="text-align:center;">
-<a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first) %>">
+<a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
 <% if project.features.where(user_id: current_user.id).first_or_create.featured %>
 <span class="glyphicon glyphicon-eye-open"></span>
 <% else %>
@@ -15,3 +16,4 @@
 <% end %>
 </a>
 </tr>
+<%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>

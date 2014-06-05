@@ -33,6 +33,10 @@ class ProjectsController < ApplicationController
   		@start_date = Date.today.beginning_of_week(start_day = :sunday)
   		@end_date = Date.today.end_of_week(start_day = :sunday)
   	end
+  	respond_to do |format|
+      format.js
+      format.html
+    end
   end
   
   def edit

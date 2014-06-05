@@ -1,4 +1,3 @@
-<%= current_page?(user_path) %>
 <% provide(:title, @user.name) %>
 <center><h1><%= @user.name %></h1>
 <p><%= @user.email %></p></center>
@@ -20,10 +19,11 @@
 	<% total_est_time = total_est_time + est_time %>
 	<% if est_time > 0 %>
 		<tr>
-			<td style="text-align:left"><%= link_to project.name, project_path(project) %> </td>
+			<td style="text-align:left"><a href="#" data-toggle="modal" data-target="#modal<%= project.id %>"><%= project.name %></a>		<%= render "static_pages/project_popup", project: project, start_date: @start_date, end_date: @end_date %></td>
 			<td style="text-align:center"><%= est_time %></td>
 			<td style="text-align:center"><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></td>
 		</tr>
+
 	<% end %>
 <% end %>
 </table>

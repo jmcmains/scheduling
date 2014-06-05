@@ -44,7 +44,6 @@
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   padding: 10px;
-  margin-bottom: 10px;
   @include box_sizing;
 }
 
@@ -181,6 +180,15 @@ margin-top:0;
 	background-color:rgb(0, 108, 204);
 }
 
+.modal-table {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.modal-table tr td {
+    padding:5px;
+    margin:5px;
+}
 #projects {
 	position:relative;
 	width: 100%;

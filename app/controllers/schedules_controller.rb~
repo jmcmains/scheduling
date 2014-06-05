@@ -2,7 +2,6 @@ class SchedulesController < ApplicationController
   before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
-	  session[:return_to] ||= request.referer
     if params[:go]
     	@project = Project.where(name: params[:name]).first_or_create
 		  @project.save!
@@ -45,14 +44,19 @@ class SchedulesController < ApplicationController
 		end
 
 		respond_to do |format|
-      format.html {redirect_to session.delete(:return_to)}
+      format.html {redirect_to request.referer}
       format.js
     end
 	end
 	
 	def index
 		@title = "Edit Schedule"
-		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => 20)
+		@per_page = params['per_page'] || 20
+		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
+		respond_to do |format|
+      format.html
+      format.js
+    end
 	end
 	
 	def rewrite

@@ -1,4 +1,4 @@
-<div style="max-width:500px;width:80%;margin-left:auto;margin-right:auto;">
+<div style="max-width:600px;width:80%;margin-left:auto;margin-right:auto;">
 <h1><%= @project.name %></h1>
 <%= form_tag(project_path(@project), method: :get) do %>
 Range:
@@ -8,5 +8,42 @@ Range:
 <p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
 <p>Total Time Spent during period = <%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %> hours</p>
 </div>
+
+<!-- Large modal -->
+<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+<h1><%= @project.name %></h1>
+<%= form_tag(project_path(@project), method: :get) do %>
+Range:
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y") %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y") %>
+<%= submit_tag "submit" %>
+<% end %>
+<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
+<p>Total Time Spent during period = <%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %> hours</p>
+    </div>
+  </div>
+</div>
+
+<!-- Small modal -->
+<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+<h1><%= @project.name %></h1>
+<%= form_tag(project_path(@project), method: :get) do %>
+Range:
+	<%= text_field_tag 'start_date', @start_date.strftime("%m/%d/%Y") %> - <%= text_field_tag 'end_date', @end_date.strftime("%m/%d/%Y") %>
+<%= submit_tag "submit" %>
+<% end %>
+<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to "delete", @project, :method => :delete, :confirm => "You sure?",:title => "Delete #{@project.name}" %></p>
+<p>Total Time Spent during period = <%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %> hours</p>
+    </div>
+  </div>
+</div>
+
 
 

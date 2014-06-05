@@ -4,5 +4,5 @@
 <th>Project Name</th>
 <th style="width:100px;text-align:center;">Visible</th>
 </tr>
-<%= render Project.all.sort_by { |a| a.name.titlecase } %>
+<%= render Project.all.sort_by { |a| a.name.titlecase }, start_date: @start_date, end_date: @end_date %>
 </table>
