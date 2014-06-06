@@ -25,6 +25,7 @@ end
 
 gem 'jquery-rails','~> 2.3.0'
 gem 'jquery-ui-rails'
+gem 'rails_12factor'
 
 gem 'pg'
 

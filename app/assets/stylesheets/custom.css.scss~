@@ -185,7 +185,7 @@ margin-top:0;
   margin-right:auto;
 }
 
-.modal-table tr td {
+.modal-table td {
     padding:5px;
     margin:5px;
 }

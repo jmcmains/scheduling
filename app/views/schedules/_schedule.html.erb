@@ -1,8 +1,12 @@
 <div id="row_<%= schedule.id %>" class="img-polaroid schedule_time">
 <%= form_tag rewrite_schedule_path(schedule), method: :get, name: "form#{schedule.id}", remote: true do %>
 		<%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: schedule.id, :style => "display:inline;margin:5px;padding:11px;width:160px" %><br>
+		<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
 		<%= text_field_tag :start_at, (schedule.formatted_start_at if schedule.start_at), style: "display:inline;margin:5px;padding:11px;width:160px" %><br>
-		<%= text_field_tag :end_at, (schedule.formatted_end_at if schedule.end_at), style: "margin:5px;display:inline;padding:11px;width:160px", id: "end_at#{schedule.id}" %><br>
+		</div>
+				<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
+		<%= text_field_tag :end_at, (schedule.formatted_end_at if schedule.end_at), style: "margin:5px;display:inline;padding:11px;width:160px" %><br>
+				</div>
 		<div style="float:right">
 		<%= hidden_field_tag :commit %>
 		<span id="update_<%= schedule.id %>" style="display:none;float:left;margin:5px;padding-top:11px"><i class="glyphicon glyphicon-thumbs-up"></i></span>
@@ -15,4 +19,5 @@
 		</div>	
 <% end %>
 </div>
+
 

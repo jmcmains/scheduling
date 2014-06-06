@@ -41,19 +41,18 @@ class ProjectsController < ApplicationController
   
   def edit
   	@project = Project.find(params[:id])
-  	@title = "Edit Project"
-  	if @project.features.count < 1
-  		@project.features.build(featured:false)
-  	end
+  	respond_to do |format|
+      format.js
+    end
   end
   
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(name: params[:project][:name])
       featured=@project.features.where(user_id: current_user.id).first_or_create
-			featured.update_attributes(featured:params[:project][:features_attributes][:featured])
-      flash[:success] = "Project updated."
-    	redirect_to projects_path
+      respond_to do |format|
+        format.js
+      end
     else
       @title = "Edit Project"
       render 'edit'
@@ -63,7 +62,7 @@ class ProjectsController < ApplicationController
 	def destroy
 		Project.find(params[:id]).destroy
     flash[:success] = "Project destroyed."
-    redirect_to projects_path
+    redirect_to request.referer
   end
   
   def new
@@ -79,7 +78,7 @@ class ProjectsController < ApplicationController
     	current_project.update_attributes(end_at:DateTime.now)
     end
     Schedule.create!(project_id:@project.id,start_at:DateTime.now,user_id:current_user.id)
-    redirect_to projects_path
+    redirect_to request.referer
   end
   
   

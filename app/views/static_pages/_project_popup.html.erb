@@ -3,13 +3,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><%= project.name %></h4><a href="<%= edit_project_path(project) %>"> <span class="glyphicon glyphicon-edit"></span></a> | <a confirm="You sure?" data-method="delete" href="<%= project_path(project) %>" rel="nofollow" title="Delete <%= project.name %>"><span class="glyphicon glyphicon-remove"></span></a> | <a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
+        <h4 class="modal-title" id="myModalLabel<%= project.id %>"><div style='padding: 11px 17px;line-height: 1.33;'><a href="<%= edit_project_path(project) %>" title="Edit Title" data-remote="true"><%= project.name %></a></div></h4>
+        
+        <div style='padding-left:11px'><a href="<%= edit_project_path(project) %>" data-remote="true"> <span class="glyphicon glyphicon-edit"></span> Edit Title</a> | <a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
 <% if project.features.where(user_id: current_user.id).first_or_create.featured %>
-<span class="glyphicon glyphicon-eye-open"></span>
+<span class="glyphicon glyphicon-eye-open"></span> 
 <% else %>
 <span class="glyphicon glyphicon-eye-close"></span>
-<% end %>
-</a>
+<% end %> Toggle Visibility
+</a> | <a confirm="You sure?" data-method="delete" href="<%= project_path(project) %>" rel="nofollow" title="Delete <%= project.name %>"><span class="glyphicon glyphicon-remove"></span> Delete Project</a></div>
       </div>
       <div class="modal-body" style="text-align:center">
         Time Span:

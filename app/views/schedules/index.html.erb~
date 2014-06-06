@@ -22,6 +22,7 @@ $(function() {
 	$(".addnew").css("width", $("#row_<%= @schedules.first.id %>").width());
 $(".addnew").css("height", $("#row_<%= @schedules.first.id %>").height());
 contresize();
+                $(".datetimepicker").datetimepicker({sideBySide: true});
 });
 $(window).resize(function() {contresize();});
 function contresize(){
@@ -30,13 +31,6 @@ function contresize(){
 	var box_count = Math.floor(win_width/box_width);
 	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width);
-$.ajax( {
-                    url: '<%= schedules_path %>',
-                    data: {per_page: 10},
-                    default: "GET",
-                    cache: false,
-                    success:  function(data){ $('#schedules').html('<%= escape_javascript render @schedules %>') }
-             }
-           )
+
 	}
 </script>

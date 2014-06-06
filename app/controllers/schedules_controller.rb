@@ -63,7 +63,7 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.where(id: params[:id]).first
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_name: params[:project_name], start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p %Z') : nil))
+			@schedule.update_attributes(project_name: params[:project_name], start_at: DateTime.strptime("#{params[:start_at]} EDT", '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime("#{params[:end_at]} EDT", '%m/%d/%Y %I:%M %p %Z') : nil))
 			featured=@schedule.project.features.where(user_id: current_user.id).first_or_create
 			featured.update_attributes(featured: true)
 			@schedule.save!

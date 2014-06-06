@@ -13,30 +13,8 @@
 		<span id="btn<%= project.id %>"><%= render "static_pages/home_buttons", project: project %></span>
 		<% end %>
 		</div>
-
-<div class="modal fade" id="modal<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><%= project.name %></h4>
-      </div>
-      <div class="modal-body">
-        <%= form_tag(project_path(project), method: :get) do %>
-        Range:
-	      <%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y") %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y") %>
-        <%= submit_tag "submit" %>
-      <% end %>
-      <p><%= link_to 'Edit', edit_project_path(project) %> | <%= link_to "delete", project, :method => :delete, :confirm => "You sure?",:title => "Delete #{project.name}" %></p>
-      <p>Total Time Spent during period = <%= (project.time_spent(start_date,end_date,current_user)/60/60).ceil %> hours</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-		
+<%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>
+	
 	<% end %>
 
 

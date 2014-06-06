@@ -20,8 +20,9 @@ $(function() {
 			source: $( "#<%= @schedules.first.id %>" ).data('autocomplete-source')
 	});
 	$(".addnew").css("width", $("#row_<%= @schedules.first.id %>").width());
-$(".addnew").css("height", $("#row_<%= @schedules.first.id %>").height());
-contresize();
+  $(".addnew").css("height", $("#row_<%= @schedules.first.id %>").height());
+  contresize();
+  $(".datetimepicker").datetimepicker({sideBySide: true});
 });
 $(window).resize(function() {contresize();});
 function contresize(){
