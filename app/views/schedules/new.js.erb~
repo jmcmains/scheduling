@@ -1,4 +1,4 @@
-<% if current_page?(root_path) %>
+
 <% if @command == "del" %>
   $("#project<%= @project.id %>").fadeOut("slow")
 <% elsif @command == "go" %>
@@ -18,9 +18,4 @@
   $(".schedule-primary").removeClass("schedule-primary")
   $("#stopbutton").html("<%= escape_javascript render 'static_pages/stop_button' %>")
 <% end %>
-<% elsif current_page?(schedules_path) %>
-    $("#schedules").html("<%= escape_javascript render Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => 1, :per_page => 20) %>")
-<% end %>
-var i_day = <%= Schedule.total_time("day",current_user) %>
-var i_week = <%= Schedule.total_time("week",current_user) %>
-timers(<%= current_user.working? %>,i_day,i_week);
+schedTimer();

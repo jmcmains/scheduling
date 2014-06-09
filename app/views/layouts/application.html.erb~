@@ -11,54 +11,19 @@
 </head>
 <body>
 <%= render "layouts/navbar" %>
-<div class="container">
+<div class="container container-fluid">
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
+  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
 <% end %>
 <%= yield %>
 <% if signed_in? %>
-<div id="hours_popup" style="width:130px;z-index:50;" class="hidden1 btn btn-default">
-	  <h3 style="margin-top:5px;">Hours</h3>
-	  		<div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
-  				This Week:<span id="hours_week" style="padding:11px;"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
-  				</div>
-</div>
-<script>
-$(function() {
-var i_day = <%= Schedule.total_time("day",current_user) %>
-var i_week = <%= Schedule.total_time("week",current_user) %>
-timers(<%= current_user.working? %>,i_day,i_week);
-});
-$( "div#hours_popup" ).click(function() {
- if ($("div#hours_popup").hasClass("hidden1")) {
-		$( "div#hours" ).slideToggle("slow");
-		$("div#hours_popup").css("bottom","0px");
-		$("div#hours_popup").removeClass("hidden1")
-		$("div#hours_popup").addClass("shown1")
-	} else {
-		$( "div#hours" ).slideToggle("slow");
-		$("div#hours_popup").css("bottom","0px");
-		$("div#hours_popup").addClass("hidden1")
-		$("div#hours_popup").removeClass("shown1")
-	}
-});
-function timers(working,i_day,i_week) {
-	timer1 = parseFloat($('#test').text());
-	clearInterval(timer1);
-	$('#hours_day').text( Math.round(i_day/36)/100 );
-	$('#hours_week').text( Math.round(i_week/36)/100 );
-	if (working) {
-		var start = new Date;
-		var timer1 = setInterval(function() { 
-			$('#hours_day').text( Math.round(((new Date - start)/1000 + i_day)/36)/100 );
-			$('#hours_week').text( Math.round(((new Date - start)/1000 + i_week)/36)/100 );
-		}, 1000)
-		//var timer1 = setInterval(function() { $('#hours_day').text(i_day++) }, 1000);
-	}
-	$('#test').text(timer1);
-}
+  <%= content_tag "div", id: "hours_popup", data: {day: Schedule.total_time("day",current_user), week: Schedule.total_time("week",current_user), working: current_user.working?}, style: "width:130px;z-index:50;", class: "hidden1 btn btn-default" do %>
+  <h3 style="margin-top:5px;">Hours</h3>
+  <div id="hours" style="display:none">Today: <span id="hours_day" style="padding:11px;"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
+    				This Week:<span id="hours_week" style="padding:11px;"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
+   </div>
+  <% end %>
 
-</script>
 <% end %>
 </div>
 </body>

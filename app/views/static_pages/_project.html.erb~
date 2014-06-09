@@ -7,7 +7,7 @@
 		<% end %>
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
 		
-		<button class="btn btn-inverse title" data-toggle="modal" data-target="#modal<%= project.id %>"><%= project.name %></button>
+		<button class="btn btn-inverse title" data-toggle="modal" data-backdrop="static" data-target="#modal<%= project.id %>" id="project_title<%= project.id %>"><%= project.name %></button>
 		<br>
 		<%= hidden_field_tag :name, project.name  %>
 		<span id="btn<%= project.id %>"><%= render "static_pages/home_buttons", project: project %></span>

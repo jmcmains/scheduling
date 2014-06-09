@@ -5,7 +5,5 @@ $('#schedules').prepend($('<%= escape_javascript render @schedule %>').fadeIn("s
 $( ".autocomplete" ).autocomplete({
 			source: $( "#<%= @schedule.id %>" ).data('autocomplete-source')
 	});
-var i_day = <%= Schedule.total_time("day",current_user) %>
-var i_week = <%= Schedule.total_time("week",current_user) %>
-timers(<%= current_user.working? %>,i_day,i_week);
 $(".datetimepicker").datetimepicker({sideBySide: true});
+schedTimer();
