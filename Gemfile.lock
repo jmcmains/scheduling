@@ -51,7 +51,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     erubis (2.7.0)
-    execjs (2.1.0)
+    execjs (2.2.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     font-awesome-sass-rails (3.0.2.2)
@@ -159,14 +159,14 @@ DEPENDENCIES
   activeresource!
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass
-  bootstrap3-datetimepicker-rails (~> 3.0.0)
+  bootstrap3-datetimepicker-rails
   coffee-rails
   font-awesome-sass-rails
   google_drive
   jquery-rails (~> 2.3.0)
   jquery-ui-rails
   masonry-rails
-  momentjs-rails (~> 2.5.0)
+  momentjs-rails
   pg
   rails
   rails_12factor

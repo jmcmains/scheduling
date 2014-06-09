@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: development
+  database: scheduling_dev
   pool: 5
   username: jason
   password: admin
