@@ -61,7 +61,6 @@
     </div>
   </div>
 </div>
-
 <script>
-$('#modalSignUp').modal('show')
+  $('#modalSignUp').modal('show')
 </script>
