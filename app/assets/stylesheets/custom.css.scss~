@@ -249,3 +249,14 @@ margin-top:0;
 		}
 	}
 }
+
+#signup {
+width:50%;margin-left:auto;margin-right:auto;
+}
+
+@media only screen and (max-width: 767px){
+#signup {
+width:90%;
+}
+}
+
