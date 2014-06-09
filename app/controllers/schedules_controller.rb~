@@ -51,11 +51,11 @@ class SchedulesController < ApplicationController
 	
 	def index
 		@title = "Edit Schedule"
-		@per_page = params['per_page'] || 20
+		@per_page = params[:per_page] || 1
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html
-      format.js { render :json => @schedules}
+      format.js
     end
 	end
 	
@@ -63,7 +63,7 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.where(id: params[:id]).first
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_name: params[:project_name], start_at: DateTime.strptime(params[:start_at], '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime(params[:end_at], '%m/%d/%Y %I:%M %p %Z') : nil))
+			@schedule.update_attributes(project_name: params[:project_name], start_at: DateTime.strptime("#{params[:start_at]} EDT", '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime("#{params[:end_at]} EDT", '%m/%d/%Y %I:%M %p %Z') : nil))
 			featured=@schedule.project.features.where(user_id: current_user.id).first_or_create
 			featured.update_attributes(featured: true)
 			@schedule.save!

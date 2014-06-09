@@ -51,11 +51,11 @@ class SchedulesController < ApplicationController
 	
 	def index
 		@title = "Edit Schedule"
-		@per_page = params['per_page'] || 20
+		@per_page = params[:per_page] || 20
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html
-      format.js { render :json => @schedules}
+      format.js
     end
 	end
 	

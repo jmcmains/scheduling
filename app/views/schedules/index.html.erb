@@ -27,10 +27,18 @@ $(function() {
 $(window).resize(function() {contresize();});
 function contresize(){
   var win_width = $(window).width();
+  var win_height = $(window).height();
 	var box_width = $('.schedule_time').outerWidth()+10;
+  var box_height = $('.schedule_time').outerHeight()+10;
 	var box_count = Math.floor(win_width/box_width);
+	var box_count_h = Math.floor(win_height/box_height);
 	var total_width = box_count * box_width+1;
 	$('#projects').css('width',total_width);
-
+	$.ajax({
+    url: "<%= schedules_path %>",
+    success: function(data){  },
+    dataType:    "json",
+    data: { per_page: (box_count * box_count_h) }
+  });
 	}
 </script>
