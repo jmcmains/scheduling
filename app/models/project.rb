@@ -30,6 +30,14 @@ class Project < ActiveRecord::Base
   	!schedules.where(end_at: nil, user_id: user.id).blank?
   end
   
+  def self.active(user)
+    if !Schedule.where(end_at: nil, user_id: user.id).blank?
+      return Schedule.where(end_at: nil, user_id: user.id).first.project
+    else
+      return nil
+    end
+  end
+  
   
   def time_spent(start_date,end_date,user)
   	total_time = 0

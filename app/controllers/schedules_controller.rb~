@@ -8,26 +8,26 @@ class SchedulesController < ApplicationController
     	@command="go"
 		 	current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
 		  if current_project
-		  	current_project.update_attributes(end_at:DateTime.now)
+		  	current_project.update_attributes(end_at:Time.zone.now)
 		  	@current_project=current_project.project
 		  else
 		    @current_project=nil
 		  end
-		  Schedule.create!(project_id:@project.id,start_at:DateTime.now,user_id:current_user.id)
+		  Schedule.create!(project_id:@project.id,start_at:Time.zone.now,user_id:current_user.id)
 		  featured=@project.features.where(user_id: current_user.id).first
 		  if featured.blank?
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
-        @start_date=Date.today.beginning_of_week
-    	  @end_date=Date.today.end_of_week
+        @start_date=Time.zone.today.beginning_of_week
+    	  @end_date=Time.zone.today.end_of_week
 		    @new = true
 		  elsif featured.featured
 		    @new = false
 		  else
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
-        @start_date=Date.today.beginning_of_week
-    	  @end_date=Date.today.end_of_week
+        @start_date=Time.zone.today.beginning_of_week
+    	  @end_date=Time.zone.today.end_of_week
 		    @new = true
 		  end
 		  featured.save!
@@ -42,7 +42,7 @@ class SchedulesController < ApplicationController
 			@new = false
 			current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
 			if current_project
-				current_project.update_attributes(end_at:DateTime.now)
+				current_project.update_attributes(end_at:Time.zone.now)
 				@current_project=current_project.project
 			end
 		end
@@ -56,7 +56,7 @@ class SchedulesController < ApplicationController
 	def index
 		@title = "Edit Schedule"
 		@per_page = params[:per_page] || 20
-		@test_var = params[:test_var] ||"no test var"
+		@test_var = params[:test_var] ||""
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html
@@ -68,7 +68,7 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.where(id: params[:id]).first
 		@command = params[:commit]
 		if @command == "go"
-			@schedule.update_attributes(project_name: params[:project_name], start_at: DateTime.strptime("#{params[:start_at]} EDT", '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? DateTime.strptime("#{params[:end_at]} EDT", '%m/%d/%Y %I:%M %p %Z') : nil))
+			@schedule.update_attributes(project_name: params[:project_name], start_at: Time.strptime("#{params[:start_at]}", '%m/%d/%Y %I:%M %p').in_time_zone(Time.zone), end_at: (!params[:end_at].blank? ? Time.strptime("#{params[:end_at]}", '%m/%d/%Y %I:%M %p').in_time_zone(Time.zone) : nil))
 			featured=@schedule.project.features.where(user_id: current_user.id).first_or_create
 			featured.update_attributes(featured: true)
 			@schedule.save!
@@ -84,12 +84,12 @@ class SchedulesController < ApplicationController
 	def addnew
 		current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
 	  if current_project
-	  	current_project.update_attributes(end_at:DateTime.now)
+	  	current_project.update_attributes(end_at:Time.zone.now)
 	  	@current_schedule=current_project
 	  else
 	  	@current_schedule=nil
 	  end
-	  @schedule = Schedule.new(start_at:DateTime.now,user_id:current_user.id)
+	  @schedule = Schedule.new(start_at:Time.zone.now,user_id:current_user.id)
 	  @schedule.save!
 	  respond_to do |format|
 	    format.html {redirect_to schedules_path}

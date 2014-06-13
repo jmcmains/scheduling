@@ -27,8 +27,7 @@ jQuery ->
       $('#hours_popup').data('timerFloat',timer1)  
   window.schedTimer()
   window.contresize()
-  $(".hasDatepicker").datepicker
-  $(".hasDatepicker").on "blur", -> $(this).datepicker "hide"
+  $("#projects").sortable()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
   $("#hours_popup").click ->
     if $("#hours_popup").hasClass("hidden1")

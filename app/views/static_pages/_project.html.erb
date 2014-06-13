@@ -1,10 +1,6 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 <% if project.features.where(user_id: current_user).first && project.features.where(user_id: current_user).first.featured %>
-		<% if project.active?(current_user) %>
-			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
-		<% else %>
-			<div class="img-rounded schedule" id="project<%= project.id %>">
-		<% end %>
+		<%= content_tag_for :div, project, class: "img-rounded schedule" do %>
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
 		
 		<button class="btn btn-inverse title" data-toggle="modal" data-target="#modal<%= project.id %>" id="project_title<%= project.id %>"><%= project.name %></button>
@@ -12,7 +8,7 @@
 		<%= hidden_field_tag :name, project.name  %>
 		<span id="btn<%= project.id %>"><%= render "static_pages/home_buttons", project: project %></span>
 		<% end %>
-		</div>
+<% end %>
     <%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>
 	<% end %>
 <% end %>

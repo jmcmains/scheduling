@@ -19,7 +19,7 @@
 <% if signed_in? %>
   <%= content_tag "div", id: "hours_popup", data: {day: Schedule.total_time("day",current_user), week: Schedule.total_time("week",current_user), working: current_user.working?}, class: "hidden1 btn btn-default" do %>
   <h3 style="margin-top:5px;">Hours</h3>
-  <span id="test_hours"><%= @test_var ? @test_var : "" %></span>
+  <span id="test_hours"><%= @test_val %></span>
   <div id="hours" style="display:none">Today: <span id="hours_day"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
     				This Week:<span id="hours_week"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
    </div>

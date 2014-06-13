@@ -19,10 +19,10 @@ gem 'turbolinks', '1.1.1'
 
 group :assets do
   gem 'sass-rails'
-  gem 'uglifier'
 end
 
-  gem 'coffee-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 gem 'jquery-rails','~> 2.3.0'
 gem 'jquery-ui-rails'
 gem 'rails_12factor'

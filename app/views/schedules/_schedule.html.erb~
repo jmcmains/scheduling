@@ -1,4 +1,4 @@
-<div id="row_<%= schedule.id %>" class="img-polaroid schedule_time">
+<%= content_tag_for :div schedule, class="img-polaroid schedule_time" do %>
   <%= form_tag rewrite_schedule_path(schedule), method: :get, name: "form#{schedule.id}", remote: true do %>
     <%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: schedule.id %><br>
     <div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
@@ -9,7 +9,7 @@
 	  </div>
 	  <div style="float:right">
 		  <%= hidden_field_tag :commit %>
-	    <span id="update_<%= schedule.id %> thumb">
+	    <span id="update_<%= schedule.id %>" class="thumb">
 		    <i class="glyphicon glyphicon-thumbs-up"></i>
 		  </span>
 		  <button class="btn btn-success btn-large" name="go" type="submit" onClick="document.form<%= schedule.id %>.commit.value='go'">
@@ -20,6 +20,6 @@
 		  </button>
 	  </div>	
   <% end %>
-</div>
+<% end %>
 
 

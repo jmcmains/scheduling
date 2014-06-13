@@ -1,5 +1,5 @@
-<div id="projects">
-  <%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %>
+<div id="projects" data-update-url="<%= schedules_path %>">
+  <div style="margin-left:auto;margin-right:auto"><%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %></div>
   <div>
     <%= link_to addnew_schedules_path, remote: true do %>
       <div class="addnew img-rounded">
@@ -14,4 +14,10 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function () {
+  $.get($("#projects").data('update-url'),{per_page: 5, test_var: "YESSSSS"})
+ });
+</script>
 

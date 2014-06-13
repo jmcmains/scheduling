@@ -11,13 +11,14 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
-  
+
   has_many :features, dependent: :destroy
   accepts_nested_attributes_for :features
   
   def working?
   	!Schedule.find_by_end_at_and_user_id(nil,id).blank?
   end
+
   
   private
   

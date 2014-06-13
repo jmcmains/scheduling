@@ -1,4 +1,4 @@
-<div id="projects">
+<div id="projects" data-update-url="<%= schedules_path %>">
   <div style="margin-left:auto;margin-right:auto"><%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %></div>
   <div>
     <%= link_to addnew_schedules_path, remote: true do %>

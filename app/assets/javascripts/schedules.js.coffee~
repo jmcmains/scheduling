@@ -4,7 +4,6 @@
 jQuery ->
   window.update_sched = -> 
     $( ".autocomplete" ).autocomplete source: $(".schedule_time:first").data 'autocomplete-source'
-    $("#stopbutton").html("<%= escape_javascript render 'static_pages/stop_button' %>");
     $(".datetimepicker").datetimepicker sideBySide: true
   window.contresize = ->
     win_width = $(window).width()
@@ -16,4 +15,5 @@ jQuery ->
   $(".addnew").css "height", $(".schedule_time:first").height()
   window.contresize()
   window.update_sched()
+  $.get($("#projects").data('update-url'),{per_page: 5, test_var: "YESSSSS"})
   $(window).resize -> window.contresize()

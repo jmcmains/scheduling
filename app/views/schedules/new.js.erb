@@ -1,5 +1,5 @@
 <% if @command == "del" %>
-  $("#project<%= @project.id %>").fadeOut("slow");
+  $("#project_<%= @project.id %>").fadeOut("slow");
 <% elsif @command == "go" %>
   <% if @new %>
     $("#projects").html("<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>");
@@ -8,7 +8,7 @@
       $(".schedule-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>");
       $(".schedule-primary").removeClass("schedule-primary");
     <% end %>
-    $("#project<%= @project.id %>").addClass("schedule-primary");
+    $("#project_<%= @project.id %>").addClass("schedule-primary");
     $(".schedule-primary #btn<%= @project.id %>").html("<%=j render 'static_pages/home_buttons', project: @project %>")
   <% end %>
 <% elsif @command == "stop" %>
