@@ -12,11 +12,6 @@
     <%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>
 	<% end %>
 <% end %>
-<script>
-$(function () {
-  $("#project_<%= Project.active(current_user)? Project.active(current_user).id : 0 %>").addClass("schedule-primary");
- });
-</script>
 
 
 

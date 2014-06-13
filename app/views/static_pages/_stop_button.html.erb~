@@ -1,4 +1,6 @@
-			<button class="btn btn-default" id="running" name="stop" type="submit">
+				    <% if !Schedule.active_project(current_user).blank? %>
+				    		<button class="btn btn-default" id="running" name="stop" type="submit">
 				<i class="icon-pause icon-white"></i>
 			</button>
+			<% end %>
 

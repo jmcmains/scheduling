@@ -3,17 +3,18 @@
 <% elsif @command == "go" %>
   <% if @new %>
     $("#projects").html("<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>");
+    $("#project_<%= @project.id %>").addClass("project-primary");
   <% else %>
     <% if @current_project %>
-      $(".schedule-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>");
-      $(".schedule-primary").removeClass("schedule-primary");
+      $(".project-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>");
+      $(".project-primary").removeClass("project-primary");
     <% end %>
-    $("#project_<%= @project.id %>").addClass("schedule-primary");
-    $(".schedule-primary #btn<%= @project.id %>").html("<%=j render 'static_pages/home_buttons', project: @project %>")
+    $("#project_<%= @project.id %>").addClass("project-primary");
+    $(".project-primary #btn<%= @project.id %>").html("<%=j render 'static_pages/home_buttons', project: @project %>")
   <% end %>
 <% elsif @command == "stop" %>
-  $(".schedule-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>");
-  $(".schedule-primary").removeClass("schedule-primary");
+  $(".project-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>");
+  $(".project-primary").removeClass("project-primary");
 <% end %>
 $("#hours_popup").data('day',<%= Schedule.total_time('day',current_user) %>)
 $("#hours_popup").data('week',<%= Schedule.total_time('week',current_user) %>)

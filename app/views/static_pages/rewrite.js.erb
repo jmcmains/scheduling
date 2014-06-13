@@ -1,7 +1,0 @@
-<% if @command == "go" %>
-	$("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut("slow")
-<% else %>
-	$("#schedule_<%= @schedule.id %>").hide({ direction: "right"  }, "slow")
-<% end %>
-schedTimer();
-$('#test_hours').text('completed')

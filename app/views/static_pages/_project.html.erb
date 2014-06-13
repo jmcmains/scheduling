@@ -1,6 +1,6 @@
 <% Project.all.sort_by(&:name).each do |project| %>
 <% if project.features.where(user_id: current_user).first && project.features.where(user_id: current_user).first.featured %>
-		<%= content_tag_for :div, project, class: "img-rounded schedule" do %>
+		<%= content_tag_for :div, project, class: "img-rounded" do %>
 		<%= form_tag(new_schedule_path, class: "form-inline", :style => "display:inline", method: :get, remote: true) do %>
 		
 		<button class="btn btn-inverse title" data-toggle="modal" data-target="#modal<%= project.id %>" id="project_title<%= project.id %>"><%= project.name %></button>

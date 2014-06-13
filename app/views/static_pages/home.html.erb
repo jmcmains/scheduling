@@ -5,7 +5,7 @@
 
 <script>
 $(function () {
-  $("#project_<%= Project.active(current_user)? Project.active(current_user).id : 0 %>").addClass("schedule-primary");
+  $("#project_<%= Project.active(current_user)? Project.active(current_user).id : 0 %>").addClass("project-primary");
  });
 </script>
 

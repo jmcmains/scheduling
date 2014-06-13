@@ -165,6 +165,9 @@ padding:0;margin:10px auto auto 0;
 width:90%;
 margin-left:auto;
 margin-right:auto;
+  td {
+    vertical-align: top;
+  }
 }
 .user_info_half {
 width:50%;
@@ -217,7 +220,7 @@ margin-top:0;
 }
 
 
-.schedule {
+.project {
 	background-color:#eee;
 	border:1px solid #ccc;
 	padding:0;

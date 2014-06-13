@@ -20,20 +20,5 @@ class StaticPagesController < ApplicationController
 		@page = page.to_f+1;
 	end
 	
-	def addnew
-		current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
-	  if current_project
-	  	current_project.update_attributes(end_at:DateTime.now)
-	  	@current_schedule=current_project
-	  else
-	  	@current_schedule=nil
-	  end
-	  @schedule = Schedule.new(start_at: DateTime.now,user_id: current_user.id)
-	  @schedule.save!
-	  respond_to do |format|
-	    format.html {redirect_to root_path}
-	    format.js
-	  end
-	end
 	
 end

@@ -34,9 +34,6 @@ Scheduling::Application.routes.draw do
 	end
 	get 'more/:page' => 'static_pages#more'
 	resources :static_pages do
-	  collection do
-	  	get :addnew
-		end
 		member do
 			get :rewrite
 		end
