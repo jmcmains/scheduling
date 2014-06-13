@@ -2,9 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-  window.update_sched = -> 
-    $( ".autocomplete" ).autocomplete source: $(".schedule_time:first").data 'autocomplete-source'
-    $(".datetimepicker").datetimepicker sideBySide: true
   window.contresize = ->
     win_width = $(window).width()
     box_width = $('.schedule_time:first').outerWidth()+10
@@ -13,6 +10,7 @@ jQuery ->
     $('#projects').css 'width',total_width
   $(".addnew").css "width", $(".schedule_time:first").width()
   $(".addnew").css "height", $(".schedule_time:first").height()
+  $( ".autocomplete" ).autocomplete source: $( ".autocomplete:first" ).data('autocomplete-source')
+  $(".datetimepicker").datetimepicker sideBySide: true
   window.contresize()
-  window.update_sched()
   $(window).resize -> window.contresize()
