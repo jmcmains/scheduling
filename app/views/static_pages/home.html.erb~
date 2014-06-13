@@ -1,23 +1,8 @@
-<div id="projects">
+<div id="projects" data-count="<%= Feature.where(featured: true, user_id:current_user.id).count %>">
 <% Project.all.sort_by(&:name).each do |project| %>
 	<%= render "static_pages/project", project: project, start_date: @start_date, end_date: @end_date %>
 <% end %>
 </div>
 
-<script>
-$(window).resize(function() {contresize();});
 
-
-$(function() {
-	contresize();
-});
-
-function contresize(){
-  var win_width = $(window).width();
-	var box_width = $('.schedule').outerWidth()+11;
-	var box_count = Math.min(Math.floor(win_width/box_width),parseFloat('<%= Feature.where(featured: true, user_id:current_user.id).count %>'));
-	var total_width = box_count * box_width;
-	$('#projects').css('width',total_width)
-  }
-</script>
 

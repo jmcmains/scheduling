@@ -1,16 +1,16 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 jQuery ->
-  contresize = ->
+  window.contresize = ->
     win_width = $(window).width()
     proCount = $("#projects").data('count')
     box_width = $('.schedule').outerWidth()+11;
     box_count = Math.min(Math.floor(win_width/box_width),proCount);
     total_width = box_count * box_width;
     $('#projects').css('width',total_width)
-  schedTimer =  ->
+
+  window.schedTimer =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')
     working = $("#hours_popup").data('working')
@@ -24,9 +24,11 @@ jQuery ->
         $('#hours_day').text(Math.round(((new Date - start)/1000 + day)/36)/100)
         $('#hours_week').text( Math.round(((new Date - start)/1000 + week)/36)/100)
       , 1000
-      $('#hours_popup').data('timerFloat',timer1)
-  schedTimer()
-  contresize()
+      $('#hours_popup').data('timerFloat',timer1)  
+  window.schedTimer()
+  window.contresize()
+  $(".hasDatepicker").datepicker
+  $(".hasDatepicker").on "blur", -> $(this).datepicker "hide"
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
   $("#hours_popup").click ->
     if $("#hours_popup").hasClass("hidden1")
@@ -37,7 +39,7 @@ jQuery ->
       $( "#hours" ).slideToggle("slow")
       $("#hours_popup").addClass("hidden1")
       $("#hours_popup").removeClass("shown1")
-  $(window).resize -> contresize()
+  $(window).resize -> window.contresize()
 
 	    
 

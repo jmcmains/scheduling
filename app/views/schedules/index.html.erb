@@ -1,44 +1,17 @@
 <div id="projects">
-<%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %>
-<div>
-<a href="<%= addnew_schedules_path %>" data-remote="true">
-<div class="addnew img-rounded">
-<div><i class="icon-plus-sign icon-4x"></i><br>
-Do something else...<br>
+  <div style="margin-left:auto;margin-right:auto"><%= will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %></div>
+  <div>
+    <%= link_to addnew_schedules_path, remote: true do %>
+      <div class="addnew img-rounded">
+        <div>
+          <i class="icon-plus-sign icon-4x"></i><br>
+          Do something else...<br>
+        </div>
+      </div>
+    <% end %>
+    <div id="schedules">
+      <%= render @schedules %>
+    </div>
+  </div>
 </div>
-</div></a>
 
-
-<div id="schedules">
-<%= render @schedules %>
-</div>
-</div>
-</div>
-<script>
-$(function() {	
-	 $( ".autocomplete" ).autocomplete({
-			source: $( "#<%= @schedules.first.id %>" ).data('autocomplete-source')
-	});
-	$(".addnew").css("width", $("#row_<%= @schedules.first.id %>").width());
-  $(".addnew").css("height", $("#row_<%= @schedules.first.id %>").height());
-  contresize();
-  $(".datetimepicker").datetimepicker({sideBySide: true});
-});
-$(window).resize(function() {contresize();});
-function contresize(){
-  var win_width = $(window).width();
-  var win_height = $(window).height();
-	var box_width = $('.schedule_time').outerWidth()+10;
-  var box_height = $('.schedule_time').outerHeight()+10;
-	var box_count = Math.floor(win_width/box_width);
-	var box_count_h = Math.floor(win_height/box_height);
-	var total_width = box_count * box_width+1;
-	$('#projects').css('width',total_width);
-	$.ajax({
-    url: "<%= schedules_path %>",
-    success: function(data){  },
-    dataType:    "json",
-    data: { per_page: (box_count * box_count_h) }
-  });
-	}
-</script>

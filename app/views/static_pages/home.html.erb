@@ -1,7 +1,5 @@
 <div id="projects" data-count="<%= Feature.where(featured: true, user_id:current_user.id).count %>">
-<% Project.all.sort_by(&:name).each do |project| %>
-	<%= render "static_pages/project", project: project, start_date: @start_date, end_date: @end_date %>
-<% end %>
+	<%= render "static_pages/project", start_date: @start_date, end_date: @end_date %>
 </div>
 
 

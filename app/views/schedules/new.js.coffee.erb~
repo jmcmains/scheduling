@@ -1,0 +1,21 @@
+if <%= @command %> == "del"
+  $("#project<%= @project.id %>").fadeOut "slow"
+elseif <%= @command %> == "go"
+  if <%= @new %>
+    $("#projects").html "<%= escape_javascript render 'static_pages/project', project: @current_project %>"
+  else
+    if <%= @current_project %>
+      $(".schedule-primary span").html "<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>"
+      $(".schedule-primary").removeClass "schedule-primary"
+    $("#project<%= @project.id %>").addClass "schedule-primary"
+    $(".schedule-primary #btn<%= @project.id %>").html "<%= escape_javascript render 'static_pages/home_buttons', project: @project %>"
+  $("#stopbutton").html "<%= escape_javascript render 'static_pages/stop_button' %>"
+elseif <%= @command %> == "stop"
+  $(".schedule-primary span").html "<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>"
+  $(".schedule-primary").removeClass "schedule-primary"
+  $("#stopbutton").html "<%= escape_javascript render 'static_pages/stop_button' %>"
+$("#hours_popup").data 'day',<%= Schedule.total_time('day',current_user) %>
+$("#hours_popup").data 'week',<%= Schedule.total_time('week',current_user) %>
+$("#hours_popup").data 'working', <%= current_user.working? %>
+$("#hours_popup").text 'complete'
+schedTimer();

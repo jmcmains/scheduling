@@ -1,4 +1,4 @@
-
+<% Project.all.sort_by(&:name).each do |project| %>
 <% if project.features.where(user_id: current_user).first && project.features.where(user_id: current_user).first.featured %>
 		<% if project.active?(current_user) %>
 			<div class="img-rounded schedule schedule-primary" id="project<%= project.id %>">
@@ -13,9 +13,9 @@
 		<span id="btn<%= project.id %>"><%= render "static_pages/home_buttons", project: project %></span>
 		<% end %>
 		</div>
-<%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>
-	
+    <%= render "static_pages/project_popup", project: project, start_date: start_date, end_date: end_date %>
 	<% end %>
+<% end %>
 
 
 

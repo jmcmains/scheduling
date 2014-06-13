@@ -1,8 +1,11 @@
+$("#hours_popup").data('day',<%= Schedule.total_time("day",current_user) %>);
+$("#hours_popup").data('week',<%= Schedule.total_time("week",current_user) %>);
+$("#hours_popup").data('working',<%= current_user.working? %>);
+update_sched();
+$("#stopbutton").html("<%=j render 'static_pages/stop_button' %>");
+schedTimer();
 <% if @command == "go" %>
 	$("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut("slow")
 <% else %>
 	$("#row_<%= @schedule.id %>").fadeOut("slow")
 <% end %>
-var i_day = <%= Schedule.total_time("day",current_user) %>
-var i_week = <%= Schedule.total_time("week",current_user) %>
-timers(<%= current_user.working? %>,i_day,i_week);

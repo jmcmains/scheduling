@@ -1,12 +1,12 @@
 <div id='calendar' style="margin-left:5%;margin-right:5%;width: 90%"></div>
 <script>
 $(function() {
-	$('#calendar').fullCalendar({
-        height: 600,
-        theme: false,
-        firstHour: 8,
-        defaultView: 'agendaWeek',
-        header: {
+  $('#calendar').fullCalendar({
+    height: 600,
+    theme: false,
+    firstHour: 8,
+    defaultView: 'agendaWeek',
+    header: {
 					left: 'prev,next today',
 					center: 'title',
 					right: 'month,agendaWeek,agendaDay'
@@ -14,7 +14,7 @@ $(function() {
 				editable: true,
 				events: [
 				<% Schedule.where(user_id: current_user.id).sort_by(&:id).each do |event| %>
-				<% if event.duration > 60 && !event.project.name.blank? %>
+				<% if event.duration > 60 && !event.project.blank? %>
 					{
 						title: '<%= event.project.name %>',
 						start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),

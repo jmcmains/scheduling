@@ -18,12 +18,16 @@ class SchedulesController < ApplicationController
 		  if featured.blank?
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
+        @start_date=Date.today.beginning_of_week
+    	  @end_date=Date.today.end_of_week
 		    @new = true
 		  elsif featured.featured
 		    @new = false
 		  else
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
+        @start_date=Date.today.beginning_of_week
+    	  @end_date=Date.today.end_of_week
 		    @new = true
 		  end
 		  featured.save!
@@ -52,6 +56,7 @@ class SchedulesController < ApplicationController
 	def index
 		@title = "Edit Schedule"
 		@per_page = params[:per_page] || 20
+		@test_var = params[:test_var] ||""
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html

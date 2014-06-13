@@ -1,4 +1,4 @@
-<div class="modal fade" data-backdrop="static" id="modal<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,6 @@
         Time Span:
 
 <%= form_tag(project_path(project), class: 'form-inline', style: 'display:inline;margin-left:auto;margin-right:auto', method: :get, remote: true) do %>
-	
 	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "form-control datepicker", id: "checkin#{project.id}", style: "width:100px" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "form-control datepicker", id: "checkout#{project.id}", style: "width:100px" %>
 <%= submit_tag "Submit", class: 'btn btn-default' %>
       <% end %>
@@ -34,8 +33,6 @@
 
 <script>
 $(function() {
-    var checkin = $('#checkin<%= project.id %>').datepicker({ onRender: function(date) {}}).on('changeDate', function(ev) {checkin.hide();}).data('datepicker');
-    var checkout = $('#checkout<%= project.id %>').datepicker({ onRender: function(date) {}}).on('changeDate', function(ev) {checkout.hide();
-    }).data('datepicker');
+  $(".hasDatepicker").on("blur", function(e) { $(this).datepicker("hide"); });
 });
 </script>

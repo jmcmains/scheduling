@@ -1,1 +1,3 @@
-$('#schedules').html('<%= escape_javascript render @schedules %>')
+$("#hours_popup").text('worked!')
+
+

@@ -1,18 +1,18 @@
 <% provide(:title, "Sign in") %>
+<div id="projects" data-count="30">
 <% Project.first(30).each do |project| %>
-
-			<div class="img-rounded schedule" id="project<%= project.id %>">
-		<button class="btn btn-inverse title" id="project_title<%= project.id %>"><%= project.name %></button>
+  <div class="img-rounded schedule" id="project<%= project.id %>">
+    <button class="btn btn-inverse title" id="project_title<%= project.id %>"><%= project.name %></button>
 		<br>
-		<span id="btn<%= project.id %>"><button class="btn btn-success btn-lg home-left" name="go" type="submit">
-		<i class="glyphicon glyphicon-play"></i>
-	</button>
-	<button class="btn btn-warning btn-lg  home-left" name="del" type="submit">
-	<i class="glyphicon glyphicon-star"></i>
-</button>
-	</span>
-		</div>
+	  <button class="btn btn-success btn-lg home-left" name="go" type="submit">
+	    <i class="glyphicon glyphicon-play"></i>
+    </button>
+    <button class="btn btn-warning btn-lg  home-left" name="del" type="submit">
+      <i class="glyphicon glyphicon-star"></i>
+    </button>
+	</div>
 <% end %>
+</div>
 
 <div class="modal" id="modalSignUp" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

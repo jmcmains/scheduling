@@ -1,23 +1,25 @@
 <div id="row_<%= schedule.id %>" class="img-polaroid schedule_time">
-<%= form_tag rewrite_schedule_path(schedule), method: :get, name: "form#{schedule.id}", remote: true do %>
-		<%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: schedule.id, :style => "display:inline;margin:5px;padding:11px;width:160px" %><br>
-		<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
-		<%= text_field_tag :start_at, (schedule.formatted_start_at if schedule.start_at), style: "display:inline;margin:5px;padding:11px;width:160px", id: "start_at#{schedule.id}" %><br>
-		</div>
-				<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
-		<%= text_field_tag :end_at, (schedule.formatted_end_at if schedule.end_at), style: "margin:5px;display:inline;padding:11px;width:160px", id: "end_at#{schedule.id}"  %><br>
-				</div>
-		<div style="float:right">
-		<%= hidden_field_tag :commit %>
-		<span id="update_<%= schedule.id %>" style="display:none;float:left;margin:5px;padding-top:11px"><i class="glyphicon glyphicon-thumbs-up"></i></span>
-		<button class="btn btn-success btn-large" name="go" style="float:left;margin:5px" type="submit" onClick="document.form<%= schedule.id %>.commit.value='go'">
-  		<i class="glyphicon glyphicon-retweet"></i>
-  	</button>
-  	<button class="btn btn-danger btn-large" name="del" style="float:left;margin:5px;" type="submit" onClick="document.form<%= schedule.id %>.commit.value='del'">
-			<i class="glyphicon glyphicon-remove"></i>
-		</button>
-		</div>	
-<% end %>
+  <%= form_tag rewrite_schedule_path(schedule), method: :get, name: "form#{schedule.id}", remote: true do %>
+    <%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: schedule.id %><br>
+    <div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
+	    <%= text_field_tag :start_at, (schedule.formatted_start_at if schedule.start_at), id: "start_at#{schedule.id}" %><br>
+	  </div>
+	  <div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
+	    <%= text_field_tag :end_at, (schedule.formatted_end_at if schedule.end_at), id: "end_at#{schedule.id}"  %><br>
+	  </div>
+	  <div style="float:right">
+		  <%= hidden_field_tag :commit %>
+	    <span id="update_<%= schedule.id %>" class="thumb">
+		    <i class="glyphicon glyphicon-thumbs-up"></i>
+		  </span>
+		  <button class="btn btn-success btn-large" name="go" type="submit" onClick="document.form<%= schedule.id %>.commit.value='go'">
+    		<i class="glyphicon glyphicon-retweet"></i>
+    	</button>
+    	<button class="btn btn-danger btn-large" name="del" type="submit" onClick="document.form<%= schedule.id %>.commit.value='del'">
+			  <i class="glyphicon glyphicon-remove"></i>
+		  </button>
+	  </div>	
+  <% end %>
 </div>
 
 

@@ -1,6 +1,7 @@
 <% provide(:title, @user.name) %>
 <center><h1><%= @user.name %></h1>
-<p><%= @user.email %></p></center>
+<p><%= @user.email %></p>
+<p>Time Logged: <%= Project.time_spent(DateTime.now-2.years, DateTime.now, @user) %></center>
 <% if current_user == @user || current_user.admin %>
 <table class="user_info">
 <tr>
@@ -32,7 +33,6 @@
 </table>
 Total Estimated Hours Worked this period: <%= total_est_time %> <br>
 Total Hours Worked this period: <%= ((2*total_project_time/60/60).ceil)/2.0 %> <br>
-<%= link_to 'New Project', new_project_path %>
 </td>
 <td class="user_info_half">
 <%= render 'pie_chart', projects:@projects, start_date: @start_date, end_date: @end_date %>

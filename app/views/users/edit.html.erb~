@@ -1,7 +1,7 @@
 <% provide(:title, "Edit user") %> 
 
     <%= form_for(@user, role: 'form') do |f| %>
-      <div class="form-group" style="margin-left:auto;margin-right:auto;max-width:600px;width:80%'>
+      <div class="form-group" style="margin-left:auto;margin-right:auto;max-width:600px;width:80%">
       <%= render 'shared/error_messages' %>
 <div class="form-group">
       <%= f.label :name %>
@@ -20,7 +20,7 @@
       <%= f.password_field :password_confirmation, type: "password", class: "form-control"  %></div>
 
 <div class="form-group">
-      <%= f.submit "Save changes", class: "btn btn-default" %></div>
+      <%= f.submit "Save changes", class: "btn btn-default" %>
       </div>
     <% end %>
 

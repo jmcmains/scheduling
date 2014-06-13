@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   def working?
   	!Schedule.find_by_end_at_and_user_id(nil,id).blank?
   end
+
   
   private
   
