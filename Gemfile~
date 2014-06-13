@@ -12,17 +12,17 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'masonry-rails'
-gem 'bcrypt-ruby','3.0.1'
+gem 'bcrypt-ruby'
 gem 'google_drive'
 gem 'activeresource', github: 'rails/activeresource'
 gem 'turbolinks', '1.1.1'
 
 group :assets do
   gem 'sass-rails'
+  gem 'uglifier'
 end
 
 gem 'coffee-rails'
-gem 'uglifier'
 gem 'jquery-rails','~> 2.3.0'
 gem 'jquery-ui-rails'
 gem 'rails_12factor'
