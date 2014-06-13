@@ -51,7 +51,7 @@ class Schedule < ActiveRecord::Base
   
   
   def formatted_start_at
-		start_at.strftime('%m/%d/%Y %I:%M %p')
+		start_at.strftime('%m/%d/%Y %I:%M %p').in_time_zone(Time.zone)
 	end
 	
 	def formatted_start_at=(time_str)
@@ -59,7 +59,7 @@ class Schedule < ActiveRecord::Base
 	end
 	
 	def formatted_end_at
-		end_at.strftime('%m/%d/%Y %I:%M %p')
+		end_at.strftime('%m/%d/%Y %I:%M %p').in_time_zone(Time.zone)
 	end
 	
 	def formatted_end_at=(time_str)

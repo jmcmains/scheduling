@@ -55,7 +55,7 @@ class Schedule < ActiveRecord::Base
 	end
 	
 	def formatted_start_at=(time_str)
-		self.start_at = DateTime.strptime("#{time_str} ETD", '%m/%d/%Y %I:%M %p')
+		self.start_at = Time.strptime("#{time_str}", '%m/%d/%Y %I:%M %p').in_time_zone(Time.zone)
 	end
 	
 	def formatted_end_at
@@ -63,7 +63,7 @@ class Schedule < ActiveRecord::Base
 	end
 	
 	def formatted_end_at=(time_str)
-		self.end_at = DateTime.strptime("#{time_str} ETD", '%m/%d/%Y %I:%M %p')
+		self.end_at = Time.strptime("#{time_str}", '%m/%d/%Y %I:%M %p').in_time_zone(Time.zone)
 	end
 	
 	def self.active_project(user)
