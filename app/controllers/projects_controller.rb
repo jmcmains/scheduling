@@ -15,11 +15,11 @@ class ProjectsController < ApplicationController
     @title = "All Projects"
     @projects = Project.where(user_id: current_user.id)
     if params[:start_date]
-    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
-  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Date.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.today.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.today.end_of_week(start_day = :sunday)
   	end
   end
   
@@ -27,11 +27,11 @@ class ProjectsController < ApplicationController
   	@project = Project.find(params[:id])
   	@title = @project.name
   	if params[:start_date]
-  		@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+  		@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
-  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Date.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.today.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.today.end_of_week(start_day = :sunday)
   	end
   	respond_to do |format|
       format.js
@@ -75,9 +75,9 @@ class ProjectsController < ApplicationController
     @project.save
     current_project=Schedule.find_by_end_at(nil)
     if current_project
-    	current_project.update_attributes(end_at:DateTime.now)
+    	current_project.update_attributes(end_at:Time.zone.now)
     end
-    Schedule.create!(project_id:@project.id,start_at:DateTime.now,user_id:current_user.id)
+    Schedule.create!(project_id:@project.id,start_at:Time.zone.now,user_id:current_user.id)
     redirect_to request.referer
   end
   

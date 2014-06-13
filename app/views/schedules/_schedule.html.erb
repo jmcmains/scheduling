@@ -2,10 +2,10 @@
   <%= form_tag rewrite_schedule_path(schedule), method: :get, name: "form#{schedule.id}", remote: true do %>
     <%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete", id: schedule.id %><br>
     <div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
-	    <%= text_field_tag :start_at, (schedule.formatted_start_at if schedule.start_at), id: "start_at#{schedule.id}" %><br>
+	    <%= text_field_tag :start_at, (schedule.start_at.strftime('%m/%d/%Y %I:%M %p') if schedule.start_at), id: "start_at#{schedule.id}" %><br>
 	  </div>
 	  <div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
-	    <%= text_field_tag :end_at, (schedule.formatted_end_at if schedule.end_at), id: "end_at#{schedule.id}"  %><br>
+	    <%= text_field_tag :end_at, (schedule.end_at.strftime('%m/%d/%Y %I:%M %p') if schedule.end_at), id: "end_at#{schedule.id}"  %><br>
 	  </div>
 	  <div style="float:right">
 		  <%= hidden_field_tag :commit %>

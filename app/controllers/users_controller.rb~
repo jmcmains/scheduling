@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
   	else
-  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Date.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
   	end
   end
   
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   	# Creating header
 		project_col=ws.num_cols+1
 		hours_col=ws.num_cols+2
-		ws[1,project_col] = Date.today.beginning_of_week
+		ws[1,project_col] = Time.zone.now.beginning_of_week
 		ws[3,project_col] = "Project"
 		ws[3,hours_col] = "Hours Spent"
 		i=4;
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
   
   def update
   	@user = User.find(params[:id])
-  	if @user.update_attributes(params[:user])
+  	if @user.update_attributes(user_params)
   		flash[:success] = "Profile Updated"
   		sign_in @user
   		redirect_to request.referer
@@ -95,5 +95,8 @@ class UsersController < ApplicationController
   		redirect_to(root_path) unless (current_user && current_user.admin)
   	end
 
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :time_zone)
+    end
 
 end

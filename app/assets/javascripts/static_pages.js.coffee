@@ -28,6 +28,8 @@ jQuery ->
   window.schedTimer()
   window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
+  $(".datepicker").datepicker()
+  $(".datepicker").on "blur", (e) ->  $(this).datepicker "hide"
   $("#hours_popup").click ->
     if $("#hours_popup").hasClass("hidden1")
       $( "#hours" ).slideToggle("slow")

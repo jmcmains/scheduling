@@ -6,26 +6,26 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@projects = Project.all
     if params[:start_date]
-    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
-  		@start_date = Date.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Date.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
   	end
   end
   
   def google
 		require "rubygems"
 		require "google_drive"
-  	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  	@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+  	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  	@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	@user = User.find(params[:id])
   	session = GoogleDrive.login("jason@rubberbanditz.com", "jkm826191")
   	ws = session.spreadsheet_by_key("0AkIywWhymTjhdGxRQndYZEx5X1RtMW0zMGNyenViTEE").worksheets[1]
   	# Creating header
 		project_col=ws.num_cols+1
 		hours_col=ws.num_cols+2
-		ws[1,project_col] = Date.today.beginning_of_week
+		ws[1,project_col] = Time.zone.now.beginning_of_week
 		ws[3,project_col] = "Project"
 		ws[3,hours_col] = "Hours Spent"
 		i=4;
