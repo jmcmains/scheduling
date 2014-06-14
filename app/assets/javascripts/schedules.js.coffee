@@ -7,7 +7,11 @@ jQuery ->
     box_width = $('.schedule:first').outerWidth()+10
     box_count = Math.floor(win_width/box_width)
     total_width = box_count * box_width
-    $('#projects').css 'width',total_width  
+    $('#projects').css 'width',total_width
+    if win_width < 575
+      $('#calendar').fullCalendar 'changeView', 'agendaDay'
+    else
+      $('#calendar').fullCalendar 'changeView', 'agendaWeek'
   window.schedTimer1 =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')

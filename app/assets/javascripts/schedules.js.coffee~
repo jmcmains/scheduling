@@ -7,7 +7,11 @@ jQuery ->
     box_width = $('.schedule:first').outerWidth()+10
     box_count = Math.floor(win_width/box_width)
     total_width = box_count * box_width
-    $('#projects').css 'width',total_width  
+    $('#projects').css 'width',total_width
+    if win_width < 550
+      $('#calendar').fullCalendar 'changeView', 'agendaDay'
+    else
+      $('#calendar').fullCalendar 'changeView', 'agendaWeek'
   window.schedTimer1 =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')
@@ -25,8 +29,8 @@ jQuery ->
       $('#hours_popup').data('timerFloat',timer1)
   
 jQuery ->
-  $(".addnew").css "width", $(".schedule:first").width()
-  $(".addnew").css "height", $(".schedule:first").height()
+  $(".addnew").css "width", $(".schedule:first").outerWidth()
+  $(".addnew").css "height", $(".schedule:first").outerHeight()
   $( ".autocomplete" ).autocomplete source: $( ".autocomplete:first" ).data('autocomplete-source')
   $(".datetimepicker").datetimepicker sideBySide: true
   schedTimer1();
