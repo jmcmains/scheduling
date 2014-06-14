@@ -10,7 +10,7 @@ jQuery ->
     $('#projects').css 'width',total_width
   $(".addnew").css "width", $(".schedule_time:first").width()
   $(".addnew").css "height", $(".schedule_time:first").height()
-  $( ".autocomplete" ).autocomplete source: $( ".schedule:first" ).data('autocomplete-source')
+  $( ".autocomplete" ).autocomplete source: $( ".autocomplete:first" ).data('autocomplete-source')
   $(".datetimepicker").datetimepicker sideBySide: true
   window.contresize()
   $(window).resize -> window.contresize()

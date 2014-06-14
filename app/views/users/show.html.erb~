@@ -1,7 +1,7 @@
 <% provide(:title, @user.name) %>
 <center><h1><%= @user.name %></h1>
 <p><%= @user.email %></p>
-<p>Time Logged: <%= Project.time_spent(DateTime.now-10.years, DateTime.now, @user) %></center>
+<p>Time Logged: <%= (2*Project.time_spent(DateTime.now-2.years, DateTime.now, @user)/60.0/60.0).ceil/2.0 %></center>
 <% if current_user == @user || current_user.admin %>
 <table class="user_info">
 <tr>

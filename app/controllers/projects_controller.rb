@@ -18,8 +18,8 @@ class ProjectsController < ApplicationController
     	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
-  		@start_date = Time.zone.now.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Time.zone.now.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
   	end
   end
   
@@ -30,8 +30,8 @@ class ProjectsController < ApplicationController
   		@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
   		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
-  		@start_date = Time.zone.now.today.beginning_of_week(start_day = :sunday)
-  		@end_date = Time.zone.now.today.end_of_week(start_day = :sunday)
+  		@start_date = Time.zone.now.beginning_of_week(start_day = :sunday)
+  		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
   	end
   	respond_to do |format|
       format.js

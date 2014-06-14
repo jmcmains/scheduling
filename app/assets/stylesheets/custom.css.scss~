@@ -76,7 +76,7 @@ margin-bottom:0;
 }
 }
 
-#sign-up-form {display:hidden;}
+#sign-up-form {display:none;}
 
 
 #calendar {
