@@ -1,7 +1,7 @@
 <% provide(:title, "Sign in") %>
 <div id="projects" data-count="30">
 <% Project.first(30).each do |project| %>
-  <div class="img-rounded schedule" id="project<%= project.id %>">
+  <div class="img-rounded project" id="project<%= project.id %>">
     <button class="btn btn-inverse title" id="project_title<%= project.id %>"><%= project.name %></button>
 		<br>
 	  <button class="btn btn-success btn-lg home-left" name="go" type="submit">
@@ -18,7 +18,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4> Sign in or Sign up </h4>
+        <h4>Sign in</h4>
       </div>
       <div class="modal-body" style="text-align:center">
         <p style="margin:5px">Time saver is a simple app that allows you to track your time spent on various projects</p>
@@ -35,7 +35,8 @@
             <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
           </div>
         <% end %>
-        <p style="margin:5px">Or if you're a new user,  Sign up now!</p>
+        <p style="margin:5px">Or if you're a new user,  <a href="#" id="sign-up-link">Sign up now!</a></p>
+        <div id="sign-up-form">
         <%= form_for(User.new) do |f| %>
           <div class="form-group">
             <%= f.label :name %>
@@ -61,6 +62,7 @@
             <%= f.submit "Create my account", class: "btn btn-lg btn-default" %>
           </div>
         <% end %>
+        </div>
       </div>
     </div>
   </div>

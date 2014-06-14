@@ -12,3 +12,6 @@ jQuery ->
     $('#projects').css('width',total_width)
   $(window).resize -> window.contresize()
   $('#modalSignUp').modal('show')
+  $("#sign-up-link").click ->
+    $( "#sign-up-form" ).slideToggle()
+

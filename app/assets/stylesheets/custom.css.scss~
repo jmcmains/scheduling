@@ -59,10 +59,6 @@ input {
   }
 }
 
-.field_with_errors {
-  @extend .control-group;
-  @extend .error;
-}
 .navbar {
 margin-bottom:0;
 }
@@ -79,6 +75,9 @@ margin-bottom:0;
   padding-right:18px;
 }
 }
+
+#sign-up-form {display:hidden;}
+
 
 #calendar {
   margin-left:auto;
@@ -226,7 +225,6 @@ margin-top:0;
 	padding:0;
 	float:left;
 	margin:5px;	
-	
 }
 
 .project-primary {
