@@ -1,5 +1,3 @@
-@import "bootstrap";
-@import 'font-awesome';
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
@@ -175,7 +173,9 @@ display:auto;
 
 @media only screen and (max-width: 1150px){
 .user_info {
-width:100%;
+width:90%;
+margin-left:auto;
+margin-right:auto;
 }
 .user_info_half {
 width:100%;

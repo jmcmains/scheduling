@@ -1,4 +1,2 @@
-<%= form_for(project, class: "form-inline", style: "display:inline", remote: true) do |f| %>
-	<%= f.text_field :name, class: "form-control input-lg", style: "width:250px;display:inline" %>
-	<%= f.submit "Save", class: "btn btn-primary btn-lg", style: "display:inline"%>
-  <% end %>
+
+<%= product.name %>

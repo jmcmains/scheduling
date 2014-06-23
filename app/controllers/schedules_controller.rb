@@ -2,6 +2,8 @@ class SchedulesController < ApplicationController
   before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
+	  @start_date=Time.zone.today.beginning_of_week
+    @end_date=Time.zone.today.end_of_week
     if params[:go]
     	@project = Project.where(name: params[:name]).first_or_create
 		  @project.save!
@@ -18,16 +20,13 @@ class SchedulesController < ApplicationController
 		  if featured.blank?
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
-        @start_date=Time.zone.today.beginning_of_week
-    	  @end_date=Time.zone.today.end_of_week
+        
 		    @new = true
 		  elsif featured.featured
 		    @new = false
 		  else
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
-        @start_date=Time.zone.today.beginning_of_week
-    	  @end_date=Time.zone.today.end_of_week
 		    @new = true
 		  end
 		  featured.save!

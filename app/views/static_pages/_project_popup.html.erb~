@@ -17,7 +17,7 @@
         Time Span:
 
 <%= form_tag(project_path(project), class: 'form-inline', style: 'display:inline;margin-left:auto;margin-right:auto', method: :get, remote: true) do %>
-	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "form-control datepicker-no-time", id: "checkin#{project.id}", style: "display:inline;width:100px" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "form-control datepicker", id: "checkout#{project.id}", style: "display:inline;width:100px" %>
+	<%= text_field_tag 'start_date', start_date.strftime("%m/%d/%Y"), class: "form-control datepicker-no-time", id: "checkin#{project.id}", style: "display:inline;width:100px" %> - <%= text_field_tag 'end_date', end_date.strftime("%m/%d/%Y"), class: "form-control datepicker-no-time", id: "checkout#{project.id}", style: "display:inline;width:100px" %>
 <%= submit_tag "Submit", class: 'btn btn-default' %>
       <% end %>
       

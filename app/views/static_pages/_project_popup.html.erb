@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel<%= project.id %>"><div style='padding: 11px 17px;line-height: 1.33;'><a href="<%= edit_project_path(project) %>" title="Edit Title" data-remote="true"><%= project.name %></a></div></h4>
+        <h4 class="modal-title" id="myModalLabel<%= project.id %>"><%= render 'projects/project_title_link', project: project %></h4>
         
         <div style='padding-left:11px'><a href="<%= edit_project_path(project) %>" data-remote="true"> <span class="glyphicon glyphicon-edit"></span> Edit Title</a> | <a href="<%= toggle_feature_path(project.features.where(user_id: current_user.id).first_or_create) %>">
 <% if project.features.where(user_id: current_user.id).first_or_create.featured %>

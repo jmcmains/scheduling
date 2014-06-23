@@ -1,0 +1,12 @@
+$("#hours_popup").data 'day',<%= Schedule.total_time("day",current_user) %>
+$("#hours_popup").data 'week',<%= Schedule.total_time("week",current_user) %>
+$("#hours_popup").data 'working',<%= current_user.working? %>
+$( ".autocomplete" ).autocomplete source: $(".autocomplete:first").data 'autocomplete-source'
+$(".datetimepicker").datetimepicker sideBySide: true
+$("#stopbutton").html "<%=j render 'static_pages/stop_button' %>"
+schedTimer1()
+<% if @command == "go" %>
+$("#update_<%= @schedule.id %>").fadeIn("slow").fadeOut "slow"
+<% else %>
+$("#schedule_<%= @schedule.id %>").fadeOut "slow"
+<% end %>

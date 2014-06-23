@@ -11,11 +11,7 @@ Scheduling::Application.routes.draw do
 	    get :toggle
 	  end
 	end
-	  
-	
-	 
-
-  get '/signin',  to: 'sessions#new'
+	get '/signin',  to: 'sessions#new'
   get '/signout', to: 'sessions#destroy', via: :delete
 	
 	resources :schedules do
@@ -32,7 +28,6 @@ Scheduling::Application.routes.draw do
 			get :autocomplete
 		end
 	end
-	get 'more/:page' => 'static_pages#more'
 	resources :static_pages do
 		member do
 			get :rewrite

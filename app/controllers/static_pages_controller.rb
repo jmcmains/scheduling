@@ -13,12 +13,5 @@ class StaticPagesController < ApplicationController
   		redirect_to signin_url
   	end
   end
-  
-  def more
-    page=params[:page];
-		@schedules=Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => page, :per_page => 10)
-		@page = page.to_f+1;
-	end
-	
 	
 end

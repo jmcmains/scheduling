@@ -1,24 +1,22 @@
 if <%= @command %> == "del"
-  $("#project<%= @project.id %>").fadeOut "slow"
+	$("#project_<%= @project.id %>").fadeOut "slow"
 else if <%= @command %> == "go"
-  if <%= @new %>
-    $("#projects").html("<%=j render 'static_pages/project', project: @project, start_date: Date.today.beginning_of_week, end_date: Date.today.end_of_week %>"
-  else
-    if <%= @current_project %>
-      $(".schedule-primary span").html "<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>"
-      $(".schedule-primary").removeClass "schedule-primary"
-    end
-    $("#project<%= @project.id %>").addClass("schedule-primary");
-    $(".schedule-primary #btn<%= @project.id %>").html "<%= escape_javascript render 'static_pages/home_buttons', project: @project %>"
-  end
-  $("#stopbutton").html "<%= escape_javascript render 'static_pages/stop_button' %>"
+	if <%= @new %>
+		$("#projects").html "<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>"
+		$("#project_<%= @project.id %>").addClass "project-primary"
+	else
+		<% if @current_project %>
+		$(".project-primary span").html "<%=j render 'static_pages/home_buttons', project: @current_project %>"
+		$(".project-primary").removeClass "project-primary"
+		<% end %>
+		$("#project_<%= @project.id %>").addClass "project-primary"
+		$(".project-primary #btn<%= @project.id %>").html "<%=j render 'static_pages/home_buttons', project: @project %>"
 else if <%= @command %> == "stop"
-  $(".schedule-primary span").html "<%= escape_javascript render 'static_pages/home_buttons', project: @current_project %>"
-  $(".schedule-primary").removeClass "schedule-primary"
-  $("#stopbutton").html "<%= escape_javascript render 'static_pages/stop_button' %>"
-end
-$("#hours_popup").data('day',<%= Schedule.total_time('day',current_user) %>)
-$("#hours_popup").data('week',<%= Schedule.total_time('week',current_user) %>)
-$("#hours_popup").data('working', <%= current_user.working? %>)
-$("#hours_popup").text('complete')
-schedTimer();
+	$(".project-primary span").html "<%=j render 'static_pages/home_buttons', project: @current_project %>"
+	$(".project-primary").removeClass "project-primary"
+$("#hours_popup").data 'day',<%= Schedule.total_time('day',current_user) %>
+$("#hours_popup").data 'week',<%= Schedule.total_time('week',current_user) %>
+$("#hours_popup").data 'working',<%= current_user.working? %>
+schedTimer()
+$("#stopbutton").html "<%=j render 'static_pages/stop_button' %>"
+
