@@ -1,5 +1,3 @@
-$('#myModalLabel<%= @project.id %>').html("<div style='padding: 11px 17px;line-height: 1.33;'><%= link_to @project.name, edit_project_path(@project), title: 'Edit Title', remote: true %></div>")
-
-
-$('#project_title<%= @project.id %>').text("<%= @project.name %>")
+$('#myModalLabel<%= @project.id %>').html "<%=j render 'projects/project_title_link', project: @project %>"
+$('#project_title<%= @project.id %>').text "<%= @project.name %>"
 

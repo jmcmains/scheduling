@@ -1,17 +1,17 @@
 <% if @command== "del" %> 
 $("#project_<%= @project.id %>").fadeOut("slow")
 <% elsif @command == "go" %> 
-if (<%= @new %>) {
+<% if @new %>
 	$("#projects").html("<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>")
 	$("#project_<%= @project.id %>").addClass("project-primary")
-} else {
+<% else %>
 	<% if @current_project %>
 	$(".project-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>")
 	$(".project-primary").removeClass("project-primary")
 	<% end %>
 	$("#project_<%= @project.id %>").addClass("project-primary")
 	$(".project-primary #btn<%= @project.id %>").html("<%=j render 'static_pages/home_buttons', project: @project %>")
-}
+<% end %>
 <% elsif @command == "stop" %>
 $(".project-primary span").html("<%=j render 'static_pages/home_buttons', project: @current_project %>")
 $(".project-primary").removeClass("project-primary")

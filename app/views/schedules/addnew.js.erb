@@ -5,7 +5,7 @@ schedTimer1()
 <% if !@current_schedule.blank? %>
 	$('#end_at<%= @current_schedule.id %>').val('<%= @current_schedule.formatted_end_at %>')
 <% end %>
-$('#schedules').prepend $('<%=j render @schedule %>').fadeIn("slow")
+$('#schedules').prepend($('<%=j render @schedule %>').fadeIn("slow"))
 $("#stopbutton").html("<%=j render 'static_pages/stop_button' %>")
 $( ".autocomplete" ).autocomplete({source: $( ".autocomplete:first" ).data('autocomplete-source')})
 $(".datetimepicker").datetimepicker({sideBySide: true})

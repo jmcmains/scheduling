@@ -1,7 +1,0 @@
-$("#hours_popup").data 'day',<%= Schedule.total_time("day",current_user) %>
-$("#hours_popup").data 'week',<%= Schedule.total_time("week",current_user) %>
-$("#hours_popup").data 'working',<%= current_user.working? %>
-schedTimer1()
-$( ".autocomplete" ).autocomplete source: $(".autocomplete:first").data 'autocomplete-source'
-$(".datetimepicker").datetimepicker sideBySide: true
-$("#schedule_<%= @schedule.id %>").fadeOut "slow"

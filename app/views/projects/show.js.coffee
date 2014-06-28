@@ -1,1 +1,0 @@
-$("#time_<%= @project.id %>").html '<%= (@project.time_spent(@start_date,@end_date,current_user)/60/60).ceil %>'
