@@ -28,6 +28,7 @@ jQuery ->
   window.schedTimer()
   window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
+  #$('#user_time_zone').set_timezone();
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
   $("#hours_popup").click ->

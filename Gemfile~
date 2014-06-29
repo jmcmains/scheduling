@@ -16,11 +16,8 @@ gem 'bcrypt-ruby'
 gem 'google_drive'
 gem 'activeresource', github: 'rails/activeresource'
 gem 'turbolinks', '1.1.1'
-
-group :assets do
-  gem 'sass-rails'
-  gem 'uglifier'
-end
+gem 'sass-rails'
+gem 'uglifier'
 
 gem 'coffee-rails'
 gem 'jquery-rails','~> 2.3.0'

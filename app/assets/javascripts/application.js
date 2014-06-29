@@ -16,5 +16,7 @@
 //= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
+//= require detect_timezone
+//= require jquery.detect_timezone
 //= require_tree .
 

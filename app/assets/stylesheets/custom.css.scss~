@@ -59,6 +59,7 @@ input {
 
 .navbar {
 margin-bottom:0;
+border-radius:0;
 }
 
 @media only screen and (max-width: 820px) and (min-width: 768px){
@@ -174,8 +175,6 @@ display:auto;
 @media only screen and (max-width: 1150px){
 .user_info {
 width:90%;
-margin-left:auto;
-margin-right:auto;
 }
 .user_info_half {
 width:100%;
