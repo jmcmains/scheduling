@@ -37,3 +37,4 @@ jQuery ->
   $(window).resize -> 
     schedule_resize()
   schedule_resize()
+    	

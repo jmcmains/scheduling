@@ -9,19 +9,28 @@ class SchedulesController < ApplicationController
 		  @project.save!
     	@command="go"
 		 	current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
-		  if current_project
-		  	current_project.update_attributes(end_at:Time.zone.now)
-		  	@current_project=current_project.project
+		  if params[:now]
+		  	if current_project
+					current_project.update_attributes(end_at:Time.zone.now)
+					@current_project=current_project.project
+				else
+				  @current_project=nil
+				end
+		  	Schedule.create!(project_id:@project.id,start_at:Time.zone.now,user_id:current_user.id)		  	
 		  else
-		    @current_project=nil
-		  end
-		  Schedule.create!(project_id:@project.id,start_at:Time.zone.now,user_id:current_user.id)
+ 		  	if current_project
+					current_project.update_attributes(end_at:Time.strptime("#{params[:start_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z'))
+					@current_project=current_project.project
+				else
+				  @current_project=nil
+				end
+		  	Schedule.create!(project_id:@project.id,start_at:Time.strptime("#{params[:start_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z'),user_id:current_user.id)
+		 	end
 		  featured=@project.features.where(user_id: current_user.id).first
 		  if featured.blank?
 		    featured=@project.features.where(user_id: current_user.id).first_or_create
         featured.update_attributes(featured:true)
-        
-		    @new = true
+         @new = true
 		  elsif featured.featured
 		    @new = false
 		  else

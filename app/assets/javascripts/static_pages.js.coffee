@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
+ 	$('#now').change -> $("#now-text-field").toggle()
   window.contresize = ->
     win_width = $(window).width()
     proCount = $("#projects").data('count')
@@ -9,7 +10,6 @@ jQuery ->
     box_count = Math.min(Math.floor(win_width/box_width),proCount);
     total_width = box_count * box_width;
     $('#projects').css('width',total_width)
-
   window.schedTimer =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')
@@ -28,20 +28,18 @@ jQuery ->
   window.schedTimer()
   window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
-  #$('#user_time_zone').set_timezone();
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
-  $("#hours_popup").click ->
-    if $("#hours_popup").hasClass("hidden1")
-      $( "#hours" ).slideToggle("slow")
-      $("#hours_popup").removeClass("hidden1")
-      $("#hours_popup").addClass("shown1")
-    else
-      $( "#hours" ).slideToggle("slow")
-      $("#hours_popup").addClass("hidden1")
-      $("#hours_popup").removeClass("shown1")
   $(window).resize -> window.contresize()
-
+  $("#hours_popup").click ->
+    if $("#hours_popup").hasClass "hidden1"
+      $( "#hours" ).slideToggle "slow"
+      $("#hours_popup").removeClass "hidden1"
+      $("#hours_popup").addClass "shown1"
+    else
+      $( "#hours" ).slideToggle "slow"
+      $("#hours_popup").addClass "hidden1"
+      $("#hours_popup").removeClass "shown1"
 	    
 
 

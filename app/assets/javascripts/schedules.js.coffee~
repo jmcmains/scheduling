@@ -8,7 +8,7 @@ jQuery ->
     box_count = Math.floor(win_width/box_width)
     total_width = box_count * box_width
     $('#projects').css 'width',total_width
-    if win_width < 550
+    if win_width < 575
       $('#calendar').fullCalendar 'changeView', 'agendaDay'
     else
       $('#calendar').fullCalendar 'changeView', 'agendaWeek'
@@ -37,3 +37,8 @@ jQuery ->
   $(window).resize -> 
     schedule_resize()
   schedule_resize()
+  $('#now').change ->
+    if this.checked
+    	
+    else
+    	
