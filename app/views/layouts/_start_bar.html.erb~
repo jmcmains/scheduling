@@ -1,0 +1,20 @@
+<%= form_tag(new_schedule_path, class: "navbar-form navbar-left", id: "go_form", method: :get, remote: remote) do %>
+	<div class="form-group" id="text_name">
+		<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
+	</div>
+	<div class="form-group" id="now_check">
+		<label class="navbar-link" >
+			<%= check_box_tag "now", true, name: "now" %>
+			Start Now
+		</label>
+	</div>
+	<div class="form-group" id="now-text-field" style="display:none">
+		<%= text_field_tag :start_at, Time.zone.now.strftime("%m/%d/%Y %I:%M %p"), class: "form-control datetimepicker", id: "main_start_at", style: "display:inline;width:165px" %>
+	</div>
+	<button class="btn btn-default" name="go" type="submit" id="main-play">
+		<span class="glyphicon glyphicon-play"></span>
+	</button>
+	<span id="stopbutton">
+		<%= render "static_pages/stop_button" %>
+	</span>
+<% end %>
