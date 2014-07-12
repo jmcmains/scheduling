@@ -260,8 +260,6 @@ margin-top:0;
 	text-align:left;
 	padding:5px;
 	border-bottom:none;
-	border-bottom-left-radius:0;
-	border-bottom-right-radius:0;
 	width:130px;
 	z-index:50;
 	#hours_day, #hours_week {

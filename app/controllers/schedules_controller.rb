@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
 		  @project.save!
     	@command="go"
 		 	current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
-		  if params[:now] == "true"
+		  if params[:now]
 		  	if current_project
 					current_project.update_attributes(end_at:Time.zone.now)
 					@current_project=current_project.project

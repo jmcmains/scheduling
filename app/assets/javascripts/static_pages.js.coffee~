@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
- 	$('#now').change ->	$("#now-text-field").toggle()
+ 	$('#now').change -> $("#now-text-field").toggle()
   window.contresize = ->
     win_width = $(window).width()
     proCount = $("#projects").data('count')
@@ -10,7 +10,10 @@ jQuery ->
     box_count = Math.min(Math.floor(win_width/box_width),proCount);
     total_width = box_count * box_width;
     $('#projects').css('width',total_width)
-    $("#name").width(win_width-$("#navbar_logo").outerWidth()-$("#navbar_links").outerWidth()-$("#other_buttons").outerWidth()-105);
+    navbar_width = $("#navbar_links").outerWidth()
+		logo_width = $("#navbar_logo").outerWidth()
+		formWidth = 0
+		$("#test_display").html navbar_width
   window.schedTimer =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')
@@ -26,8 +29,8 @@ jQuery ->
         $('#hours_week').text( Math.round(((new Date - start)/1000 + week)/36)/100)
       , 1000
       $('#hours_popup').data('timerFloat',timer1)  
-  schedTimer()
-  contresize()
+  window.schedTimer()
+  window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"

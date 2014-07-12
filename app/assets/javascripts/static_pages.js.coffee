@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
- 	$('#now').change ->	$("#now-text-field").toggle()
+ 	$('#now').change -> $("#now-text-field").toggle()
   window.contresize = ->
     win_width = $(window).width()
     proCount = $("#projects").data('count')
@@ -25,8 +25,8 @@ jQuery ->
         $('#hours_week').text( Math.round(((new Date - start)/1000 + week)/36)/100)
       , 1000
       $('#hours_popup').data('timerFloat',timer1)  
-  schedTimer()
-  contresize()
+  window.schedTimer()
+  window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
