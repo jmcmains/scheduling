@@ -28,5 +28,4 @@ gem 'pg'
 
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
-gem 'detect_timezone_rails'
 

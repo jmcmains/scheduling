@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@projects = Project.all
     if params[:start_date]
-    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+    	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  		@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	else
   		@start_date = Time.zone.now.beginning_of_week(start_day = :sunday)
   		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   def google
 		require "rubygems"
 		require "google_drive"
-  	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
-  	@end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
+  	@start_date = Date.strptime(params[:start_date], '%m/%d/%Y').in_time_zone(Time.zone)
+  	@end_date = Date.strptime(params[:end_date], '%m/%d/%Y').in_time_zone(Time.zone)
   	@user = User.find(params[:id])
   	session = GoogleDrive.login("jason@rubberbanditz.com", "jkm826191")
   	ws = session.spreadsheet_by_key("0AkIywWhymTjhdGxRQndYZEx5X1RtMW0zMGNyenViTEE").worksheets[1]

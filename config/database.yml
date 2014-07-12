@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: scheduling_dev
+  database: scheduling1_dev
   pool: 5
   username: jason
   password: admin
@@ -16,7 +16,7 @@ production:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: scheduling_dev
+  database: scheduling1_dev
   pool: 5
   username: jason
   password: admin
