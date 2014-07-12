@@ -1,5 +1,4 @@
 class SchedulesController < ApplicationController
-  before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
 	  @start_date=Time.zone.today.beginning_of_week
