@@ -23,7 +23,8 @@
 
       <ul class="nav navbar-nav navbar-right" id="navbar_links">
 
-				<% if signed_in? %>
+				<% if user_signed_in? %>
+					<li><a href="#">Logged in as <strong><%= current_user.email %></strong></a></li>
 					<li><%= link_to "Edit Schedule", schedules_path %></li>
 					<li><%= link_to "Calendar", calendar_schedules_path %></li>
 					<li><%= link_to "Time Spent", user_path(current_user) %></li>
@@ -36,9 +37,13 @@
 						  <li><%= link_to "Users", users_path %></li>
 						  <% end %>
 						  <li><a href="#" data-toggle="modal" data-target="#Settings">Settings</a></li>
+						  <li><a href="#" data-toggle="modal" data-target="#Password">Update Password</a></li>
+						  <!--<li><a href="#" data-toggle="modal" data-target="#Settings">Settings</a></li>-->
 						  <li class="divider"></li>
-						  <li><%= link_to "Sign out", signout_path %></li>
+						  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+						  <!--<li><%= link_to "Sign out", signout_path %></li>-->
 					</ul></li>
+
 				<% end %>
 			</ul>
 
@@ -71,15 +76,17 @@
           <div class="form-group">
                 <%= f.label :time_zone %>
                 <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, class: "form-control"  %></div>
+                <% if f.object.encrypted_password.present? %>
           <div class="form-group">
                 <%= f.label :password %>
                 <%= f.password_field :password, type: "password", class: "form-control"  %></div>
 
           <div class="form-group">
                 <%= f.label :password_confirmation, "Confirm Password" %>
-                <%= f.password_field :password_confirmation, type: "password", class: "form-control"  %></div>
+                <%= f.password_field :password_confirmation, type: "password", class: "form-control"  %></div><% end %>
 
         </div>
+        
       <div class="modal-footer">
 
       <%= f.submit "Save changes", class: "btn btn-default" %>
@@ -92,3 +99,36 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="Password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="SettingsLabel">Update Password</h4></div>
+                <div class="modal-body" style="text-align:center">
+<% if current_user %>
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+		<%= devise_error_messages! %>
+
+		<%= f.hidden_field :reset_password_token %>
+
+		<div class="form-group">
+			<%= f.label :password, "New password" %>
+			<%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control" %></div>
+
+		<div class="form-group">
+			<%= f.label :password_confirmation, "Confirm new password" %>
+			<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
+		<div class="modal-footer">
+
+		<%= f.submit "Save changes", class: "btn btn-default" %>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	<% end %>
+<% end %>  
+		</div>
+    </div>
+  </div>
+</div>
+
