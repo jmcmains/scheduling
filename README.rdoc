@@ -1,7 +1,5 @@
 to do:
 
-facebook/twitter login, along side page login (option to connect to facebook)
-
 walk through for new users
 
 instead of just last week, add previous, next and current week buttons to span

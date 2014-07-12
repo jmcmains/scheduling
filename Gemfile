@@ -11,6 +11,7 @@ gem 'will_paginate-bootstrap'
 
 gem 'bootstrap-sass'
 gem 'font-awesome-sass-rails'
+gem 'font-awesome-rails'
 gem 'masonry-rails'
 gem 'bcrypt-ruby'
 gem 'google_drive'
@@ -28,4 +29,3 @@ gem 'pg'
 
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
-

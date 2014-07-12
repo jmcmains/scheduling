@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   	super
   end
   
+  
 private
 
   def user_time_zone(&block)

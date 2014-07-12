@@ -12,12 +12,9 @@
 <body>
 <%= render "layouts/navbar" %>
 <div class="container container-fluid">
-<div id="test_display">
+<div class="notice"><%= notice %></div>
+<div class="alert"><%= alert %></div>
 
-</div>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 <%= yield %>
 
 <% if signed_in? %>
