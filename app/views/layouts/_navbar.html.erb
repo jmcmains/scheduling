@@ -13,57 +13,17 @@
     </div>
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <!-- Collect the nav links, forms, and other content for toggling -->
-       <% if signed_in? %>
-       <% if current_page?(root_path) %>
-        <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get, remote: true) do %>
-          <div class="form-group" id="text_name">
-			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
-			    </div>
-			    <div class="checkbox navbar-btn" id="now_checkbox">
-            <label class="navbar-link" for="now">
-                <input id="now" checked type="checkbox">
-                Start Now
-            </label>
-        </div>
-        <div class="form-group" id="now-text-field" style="display:none">
-        <%= text_field_tag :start_at, Time.zone.now.strftime("%m/%d/%Y %I:%M %p"), class: "form-control datetimepicker", id: "main_start_at", style: "display:inline;width:200px" %>
-        </div>
-			    <button class="btn btn-default" name="go" type="submit" id="main-play">
-				      <span class="glyphicon glyphicon-play"></span>
-			    </button>
-			    <span id="stopbutton">
-	          <%= render "static_pages/stop_button" %>
-          </span>
-			   <% end %>
-			   <% else %>
-			   <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", method: :get) do %>
-          <div class="form-group" id="text_name">
-			    <%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project col-sm-5" %>
-			    </div>
-			    <div class="checkbox navbar-btn" id="now_checkbox">
-            <label class="navbar-link" for="now">
-                <input id="now" checked type="checkbox">
-                Start Now
-            </label>
-        </div>
-        <div class="form-group" id="now-text-field" style="display:none">
-        <%= text_field_tag :start_at, Time.zone.now.strftime("%m/%d/%Y %I:%M %p"), class: "form-control datetimepicker", id: "main_start_at", style: "display:inline;width:200px" %>
-        </div>
-			    <button class="btn btn-default" name="go" type="submit" id="main-play">
-				      <span class="glyphicon glyphicon-play"></span>
-			    </button>
-			    <span id="stopbutton">
-	          <%= render "static_pages/stop_button" %>
-          </span>
-			   <% end %>
-			   <% end %>
-			    
-        <% end %>
+<% if signed_in? %>
+		<% if current_page?(root_path) %>
+			<%= render "layouts/start_bar", remote:true %>
+		<% else %>
+			<%= render "layouts/start_bar", remote:false %>
+		<% end %>
+	<% end %>
 
       <ul class="nav navbar-nav navbar-right" id="navbar_links">
 
-				<% if user_signed_in? %>
-					<li><a href="#">Logged in as <strong><%= current_user.name %></strong></a></li>
+				<% if signed_in? %>
 					<li><%= link_to "Edit Schedule", schedules_path %></li>
 					<li><%= link_to "Calendar", calendar_schedules_path %></li>
 					<li><%= link_to "Time Spent", user_path(current_user) %></li>
@@ -76,12 +36,10 @@
 						  <li><%= link_to "Users", users_path %></li>
 						  <% end %>
 						  <li><a href="#" data-toggle="modal" data-target="#Settings">Settings</a></li>
-						  <li><a href="#" data-toggle="modal" data-target="#Password">Update Password</a></li>
+						  <!--<li><a href="#" data-toggle="modal" data-target="#Password">Update Password</a></li>-->
 						  <!--<li><a href="#" data-toggle="modal" data-target="#Settings">Settings</a></li>-->
 						  <li class="divider"></li>
-						  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-						  <!--<li><%= link_to "Sign out", signout_path %></li>-->
-					</ul></li>
+						  <li><%= link_to "Sign out", signout_path %></li>
 
 				<% end %>
 			</ul>
@@ -115,14 +73,13 @@
           <div class="form-group">
                 <%= f.label :time_zone %>
                 <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, class: "form-control"  %></div>
-                <% if f.object.encrypted_password.present? %>
           <div class="form-group">
                 <%= f.label :password %>
                 <%= f.password_field :password, type: "password", class: "form-control"  %></div>
 
           <div class="form-group">
                 <%= f.label :password_confirmation, "Confirm Password" %>
-                <%= f.password_field :password_confirmation, type: "password", class: "form-control"  %></div><% end %>
+                <%= f.password_field :password_confirmation, type: "password", class: "form-control"  %></div>
 
         </div>
         
@@ -135,38 +92,6 @@
           
 <% end %>
 
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="Password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="SettingsLabel">Update Password</h4></div>
-                <div class="modal-body" style="text-align:center">
-<% if current_user %>
-	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-		<%= devise_error_messages! %>
-
-		<%= f.hidden_field :reset_password_token %>
-
-		<div class="form-group">
-			<%= f.label :password, "New password" %>
-			<%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control" %></div>
-
-		<div class="form-group">
-			<%= f.label :password_confirmation, "Confirm new password" %>
-			<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %></div>
-		<div class="modal-footer">
-
-		<%= f.submit "Save changes", class: "btn btn-default" %>
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	<% end %>
-<% end %>  
-		</div>
     </div>
   </div>
 </div>

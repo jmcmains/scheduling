@@ -37,15 +37,18 @@
 <div class="form-group">
             <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
           </div>
-  <%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-facebook btn-lg" do %>
+<%
+=begin %><%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-facebook btn-sm" do %>
   <i class="fa fa-facebook"></i> | Connect with Facebook
   <% end %>
-  <%= link_to omniauth_authorize_path(resource_name, "twitter"), class: "btn btn-twitter btn-lg" do %>
+  <%= link_to omniauth_authorize_path(resource_name, "twitter"), class: "btn btn-twitter btn-sm" do %>
   <i class="fa fa-twitter"></i> | Connect with Twitter
   <% end %>
-  <%= link_to omniauth_authorize_path(resource_name, "google_oauth2"), class: "btn btn-google-plus btn-lg" do %>
+  <%= link_to omniauth_authorize_path(resource_name, "google_oauth2"), class: "btn btn-google-plus btn-sm" do %>
   <i class="fa fa-google-plus"></i> | Connect with Google Plus
   <% end %>
+  <%
+=end %>
           
         <% end %>
         <p style="margin:5px">Or if you're a new user,  <a href="#" id="sign-up-link">Sign up now!</a></p>

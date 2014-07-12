@@ -12,9 +12,10 @@
 <body>
 <%= render "layouts/navbar" %>
 <div class="container container-fluid">
+<% if !notice.blank? || !alert.blank? %>
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
-
+<% end %>
 <%= yield %>
 
 <% if signed_in? %>
