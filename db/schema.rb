@@ -42,8 +42,13 @@ ActiveRecord::Schema.define(version: 20140613001520) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
+<<<<<<< HEAD
     t.datetime "created_at"
     t.datetime "updated_at"
+=======
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+>>>>>>> parent of 4b12111... added social login
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
