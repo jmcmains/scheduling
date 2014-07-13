@@ -1,7 +1,10 @@
 Scheduling::Application.routes.draw do
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   #devise_for :users,controllers: {omniauth_callbacks: "omniauth_callbacks"}
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
 =======

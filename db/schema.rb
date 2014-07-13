@@ -44,8 +44,13 @@ ActiveRecord::Schema.define(version: 20140613001520) do
     t.string   "email"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     t.datetime "created_at"
     t.datetime "updated_at"
+=======
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+>>>>>>> parent of 4b12111... added social login
 =======
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false

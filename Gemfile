@@ -30,6 +30,9 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'detect_timezone_rails'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4b12111... added social login
 
 >>>>>>> parent of 4b12111... added social login

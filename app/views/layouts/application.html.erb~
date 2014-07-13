@@ -14,9 +14,15 @@
 <div class="container container-fluid">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
 
+=======
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
+<% end %>
+>>>>>>> parent of 4b12111... added social login
 =======
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
