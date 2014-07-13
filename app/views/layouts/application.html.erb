@@ -12,12 +12,6 @@
 <body>
 <%= render "layouts/navbar" %>
 <div class="container container-fluid">
-<div id="test_display">
-
-</div>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 
 <%= yield %>
 
@@ -33,4 +27,5 @@
 </div>
 </body>
 </html>
+
 

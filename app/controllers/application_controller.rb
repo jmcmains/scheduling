@@ -5,9 +5,10 @@ class ApplicationController < ActionController::Base
   around_filter :user_time_zone, if: :current_user
   
   def handle_unverified_request
-  	sign_out
-  	super
+   sign_out
+   super
   end
+  
   
 private
 

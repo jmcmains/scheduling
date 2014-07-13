@@ -31,24 +31,13 @@
             <%= f.label :password %>
             <%= f.password_field :password, class: "form-control input-lg", placeholder: "Password" %>
           </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<%
-=begin %>
             <% if devise_mapping.rememberable? %>
     <div class="form-group"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end %>
-<%
-=end %>
 <div class="form-group">
             <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
           </div>
-<%
-=begin %><%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-facebook btn-sm" do %>
+  <%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-facebook btn-sm" do %>
   <i class="fa fa-facebook"></i> | Connect with Facebook
   <% end %>
   <%= link_to omniauth_authorize_path(resource_name, "twitter"), class: "btn btn-twitter btn-sm" do %>
@@ -57,39 +46,7 @@
   <%= link_to omniauth_authorize_path(resource_name, "google_oauth2"), class: "btn btn-google-plus btn-sm" do %>
   <i class="fa fa-google-plus"></i> | Connect with Google Plus
   <% end %>
-<%
-=end %>
           
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
-=======
-          <div class="form-group">
-            <%= f.submit "Sign in", class: "btn btn-lg btn-default" %>
-          </div>
->>>>>>> parent of 4b12111... added social login
         <% end %>
         <p style="margin:5px">Or if you're a new user,  <a href="#" id="sign-up-link">Sign up now!</a></p>
         <div id="sign-up-form">
@@ -123,4 +80,5 @@
     </div>
   </div>
 </div>
+
 

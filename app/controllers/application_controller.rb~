@@ -2,33 +2,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   
+  around_filter :user_time_zone, if: :current_user
+  
   def handle_unverified_request
   	sign_out
   	super
   end
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
   
 private
 
   def user_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
   end
-=======
->>>>>>> parent of 4b12111... added social login
-=======
->>>>>>> parent of 4b12111... added social login
-=======
->>>>>>> parent of 4b12111... added social login
-=======
->>>>>>> parent of 4b12111... added social login
-=======
->>>>>>> parent of 4b12111... added social login
-=======
->>>>>>> parent of 4b12111... added social login
 end
