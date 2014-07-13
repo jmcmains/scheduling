@@ -57,6 +57,9 @@ GEM
     coffee-script-source (1.7.0)
     detect_timezone_rails (0.0.5)
       railties (>= 3.1)
+<<<<<<< HEAD
+>>>>>>> parent of 4b12111... added social login
+=======
 >>>>>>> parent of 4b12111... added social login
     erubis (2.7.0)
     execjs (2.2.1)
@@ -157,8 +160,13 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     will_paginate (3.0.7)
     will_paginate-bootstrap (1.0.1)
+=======
+    will_paginate (3.0.6)
+    will_paginate-bootstrap (1.0.0)
+>>>>>>> parent of 4b12111... added social login
 =======
     will_paginate (3.0.6)
     will_paginate-bootstrap (1.0.0)
@@ -175,7 +183,11 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails
   coffee-rails
 <<<<<<< HEAD
+<<<<<<< HEAD
   font-awesome-rails
+=======
+  detect_timezone_rails
+>>>>>>> parent of 4b12111... added social login
 =======
   detect_timezone_rails
 >>>>>>> parent of 4b12111... added social login

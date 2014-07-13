@@ -1,8 +1,22 @@
 class User < ActiveRecord::Base
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4b12111... added social login
 
 >>>>>>> parent of 4b12111... added social login
+
+  has_secure_password
+  
+  before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
+  
+  validates :name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :password_confirmation, presence: true
 
   has_secure_password
   
@@ -22,6 +36,7 @@ class User < ActiveRecord::Base
   	!Schedule.find_by_end_at_and_user_id(nil,id).blank?
   end
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   def self.from_omniauth(auth)
   	where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -53,6 +68,8 @@ class User < ActiveRecord::Base
   		super
   	end
   end
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
   

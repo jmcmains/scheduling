@@ -39,7 +39,11 @@
 						  <li class="divider"></li>
 						  <li><%= link_to "Sign out", signout_path %></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+					</ul></li>
+>>>>>>> parent of 4b12111... added social login
 =======
 					</ul></li>
 >>>>>>> parent of 4b12111... added social login
@@ -97,6 +101,9 @@
   </div>
 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
