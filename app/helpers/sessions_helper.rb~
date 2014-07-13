@@ -37,6 +37,7 @@ module SessionsHelper
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	def resource_name
     :user
@@ -61,6 +62,8 @@ module SessionsHelper
   def after_sign_in_path_for(resource)
   	root_path
   end
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
 =======

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   
 private
@@ -16,6 +17,8 @@ private
   def user_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
   end
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
 =======
