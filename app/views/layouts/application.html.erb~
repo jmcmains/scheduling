@@ -12,9 +12,6 @@
 <body>
 <%= render "layouts/navbar" %>
 <div class="container container-fluid">
-<div id="test_display">
-
-</div>
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
 

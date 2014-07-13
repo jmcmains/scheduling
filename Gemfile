@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails'
+gem 'rails','4.1.3'
 
 ruby '2.1.2'
 
@@ -29,7 +29,6 @@ gem 'pg'
 
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
-gem 'detect_timezone_rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'

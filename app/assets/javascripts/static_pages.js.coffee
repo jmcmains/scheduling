@@ -27,7 +27,8 @@ jQuery ->
       $('#hours_popup').data('timerFloat',timer1)  
   schedTimer()
   contresize()
-  $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
+  $( ".autocomplete-project" ).autocomplete
+  	source: $( ".autocomplete-project" ).data('autocomplete-source')
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
   $(window).resize -> window.contresize()

@@ -27,7 +27,6 @@ jQuery ->
         $('#hours_week').text( Math.round(((new Date - start)/1000 + week)/36)/100)
       , 1000
       $('#hours_popup').data('timerFloat',timer1)
-  
 jQuery ->
   $(".addnew").css "width", $(".schedule:first").outerWidth()
   $(".addnew").css "height", $(".schedule:first").outerHeight()
