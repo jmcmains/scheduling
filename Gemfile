@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails','4.1.3'
+gem 'rails'
 
 ruby '2.1.2'
 

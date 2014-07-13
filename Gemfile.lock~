@@ -1,0 +1,13 @@
+GIT
+  remote: git://github.com/rails/activeresource.git
+  revision: 23786e2ff93551dee435cfe3cdaab93ff0d04044
+  specs:
+    activeresource (4.0.0)
+      activemodel (~> 4.0)
+      activesupport (~> 4.0)
+      rails-observers (~> 0.1.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
