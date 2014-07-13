@@ -29,15 +29,3 @@ gem 'pg'
 
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
-<<<<<<< HEAD
-=======
-gem 'detect_timezone_rails'
-gem 'devise'
-gem 'omniauth'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-linkedin'
-
->>>>>>> 615462d91cb9b4e950bc5783e0524fe42c79b14b
-
