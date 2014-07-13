@@ -18,6 +18,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 81f56bd
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
 

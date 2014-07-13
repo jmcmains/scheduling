@@ -1,6 +1,6 @@
 <%= form_tag(new_schedule_path, class: "navbar-form navbar-left", id: "go_form", method: :get, remote: remote) do %>
 	<div class="form-group" id="text_name">
-		<%= text_field_tag :name, "", data: {autocomplete_source: autocomplete_projects_path}, placeholder: "Project", class: "form-control autocomplete-project" %>
+		<%= text_field_tag :name, "", data: {autocomplete_source: Project.order(:name).map(&:name)}, placeholder: "Project", class: "form-control autocomplete-project" %>
 	</div>
 	<div class="checkbox navbar-btn">
 		<label class="navbar-link" >

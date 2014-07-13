@@ -35,10 +35,46 @@ module SessionsHelper
 		session[:return_to] = request.url
 	end
 	
+<<<<<<< HEAD
 	def signed_in_user
 		unless signed_in?
 			store_location
 			redirect_to signin_url, notice: "Please sign in." 
 		end
 	end
+=======
+	def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+  
+  def resource_class
+    resource.class
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+  
+  def after_password_path_for(resource)
+  	request.referer
+  end
+  
+  def after_sign_in_path_for(resource)
+  	root_path
+  end
+ 	def signed_in_user
+		unless signed_in?
+			store_location
+			redirect_to signin_url, notice: "Please sign in."
+		end
+	end
+	
+	def signed_in?
+		!current_user.nil?
+	end
+>>>>>>> 81f56bd
 end

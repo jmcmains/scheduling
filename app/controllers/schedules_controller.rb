@@ -1,15 +1,18 @@
 class SchedulesController < ApplicationController
-  before_filter :signed_in_user
   require 'will_paginate/array'
 	def new
 	  @start_date=Time.zone.today.beginning_of_week
     @end_date=Time.zone.today.end_of_week
-    if params[:go]
+    if params[:go] || params[:go_single]
     	@project = Project.where(name: params[:name]).first_or_create
 		  @project.save!
     	@command="go"
 		 	current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
+<<<<<<< HEAD
 		  if params[:now]
+=======
+		  if params[:now] == "true" || params[:go_single]
+>>>>>>> 81f56bd
 		  	if current_project
 					current_project.update_attributes(end_at:Time.zone.now)
 					@current_project=current_project.project

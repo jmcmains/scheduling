@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   	end
   end
   
+<<<<<<< HEAD
   def google
 		require "rubygems"
 		require "google_drive"
@@ -44,6 +45,9 @@ class UsersController < ApplicationController
   	redirect_to @user
   end
   
+=======
+   
+>>>>>>> 81f56bd
   def new
   	@user = User.new
   end

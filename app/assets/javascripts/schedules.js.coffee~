@@ -37,8 +37,4 @@ jQuery ->
   $(window).resize -> 
     schedule_resize()
   schedule_resize()
-  $('#now').change ->
-    if this.checked
-    	
-    else
     	
