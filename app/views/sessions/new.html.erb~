@@ -38,6 +38,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%
 =begin %><%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "btn btn-facebook btn-sm" do %>
   <i class="fa fa-facebook"></i> | Connect with Facebook
@@ -51,6 +52,8 @@
   <%
 =end %>
           
+=======
+>>>>>>> parent of 4b12111... added social login
 =======
 >>>>>>> parent of 4b12111... added social login
 =======

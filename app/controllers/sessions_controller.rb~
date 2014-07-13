@@ -8,9 +8,15 @@ class SessionsController < ApplicationController
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if user
 			sign_in user
 			redirect_back_or root_url
+=======
+		if user && user.authenticate(params[:session][:password])
+			sign_in user
+			redirect_back_or user
+>>>>>>> parent of 4b12111... added social login
 =======
 		if user && user.authenticate(params[:session][:password])
 			sign_in user
