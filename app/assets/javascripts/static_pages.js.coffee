@@ -25,16 +25,9 @@ jQuery ->
         $('#hours_week').text( Math.round(((new Date - start)/1000 + week)/36)/100)
       , 1000
       $('#hours_popup').data('timerFloat',timer1)  
-<<<<<<< HEAD
   window.schedTimer()
   window.contresize()
   $( ".autocomplete-project" ).autocomplete source: $( "#name" ).data('autocomplete-source')
-=======
-  schedTimer()
-  contresize()
-  $( ".autocomplete-project" ).autocomplete
-  	source: $( ".autocomplete-project" ).data('autocomplete-source')
->>>>>>> 81f56bd
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
   $(window).resize -> window.contresize()

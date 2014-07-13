@@ -19,47 +19,49 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-=======
->>>>>>> 81f56bd
+<% if !notice.blank? || !alert.blank? %>
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
+=======
+=======
+>>>>>>> parent of 4b12111... added social login
+=======
+>>>>>>> parent of 4b12111... added social login
+=======
+>>>>>>> parent of 4b12111... added social login
+=======
+>>>>>>> parent of 4b12111... added social login
+=======
+>>>>>>> parent of 4b12111... added social login
+<div id="test_display">
 
-=======
+</div>
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 4b12111... added social login
 =======
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 >>>>>>> parent of 4b12111... added social login
 =======
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 >>>>>>> parent of 4b12111... added social login
 =======
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 >>>>>>> parent of 4b12111... added social login
 =======
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 >>>>>>> parent of 4b12111... added social login
 =======
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dismissable"><%= value %></div>
-<% end %>
 >>>>>>> parent of 4b12111... added social login
+<% end %>
+=======
+>>>>>>> 81f56bd
 <%= yield %>
 
 <% if signed_in? %>
   <%= content_tag "div", id: "hours_popup", data: {day: Schedule.total_time("day",current_user), week: Schedule.total_time("week",current_user), working: current_user.working?}, class: "hidden1 btn btn-default" do %>
   <h3 style="margin-top:5px;">Hours</h3>
-  <span id="test_hours"></span>
   <div id="hours" style="display:none">Today: <span id="hours_day"><%= (Schedule.total_time("day",current_user)/3600).round(2) %></span><br>
     				This Week:<span id="hours_week"><%= (Schedule.total_time("week",current_user)/3600).round(2) %></span>
    </div>

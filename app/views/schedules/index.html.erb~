@@ -5,9 +5,9 @@
       <div class="addnew img-rounded img-polaroid schedule_time">
         <div>
 <<<<<<< HEAD
-          <i class="glyphicon glyphicon-plus-sign"></i><br>
+          <i class="glyphicon glyphicon-plus-sign" style="font-size:3em"></i><br>
 =======
-          <i class="glyphicon glyphicon-plus-sign glyphicon-4x"></i><br>
+          <i class="glyphicon glyphicon-plus-sign icon-4x"></i><br>
 >>>>>>> 81f56bd
           Do something else...<br>
         </div>

@@ -10,13 +10,6 @@ jQuery ->
     box_count = Math.min(Math.floor(win_width/box_width),proCount);
     total_width = box_count * box_width;
     $('#projects').css('width',total_width)
-<<<<<<< HEAD
-    navbar_width = $("#navbar_links").outerWidth()
-		logo_width = $("#navbar_logo").outerWidth()
-		formWidth = 0
-		$("#test_display").html navbar_width
-=======
->>>>>>> 81f56bd
   window.schedTimer =  ->
     day = $("#hours_popup").data('day')
     week = $("#hours_popup").data('week')
@@ -40,7 +33,7 @@ jQuery ->
   schedTimer()
   contresize()
   $( ".autocomplete-project" ).autocomplete
-  	source: ['foo', 'food', 'four']
+  	source: $( ".autocomplete-project" ).data('autocomplete-source')
 >>>>>>> 81f56bd
   $(".datepicker-no-time").datetimepicker pickTime: false
   $(".datepicker-no-time").on "blur", (e) ->  $(this).datepicker "hide"
