@@ -69,6 +69,7 @@ GEM
     font-awesome-sass-rails (3.0.2.2)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
+    fullcalendar-rails (1.6.4.0)
     google_drive (0.3.10)
       nokogiri (>= 1.4.4, != 1.5.2, != 1.5.1)
       oauth (>= 0.3.6)
@@ -202,6 +203,7 @@ DEPENDENCIES
   devise
   font-awesome-rails
   font-awesome-sass-rails
+  fullcalendar-rails
   google_drive
   jquery-rails (~> 2.3.0)
   jquery-ui-rails

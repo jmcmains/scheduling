@@ -1,5 +1,5 @@
 Scheduling::Application.routes.draw do
-  devise_for :users,controllers: {omniauth_callbacks: "omniauth_callbacks"}
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 	resources :users do
 		member do
 			get :google
@@ -22,6 +22,7 @@ Scheduling::Application.routes.draw do
 		end
 		member do
 			get :rewrite
+			get :calendar_update
 		end
 	end
   resources :projects do

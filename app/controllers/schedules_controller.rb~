@@ -1,5 +1,22 @@
 class SchedulesController < ApplicationController
   require 'will_paginate/array'
+	
+	def calendar_update
+	day_delta = params[:day_delta].to_f
+	minute_delta = params[:minute_delta].to_f
+	@schedule = Schedule.find(params[:id])
+	old_start_at = @schedule.start_at
+	old_end_at = @schedule.end_at
+	new_start_at = old_start_at + day_delta.day + minute_delta.minute
+	new_end_at = old_end_at + day_delta.day + minute_delta.minute
+	@schedule.update_attributes(start_at: new_start_at, end_at: new_end_at)
+	respond_to do |format|
+      format.json { 
+		    render json: @schedule
+      }
+    end
+	end
+	
 	def new
 	  @start_date=Time.zone.today.beginning_of_week
     @end_date=Time.zone.today.end_of_week
@@ -8,11 +25,7 @@ class SchedulesController < ApplicationController
 		  @project.save!
     	@command="go"
 		 	current_project=Schedule.where(end_at: nil, user_id: current_user.id).first
-<<<<<<< HEAD
-		  if params[:now]
-=======
 		  if params[:now] == "true" || params[:go_single]
->>>>>>> 81f56bd
 		  	if current_project
 					current_project.update_attributes(end_at:Time.zone.now)
 					@current_project=current_project.project

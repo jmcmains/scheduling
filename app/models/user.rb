@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
    end
   end
   
+  def connect_to_omniauth(auth)
+  	update_attributes(provider: auth.provider, uid: auth.uid)
+  end
+  
   def self.new_with_session(params, session)
    if session["devise.user_attributes"]
 new session["devise.user_attributes"] do |user|

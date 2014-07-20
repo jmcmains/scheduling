@@ -7,40 +7,42 @@ $(function() {
     firstHour: 8,
     defaultView: 'agendaWeek',
     header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay'
-				},
-				editable: true,
-				events: [
-				<% Schedule.where(user_id: current_user.id).sort_by(&:id).each do |event| %>
-				<% if event.duration > 60 && !event.project.blank? %>
-					{
-						title: '<%= event.project.name %>',
-						start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
-						<% if event.end_at %>
-						end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
-						<% else %>
-						end: new Date(<%= 0.hours.ago.year %>, <%= 0.hours.ago.month-1 %>, <%= 0.hours.ago.day %>, <%= 0.hours.ago.hour %>, <%= 0.hours.ago.min %>),
-						<% end %>
-						allDay: false
-					}<%= "," if event != Schedule.last %>
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		editable: true,
+		eventResize: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+			$.ajax({
+				type:"GET",
+				url: "/schedules/" + event.id + "/calendar_update/",
+				data: "minute_delta="+minuteDelta+"&day_delta="+dayDelta+"&method=resize"
+			});
+		},
+		eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+			$.ajax({
+				type:"GET",
+				url: "/schedules/" + event.id + "/calendar_update/",
+				data: "minute_delta="+minuteDelta+"&day_delta="+dayDelta+"&method=drop"
+			});
+		},
+		events: [
+		<% Schedule.where(user_id: current_user.id).sort_by(&:id).each do |event| %>
+			<% if event.duration > 60 && !event.project.blank? %>
+			{
+				title: '<%= event.project.name %>',
+				id: '<%= event.id %>',
+				start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
+				<% if event.end_at %>
+					end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
+				<% else %>
+					end: new Date(<%= 0.hours.ago.year %>, <%= 0.hours.ago.month-1 %>, <%= 0.hours.ago.day %>, <%= 0.hours.ago.hour %>, <%= 0.hours.ago.min %>),
 				<% end %>
-				<% end %>
-				],
-				eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
-
-        alert(
-            "The end date of " + event.title + "has been moved " +
-            dayDelta + " days and " +
-            minuteDelta + " minutes."
-        );
-        if (!confirm("is this okay?")) {
-            revertFunc();
-        }
-
-    }
-    })
+				allDay: false
+			}<%= "," if event != Schedule.last %>
+			<% end %>
+		<% end %>
+		]})
     
 });
 </script>
