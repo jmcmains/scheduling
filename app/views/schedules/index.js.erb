@@ -1,2 +1,4 @@
 $("#schedules").html('<%=j render @schedules %>')
 $("#paginate").html('<%=j will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %>')
+$(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')})
+$(".datetimepicker").datetimepicker({sideBySide: true})

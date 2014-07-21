@@ -2,12 +2,8 @@
   jQuery(function() {
   	$(".addnew").css("width", $(".schedule:first").outerWidth());
     $(".addnew").css("height", $(".schedule:first").outerHeight());
-    $(".autocomplete").autocomplete({
-      source: $(".autocomplete:first").data('autocomplete-source')
-    });
-    $(".datetimepicker").datetimepicker({
-      sideBySide: true
-    });
+    $(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')});
+    $(".datetimepicker").datetimepicker({sideBySide: true});
     window.schedule_resize = function() {
       
       if ($(".schedule").length) {

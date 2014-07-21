@@ -8,4 +8,6 @@ maybe add user selected time frame (day, week, month)
 
 drag by 1 minute increments in calendar
 
+color code calendar by job?
+
 

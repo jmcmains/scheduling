@@ -1,4 +1,2 @@
-$("#schedules").html('hi')
-
-
-
+$("#schedules").html('<%=j render @schedules %>')
+$("#paginate").html('<%=j will_paginate @schedules, renderer: BootstrapPagination::Rails, class: 'pagination pagination-sm' %>')

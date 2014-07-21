@@ -2,16 +2,10 @@
   jQuery(function() {
   	$(".addnew").css("width", $(".schedule:first").outerWidth());
     $(".addnew").css("height", $(".schedule:first").outerHeight());
-    $(".autocomplete").autocomplete({
-      source: $(".autocomplete:first").data('autocomplete-source')
-    });
-    $(".datetimepicker").datetimepicker({
-      sideBySide: true
-    });
-
+    $(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')});
+    $(".datetimepicker").datetimepicker({sideBySide: true});
     window.schedule_resize = function() {
-      
-      if ($(".schedule").length) {
+       if ($(".schedule").length) {
 		    var box_count_width, box_width, total_width, win_width, win_height,box_height,box_count_height, total_height,per_page;
 		    win_width = $(window).width();
 		    win_height = $(window).height()-$(".schedule:first").offset().top;
@@ -27,6 +21,8 @@
 					url: "/schedules.js",
 					data: "per_page=" + per_page
 				});
+				$(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')});
+    		$(".datetimepicker").datetimepicker({sideBySide: true});
 			}
       if (win_width < 575) {
         $('#calendar').fullCalendar('changeView', 'agendaDay');
