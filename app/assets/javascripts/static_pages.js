@@ -6,11 +6,11 @@
     window.contresize = function() {
       var box_count, box_width, proCount, total_width, win_width;
       win_width = $(window).width();
-      proCount = $("#projects").data('count');
+      proCount = $("#project_boxes").data('count');
       box_width = $('.project').outerWidth() + 11;
       box_count = Math.min(Math.floor(win_width / box_width), proCount);
       total_width = box_count * box_width;
-      $('#projects').css('width', total_width);
+      $('#project_boxes').css('width', total_width);
     };
     window.schedTimer = function() {
       var day, start, timer1, week, working;
@@ -42,7 +42,7 @@
       $(this).datepicker("hide");
     });
     $(window).resize(function() {
-      return window.contresize();
+      window.contresize();
     });
     return $("#hours_popup").click(function() {
       if ($("#hours_popup").hasClass("hidden1")) {

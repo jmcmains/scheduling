@@ -21,5 +21,5 @@ $("#hours_popup").data('week',<%= Schedule.total_time('week',current_user) %>)
 $("#hours_popup").data('working',<%= current_user.working? %>)
 schedTimer()
 $("#stopbutton").html("<%=j render 'static_pages/stop_button' %>")
-$("#name").value("")
+$("#name").val("")
 

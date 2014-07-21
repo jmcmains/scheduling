@@ -1,4 +1,4 @@
-$("#schedules").html('<%=j render @schedules %>')
+$("#schedules").html('hi')
 
 
 

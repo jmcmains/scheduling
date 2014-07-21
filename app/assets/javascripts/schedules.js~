@@ -10,12 +10,24 @@
     });
 
     window.schedule_resize = function() {
-      var box_count, box_width, total_width, win_width;
-      win_width = $(window).width();
-      box_width = $('.schedule:first').outerWidth() + 10;
-      box_count = Math.floor(win_width / box_width);
-      total_width = box_count * box_width;
-      $('#projects').css('width', total_width);
+      
+      if ($(".schedule").length) {
+		    var box_count_width, box_width, total_width, win_width, win_height,box_height,box_count_height, total_height,per_page;
+		    win_width = $(window).width();
+		    win_height = $(window).height()-$(".schedule:first").offset().top;
+		    box_width = $('.schedule:first').outerWidth() + 10;
+		    box_height = $('.schedule:first').outerHeight() + 10;
+		    box_count_width = Math.floor(win_width / box_width);
+		    box_count_height = Math.floor(win_height / box_height);
+		    total_width_px = box_count_width * box_width;
+		    per_page = box_count_width*box_count_height-1;
+		    $('#projects').css('width', total_width_px);
+		    $.ajax({
+					type:"GET",
+					url: "/schedules.js",
+					data: "per_page=" + per_page
+				});
+			}
       if (win_width < 575) {
         $('#calendar').fullCalendar('changeView', 'agendaDay');
       } else {
@@ -41,10 +53,10 @@
       }
     };
     $(window).resize(function() {
-      schedule_resize();
+      window.schedule_resize();
     });
-    schedTimer1();
-    schedule_resize();
+    window.schedTimer1();
+    window.schedule_resize();
   });
 
 

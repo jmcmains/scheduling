@@ -7,7 +7,11 @@ class SchedulesController < ApplicationController
 	@schedule = Schedule.find(params[:id])
 	old_start_at = @schedule.start_at
 	old_end_at = @schedule.end_at
-	new_start_at = old_start_at + day_delta.day + minute_delta.minute
+	if params[:method] == "drop"
+		new_start_at = old_start_at + day_delta.day + minute_delta.minute
+	else
+		new_start_at = old_start_at
+	end
 	new_end_at = old_end_at + day_delta.day + minute_delta.minute
 	@schedule.update_attributes(start_at: new_start_at, end_at: new_end_at)
 	respond_to do |format|
@@ -79,7 +83,7 @@ class SchedulesController < ApplicationController
 	
 	def index
 		@title = "Edit Schedule"
-		@per_page = 20
+		@per_page = params[:per_page].blank? ? 20 : params[:per_page]
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html
@@ -87,6 +91,15 @@ class SchedulesController < ApplicationController
     end
 	end
 	
+	def update
+	
+	end
+
+	def pop_up
+		@schedule=Schedule.find(params[:id])
+		
+	end
+		
 	def rewrite
 		@schedule = Schedule.where(id: params[:id]).first
 		@command = params[:commit]
@@ -123,6 +136,7 @@ class SchedulesController < ApplicationController
 	def destroy
     @schedule=Schedule.where(id: params[:id]).first
     @schedule.destroy
+    
     respond_to do |format|
       format.html {redirect_to schedules_path}
       format.js

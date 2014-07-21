@@ -1,0 +1,4 @@
+$('.modal-body').html('<%=j render "edit", schedule: @schedule %>');
+$('#Schedule').modal('show');
+$(".datetimepicker").datetimepicker({sideBySide: true});
+$(".autocomplete").autocomplete({source: $( ".autocomplete" ).data('autocomplete-source')});

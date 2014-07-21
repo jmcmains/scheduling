@@ -2,7 +2,7 @@
 $("#project_<%= @project.id %>").fadeOut("slow")
 <% elsif @command == "go" %> 
 <% if @new %>
-	$("#projects").html("<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>")
+	$("#project_boxes").html("<%=j render 'static_pages/project', start_date: @start_date, end_date: @end_date %>")
 	$("#project_<%= @project.id %>").addClass("project-primary")
 <% else %>
 	<% if @current_project %>

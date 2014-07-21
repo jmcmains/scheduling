@@ -83,7 +83,7 @@ class SchedulesController < ApplicationController
 	
 	def index
 		@title = "Edit Schedule"
-		@per_page = 20
+		@per_page = params[:per_page].blank? ? 20 : params[:per_page]
 		@schedules = Schedule.where(user_id: current_user.id).sort_by(&:id).reverse.paginate(:page => params[:page], :per_page => @per_page)
 		respond_to do |format|
       format.html
@@ -91,6 +91,18 @@ class SchedulesController < ApplicationController
     end
 	end
 	
+	def edit
+		@schedule=Schedule.find(params[:id])
+		@schedule.update_attributes(project_name: params[:project_name], start_at: Time.strptime("#{params[:start_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? Time.strptime("#{params[:end_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z') : nil))
+		respond_to do |format|
+      format.html {redirect_to request.referer}
+    end
+	end
+
+	def pop_up
+		@schedule=Schedule.find(params[:id])
+	end
+		
 	def rewrite
 		@schedule = Schedule.where(id: params[:id]).first
 		@command = params[:commit]
@@ -127,6 +139,7 @@ class SchedulesController < ApplicationController
 	def destroy
     @schedule=Schedule.where(id: params[:id]).first
     @schedule.destroy
+    
     respond_to do |format|
       format.html {redirect_to schedules_path}
       format.js

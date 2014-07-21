@@ -243,6 +243,15 @@ margin-top:0;
     padding:5px;
     margin:5px;
 }
+#project_boxes {
+	position:relative;
+	width: 100%;
+  min-width: none;
+	margin-left:auto;
+	margin-right:auto;
+  padding: 0;
+}
+
 #projects {
 	position:relative;
 	width: 100%;

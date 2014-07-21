@@ -1,11 +1,11 @@
-<div id="projects" data-count="<%= Feature.where(featured: true, user_id:current_user.id).count %>">
+<div id="projects_boxes" data-count="<%= Feature.where(featured: true, user_id:current_user.id).count %>">
 	<%= render "static_pages/project", start_date: @start_date, end_date: @end_date %>
 </div>
 
 
 <script>
 $(function () {
-  $("#project_<%= Project.active(current_user)? Project.active(current_user).id : 0 %>").addClass("schedule-primary");
+  $("#project_<%= Project.active(current_user)? Project.active(current_user).id : 0 %>").addClass("project-primary");
  });
 </script>
 

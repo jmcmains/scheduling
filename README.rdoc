@@ -6,6 +6,6 @@ instead of just last week, add previous, next and current week buttons to span
 
 maybe add user selected time frame (day, week, month)
 
-figure out how to change time via the calendar
+drag by 1 minute increments in calendar
 
 

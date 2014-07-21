@@ -23,6 +23,7 @@ Scheduling::Application.routes.draw do
 		member do
 			get :rewrite
 			get :calendar_update
+			get :pop_up
 		end
 	end
   resources :projects do

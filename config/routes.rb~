@@ -22,8 +22,7 @@ Scheduling::Application.routes.draw do
 		end
 		member do
 			get :rewrite
-			get :calendar_drag
-			get :calendar_resize
+			get :calendar_update
 		end
 	end
   resources :projects do
