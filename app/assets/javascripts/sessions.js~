@@ -13,6 +13,7 @@
     $(window).resize(function() {
       return window.contresize();
     });
+    $('#modalSignUp').modal('show');
     return $("#sign-up-link").click(function() {
       return $("#sign-up-form").slideToggle();
     });

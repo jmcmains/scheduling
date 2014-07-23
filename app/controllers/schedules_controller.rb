@@ -15,11 +15,7 @@ class SchedulesController < ApplicationController
 		end
 		new_end_at = old_end_at + day_delta.day + minute_delta.minute
 		@schedule.update_attributes(start_at: new_start_at, end_at: new_end_at)
-		respond_to do |format|
-      format.json { 
-		    render json: @schedule
-      }
-    end
+
 	end
 	
 	def new

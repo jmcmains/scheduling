@@ -1,14 +1,14 @@
 <div id='calendar'></div>
-<%= pop_up_schedule_path(Schedule.first) %>
 <script>
 $(function() {
   $('#calendar').fullCalendar({
     height: 600,
     theme: false,
     firstHour: 8,
+    allDaySlot: false,
     defaultView: 'agendaWeek',
-		slotDuration: '00:15:00',
-    snapDuration: '00:15:00',
+		slotMinutes: 30,
+    snapMinutes: 1,
     editable: true,
 		selectable: true,
     header: {

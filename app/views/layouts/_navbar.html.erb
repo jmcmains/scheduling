@@ -53,7 +53,7 @@
 
 
 
-
+<% if user_signed_in? %>
 <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -62,7 +62,7 @@
         <h4 class="modal-title" id="SettingsLabel">Settings</h4></div>
         
       
-      <% if current_user %>
+
         <div class="modal-body" style="text-align:center">
         <%= form_for(current_user, role: 'form') do |f| %>
 
@@ -94,7 +94,7 @@
               </div>
     <% end %>
           
-<% end %>
+
 
     </div>
   </div>
@@ -107,7 +107,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="SettingsLabel">Update Password</h4></div>
                 <div class="modal-body" style="text-align:center">
-<% if current_user %>
+
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
 <%= devise_error_messages! %>
 
@@ -126,8 +126,8 @@
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 <% end %>
-<% end %>
 </div>
     </div>
   </div>
 </div>
+<% end %>
