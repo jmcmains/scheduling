@@ -13,8 +13,7 @@ class UsersController < ApplicationController
   		@end_date = Time.zone.now.end_of_week(start_day = :sunday)
   	end
   end
-  
-   
+     
   def new
   	@user = User.new
   end

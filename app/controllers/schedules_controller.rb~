@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+  before_filter :signed_in_user
   require 'will_paginate/array'
 	
 	def calendar_update
@@ -91,13 +92,16 @@ class SchedulesController < ApplicationController
     end
 	end
 	
-	def update
-	
+	def edit
+		@schedule=Schedule.find(params[:id])
+		@schedule.update_attributes(project_name: params[:project_name], start_at: Time.strptime("#{params[:start_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z'), end_at: (!params[:end_at].blank? ? Time.strptime("#{params[:end_at]} #{Time.zone.now.strftime('%Z')}", '%m/%d/%Y %I:%M %p %Z') : nil))
+		respond_to do |format|
+      format.html {redirect_to request.referer}
+    end
 	end
 
 	def pop_up
 		@schedule=Schedule.find(params[:id])
-		
 	end
 		
 	def rewrite

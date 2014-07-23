@@ -1,20 +1,21 @@
 class SchedulesController < ApplicationController
+  before_filter :signed_in_user
   require 'will_paginate/array'
 	
 	def calendar_update
-	day_delta = params[:day_delta].to_f
-	minute_delta = params[:minute_delta].to_f
-	@schedule = Schedule.find(params[:id])
-	old_start_at = @schedule.start_at
-	old_end_at = @schedule.end_at
-	if params[:method] == "drop"
-		new_start_at = old_start_at + day_delta.day + minute_delta.minute
-	else
-		new_start_at = old_start_at
-	end
-	new_end_at = old_end_at + day_delta.day + minute_delta.minute
-	@schedule.update_attributes(start_at: new_start_at, end_at: new_end_at)
-	respond_to do |format|
+		day_delta = params[:day_delta].to_f
+		minute_delta = params[:minute_delta].to_f
+		@schedule = Schedule.find(params[:id])
+		old_start_at = @schedule.start_at
+		old_end_at = @schedule.end_at
+		if params[:method] == "drop"
+			new_start_at = old_start_at + day_delta.day + minute_delta.minute
+		else
+			new_start_at = old_start_at
+		end
+		new_end_at = old_end_at + day_delta.day + minute_delta.minute
+		@schedule.update_attributes(start_at: new_start_at, end_at: new_end_at)
+		respond_to do |format|
       format.json { 
 		    render json: @schedule
       }
