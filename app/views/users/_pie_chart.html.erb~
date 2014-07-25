@@ -1,4 +1,4 @@
-<div class="user_info" id="chart"></div>
+<div id="chart"></div>
 <script>
 $(function () {
     var chart;
@@ -35,14 +35,12 @@ $(function () {
                 type: 'pie',
                 name: 'Time Spent',
                 data: [
-                <% projects.sort_by { |a| a.time_spent(start_date,end_date,current_user) }.reverse.each do |project| %>
+                <% non_zeros = projects.sort_by { |a| a.time_spent(start_date,end_date,current_user)>0 } %>
+                <% non_zeros.each do |project| %>
 									<% total_time=project.time_spent(start_date,end_date,current_user) %>
 									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
-									<% if est_time > 0 %>
-										['<%= project.name %>', <%= est_time %>],
-									<% end %>
+										['<%= project.name %>', <%= est_time %>]<%= "," if project != non_zeros.last %>
 								<% end %>
-                ['',   '']
                 ]
             }]
         });
