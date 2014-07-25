@@ -1,19 +1,21 @@
-	<%= form_tag edit_schedule_path(schedule), method: "get" do %>
+	<%= form_tag edit_schedule_path(schedule), method: "get", class: "form-horizontal" do %>
 
 		<div class="form-group">
-			<%= label_tag :project_name, "Project Name" %>
-			<%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete form-control", id: schedule.id %>
+			<label for="<%= schedule.id %>" class="col-sm-4 control-label">Project</label>
+			<div class="col-sm-8">
+				<%= text_field_tag :project_name, (schedule.project.name if schedule.project), data: {autocomplete_source: autocomplete_projects_path}, class: "autocomplete form-control", id: schedule.id %>
+			</div>
 			</div>
 
 		<div class="form-group">
-			<%= label_tag :start_at, "Start Time" %>
-			<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
+			<label for="start_at<%= schedule.id %>" class="col-sm-4 control-label">Start Time</label>
+			<div class="datetimepicker col-sm-8" data-date-format="MM/DD/YYYY hh:mm A">
 	    <%= text_field_tag :start_at, (schedule.start_at.strftime('%m/%d/%Y %I:%M %p') if schedule.start_at), id: "start_at#{schedule.id}", class: "form-control"  %>
 	  </div>
 	  </div>
 	  <div class="form-group">
-			<%= label_tag :end_at, "End Time" %>
-			<div class="datetimepicker" data-date-format="MM/DD/YYYY hh:mm A">
+			<label for="end_at<%= schedule.id %>" class="col-sm-4 control-label">End Time</label>
+			<div class="datetimepicker col-sm-8" data-date-format="MM/DD/YYYY hh:mm A">
 	    <%= text_field_tag :end_at, (schedule.end_at.strftime('%m/%d/%Y %I:%M %p') if schedule.end_at), id: "end_at#{schedule.id}", class: "form-control"  %>
 	  </div>
 	  </div>
