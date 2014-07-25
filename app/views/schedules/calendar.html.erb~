@@ -1,4 +1,7 @@
 <div id='calendar'></div>
+<% colors= ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'] %>
+<% repcol=(Project.all.sort_by(&:id).last.id.to_f/colors.length).ceil %>
+<% colors = colors * repcol %>
 <script>
 $(function() {
   $('#calendar').fullCalendar({
@@ -43,6 +46,8 @@ $(function() {
 				title: '<%= event.project.name %>',
 				id: '<%= event.id %>',
 				selectable: true,
+				color: '<%= colors[event.project_id] %>',
+
 				start: new Date(<%= event.start_at.year %>, <%= event.start_at.month-1 %>, <%= event.start_at.day %>, <%= event.start_at.hour %>, <%= event.start_at.min %>),
 				<% if event.end_at %>
 					end: new Date(<%= event.end_at.year %>, <%= event.end_at.month-1 %>, <%= event.end_at.day %>, <%= event.end_at.hour %>, <%= event.end_at.min %>),
@@ -67,7 +72,7 @@ $(function() {
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="SettingsLabel">Update Project</h4></div>
-        <div class="modal-body-cal" style="text-align:center">
+        <div class="modal-body modal-body-cal" style="text-align:center">
 		</div>
     </div>
   </div>

@@ -1,50 +1,48 @@
 <div id="chart"></div>
 <script>
 $(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'chart',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Time Spent'
-            },
-            tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            	percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.y +' ';
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Time Spent',
-                data: [
-                <% non_zeros = projects.sort_by { |a| a.time_spent(start_date,end_date,current_user)>0 } %>
-                <% non_zeros.each do |project| %>
-									<% total_time=project.time_spent(start_date,end_date,current_user) %>
-									<% est_time=((2*total_time/60/60).ceil)/2.0 %>
-										['<%= project.name %>', <%= est_time %>]<%= "," if project != non_zeros.last %>
-								<% end %>
-                ]
-            }]
-        });
-    });
-    
+	var chart;
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'chart',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		},
+		title: {
+			text: 'Time Spent'
+		},
+		tooltip: {
+			pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+			percentageDecimals: 1
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					color: '#000000',
+					connectorColor: '#000000',
+					formatter: function() {
+						return '<b>'+ this.point.name +'</b>: '+ this.y +' ';
+					}
+				}
+			}
+		},
+		series: [{
+			type: 'pie',
+			name: 'Time Spent',
+			data: [
+				<% non_zeros = projects.select { |a| a.time_spent(start_date,end_date,current_user) > 0 }.sort_by { |a| a.time_spent(start_date,end_date,current_user) } %>
+				
+				<% non_zeros.each do |project| %>
+					<% total_time=project.time_spent(start_date,end_date,current_user) %>
+					<% est_time=((2*total_time/60/60).ceil)/2.0 %>
+					['<%= project.name %>', <%= est_time %>]<%= "," if project != non_zeros.last %>
+				<% end %>
+			]
+		}]
+	});
 });
 </script>

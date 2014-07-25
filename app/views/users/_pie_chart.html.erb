@@ -34,7 +34,8 @@ $(function () {
 			type: 'pie',
 			name: 'Time Spent',
 			data: [
-				<% non_zeros = projects.sort_by { |a| a.time_spent(start_date,end_date,current_user)>0 } %>
+				<% non_zeros = projects.select { |a| a.time_spent(start_date,end_date,current_user) > 0 }.sort_by { |a| a.time_spent(start_date,end_date,current_user) }.reverse %>
+				
 				<% non_zeros.each do |project| %>
 					<% total_time=project.time_spent(start_date,end_date,current_user) %>
 					<% est_time=((2*total_time/60/60).ceil)/2.0 %>
