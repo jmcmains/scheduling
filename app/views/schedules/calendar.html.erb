@@ -59,8 +59,13 @@ $(function() {
 			<% end %>
 		<% end %>
 		]})
-    
+    	if ($(window).width() < 575) {
+		      $('#calendar').fullCalendar('changeView', 'agendaDay');
+		    } else {
+		      $('#calendar').fullCalendar('changeView', 'agendaWeek');
+		    }
 });
+
 </script>
 
 

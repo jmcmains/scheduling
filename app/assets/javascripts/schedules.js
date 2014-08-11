@@ -4,8 +4,17 @@
     $(".addnew").css("height", $(".schedule:first").outerHeight());
     $(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')});
     $(".datetimepicker").datetimepicker({sideBySide: true});
+    if ($(window).width() < 575) {
+        $('#calendar').fullCalendar('changeView', 'agendaDay');
+      } else {
+        $('#calendar').fullCalendar('changeView', 'agendaWeek');
+      }
     window.schedule_resize = function() {
-      
+      if ($(window).width() < 575) {
+        $('#calendar').fullCalendar('changeView', 'agendaDay');
+      } else {
+        $('#calendar').fullCalendar('changeView', 'agendaWeek');
+      }
       if ($(".schedule").length) {
 		    var box_count_width, box_width, total_width, win_width, win_height,box_height,box_count_height, total_height,per_page;
 		    win_width = $(window).width();
@@ -15,7 +24,7 @@
 		    box_count_width = Math.floor(win_width / box_width);
 		    box_count_height = Math.floor(win_height / box_height);
 		    total_width_px = box_count_width * box_width;
-		    per_page = box_count_width*box_count_height-1;
+		    per_page = Math.max(1,(box_count_width*box_count_height-1));
 		    $('#projects').css('width', total_width_px);
 		    $.ajax({
 					type:"GET",
@@ -23,11 +32,7 @@
 					data: "per_page=" + per_page
 				});
 			}
-      if (win_width < 575) {
-        $('#calendar').fullCalendar('changeView', 'agendaDay');
-      } else {
-        $('#calendar').fullCalendar('changeView', 'agendaWeek');
-      }
+      
     };
     window.schedTimer1 = function() {
       var day, start, timer1, week, working;

@@ -1,5 +1,5 @@
 <div id='calendar'></div>
-<% colors= ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'] %>
+<% colors= ['#ff0000','#00ff00','#0000ff','#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1'] %>
 <% repcol=(Project.all.sort_by(&:id).last.id.to_f/colors.length).ceil %>
 <% colors = colors * repcol %>
 <script>
@@ -61,6 +61,11 @@ $(function() {
 		]})
     
 });
+if ($(window).width() < 575) {
+        $('#calendar').fullCalendar('changeView', 'agendaDay');
+      } else {
+        $('#calendar').fullCalendar('changeView', 'agendaWeek');
+      }
 </script>
 
 
