@@ -4,11 +4,6 @@
     $(".addnew").css("height", $(".schedule:first").outerHeight());
     $(".autocomplete").autocomplete({source: $(".autocomplete:first").data('autocomplete-source')});
     $(".datetimepicker").datetimepicker({sideBySide: true});
-    if ($(window).width() < 575) {
-        $('#calendar').fullCalendar('changeView', 'agendaDay');
-      } else {
-        $('#calendar').fullCalendar('changeView', 'agendaWeek');
-      }
     window.schedule_resize = function() {
       if ($(window).width() < 575) {
         $('#calendar').fullCalendar('changeView', 'agendaDay');
